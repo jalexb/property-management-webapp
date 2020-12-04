@@ -1,0 +1,35 @@
+    What do you think you can get done before the sprint review on Wednesday
+
+
+   Meet for an hour and a half
+
+
+   themeing fonts
+   whos gonna work on the database
+
+   Work to get the framing setup.
+
+
+
+   one person is assigned to one card at a single time
+   It's a piece, a chunk that everyone works on individually
+
+
+   A card should be a day or half a day.
+
+   Build out cards based on being finished in a day/half day
+   Make cards for the entire sprint week.
+   Every individual can look at the cards to see where people are at.
+
+
+   Some groups work in teams for the first few days, bang out the database
+   and the front end. After that they work individually
+
+   Make some labels for different parts of the code
+   Database is a label,
+   front-end is a label
+   apis is a label
+
+
+
+   Airbnb apartments.com cincyrents.com
