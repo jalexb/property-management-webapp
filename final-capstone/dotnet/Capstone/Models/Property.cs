@@ -7,6 +7,7 @@ namespace Capstone.Models
 {
     public class Property
     {
+        public int propertyId { get; set; }
         public int addressId { get; set; } 
         public int userId { get; set; }
         public int Bedrooms { get; set; }
