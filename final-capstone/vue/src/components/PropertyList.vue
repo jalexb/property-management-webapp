@@ -3,8 +3,11 @@
       <div 
         class="property"
         v-for="property in properties"
-        v-bind:key="property.id"
+        v-bind:key="property.propertyId"
         >
+        <img :src="property.photo" />
+        {{property.description}}
+
       </div>
   </div>
 </template>
@@ -39,5 +42,12 @@ export default {
 </script>
 
 <style>
+.property {
+    margin: 15px;
+}
 
+.property > img {
+    display: block;
+    max-width: 200px;
+}
 </style>

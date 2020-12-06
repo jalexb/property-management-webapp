@@ -26,7 +26,7 @@ namespace Capstone.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT property_id, address_id, user_id, bedrooms, bathrooms, photo, prop_desc, price " +
+                    SqlCommand cmd = new SqlCommand("SELECT property_id, address_id, userId, bedrooms, bathrooms, photo, prop_desc, price " +
                                                     "FROM properties", conn);
 
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -37,7 +37,7 @@ namespace Capstone.DAO
 
                         prop.propertyId = (int)reader["property_id"];
                         prop.addressId = (int)reader["address_id"];
-                        prop.userId = (int)reader["user_id"];
+                        prop.userId = (int)reader["userId"];
                         prop.Bedrooms = (int)reader["bedrooms"];
                         prop.Bathrooms = (int)reader["bathrooms"];
                         prop.Photo = (string)reader["photo"];

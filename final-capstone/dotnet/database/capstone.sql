@@ -91,10 +91,10 @@ VALUES
 INSERT INTO properties 
 	(address_id, userId, bedrooms, bathrooms, photo, prop_desc, price) 
 VALUES 
-	(1, 1, 3, 2, 'https://photos.google.com/photo/AF1QipNFOOdX72uzUqBmi9ekgSQ0Yen_W4XZqISpHaQb', 'Lovely home just a few minutes away from the shore. With three bedrooms and two bathrooms it is sure to have plenty of space and amenities.', 2200);
+	(1, 1, 3, 2, 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg', 'Lovely home just a few minutes away from the shore. With three bedrooms and two bathrooms it is sure to have plenty of space and amenities.', 2200);
 INSERT INTO properties 
 	(address_id, userId, bedrooms, bathrooms, photo, prop_desc, price) 
 VALUES 
-	(2, 2, 2, 1, 'https://photos.google.com/photo/AF1QipMZBmYLv_JuARMkiL8kYIXsjwT4DMfLZflfhe0o', 'Nice apartment with good view and spacing. Perfect for a couple or bachelor.', 1300);
+	(2, 2, 2, 1, 'https://stmedia.stimg.co/1010121201_mavenrendering.jpg?fit=crop&crop=faces', 'Nice apartment with good view and spacing. Perfect for a couple or bachelor.', 1300);
 
 GO
