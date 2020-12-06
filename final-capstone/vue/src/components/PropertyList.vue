@@ -1,12 +1,12 @@
 <template>
-  <v-app>
+  <div>
       <div 
         class="property"
         v-for="property in properties"
         v-bind:key="property.id"
         >
       </div>
-  </v-app>
+  </div>
 </template>
 
 <script>
