@@ -29,7 +29,7 @@ CREATE TABLE address_table(
 	userId			INT					NOT NULL,
 	property_type	VARCHAR(50)			NOT NULL,
 	street			VARCHAR(50)			NOT NULL,
-	street2			VARCHAR(50),
+	street2			VARCHAR(50)			NOT NULL,
 	city			VARCHAR(50)			NOT NULL,
 	region			VARCHAR(50)			NOT NULL,
 	zip				INT					NOT NULL,
@@ -81,7 +81,7 @@ VALUES
 INSERT INTO address_table
 	(userId, property_type, street, street2, city, region, zip) 
 VALUES 
-	(1, 'House', '42 Wallaby Way', null, 'Syndey', 'North Carolina', 27009);
+	(1, 'House', '42 Wallaby Way', 'N/A', 'Syndey', 'North Carolina', 27009);
 INSERT INTO address_table
 	(userId, property_type, street, street2, city, region, zip) 
 VALUES 

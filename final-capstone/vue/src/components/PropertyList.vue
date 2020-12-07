@@ -6,8 +6,12 @@
         v-bind:key="property.propertyId"
         >
         <img :src="property.photo" />
-        {{property.description}}
-
+        {{property.street}}
+        <p v-if="property.street2 != ''">{{property.street2}}</p>
+        <p>{{property.city}}, {{property.region}}</p>
+        <p>${{property.price}}</p>
+        <p>{{property.bedrooms}} Bedroom(s)</p>
+        <p>{{property.bathrooms}} Bathroom(s)</p>
       </div>
   </div>
 </template>
@@ -47,7 +51,6 @@ export default {
 }
 
 .property > img {
-    display: block;
     max-width: 200px;
 }
 </style>

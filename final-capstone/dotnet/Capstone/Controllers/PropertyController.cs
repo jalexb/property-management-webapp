@@ -20,7 +20,7 @@ namespace Capstone.Controllers {
         {
             IActionResult result;
 
-            List<Property> properties = propertyDAO.getProperty();
+            List<PropertyAndAddress> properties = propertyDAO.getProperty();
 
             if(properties.Count <= 0)
             {

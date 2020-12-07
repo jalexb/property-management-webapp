@@ -8,6 +8,6 @@ namespace Capstone.DAO
 {
     public interface IPropertyDAO
     {
-        List<Property> getProperty();
+        List<PropertyAndAddress> getProperty();
     }
 }
