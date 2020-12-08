@@ -62,10 +62,14 @@ CREATE TABLE lease (
 	);
 
 CREATE TABLE pending_leases (
-	lease_id		INT					NOT NULL,
+	pending_id		INT	IDENTITY(1,1)	NOT NULL,
 	userId			INT					NOT NULL,
+	property_id		INT					NOT NULL,
+	from_date		DATE,
+	to_date			DATE,
+	CONSTRAINT		FK_property_id		FOREIGN KEY (property_id)	REFERENCES properties (property_id),
 	CONSTRAINT		FK_user_id			FOREIGN KEY (userId)		REFERENCES users (userId),
-	CONSTRAINT		FK_lease_id			FOREIGN KEY (lease_id)		REFERENCES lease (lease_id),
+	CONSTRAINT		FK_pending_id		PRIMARY KEY (pending_id)
 	);
 ALTER TABLE properties
 	ADD	CONSTRAINT	FK_addr_id	
@@ -96,13 +100,13 @@ VALUES
 
 --populate default property data
 INSERT INTO properties 
-	(address_id, userId, bedrooms, bathrooms, photo, prop_desc, price) 
+	(address_id, landlord_id, userId, bedrooms, bathrooms, photo, prop_desc, price) 
 VALUES 
-	(1, 1, 3, 2, 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg', 'Lovely home just a few minutes away from the shore. With three bedrooms and two bathrooms it is sure to have plenty of space and amenities.', 2200);
+	(1, 2, 0, 3, 2, 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg', 'Lovely home just a few minutes away from the shore. With three bedrooms and two bathrooms it is sure to have plenty of space and amenities.', 2200);
 INSERT INTO properties 
-	(address_id, userId, bedrooms, bathrooms, photo, prop_desc, price) 
+	(address_id, landlord_id, userId, bedrooms, bathrooms, photo, prop_desc, price) 
 VALUES 
-	(2, 2, 2, 1, 'https://stmedia.stimg.co/1010121201_mavenrendering.jpg?fit=crop&crop=faces', 'Nice apartment with good view and spacing. Perfect for a couple or bachelor.', 1300);
+	(2, 2, 0, 2, 1, 'https://stmedia.stimg.co/1010121201_mavenrendering.jpg?fit=crop&crop=faces', 'Nice apartment with good view and spacing. Perfect for a couple or bachelor.', 1300);
 
 
 --populate default renter_information data
