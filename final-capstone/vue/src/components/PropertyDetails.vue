@@ -1,13 +1,14 @@
 <template>
   <div :property="property">
-    <p>{{property.street}}</p>
+    <h1>{{property.street}}</h1>
     <p v-if="property.street2 != ''">{{ property.street2 }}</p>
     <img :src="property.photo" />
-    <p>{{ property.city }}, {{ property.region }}</p>
-    <p>{{ property.zip }}</p>
-    <p>${{ property.price }}</p>
-    <p>{{ property.bedrooms }} Bedroom(s) | {{ property.bathrooms }} Bathroom(s)</p>
+    <p>{{ property.city }}, {{ property.region }} {{ property.zip }}</p>
+    <p><span class="bold-text">Rent:</span> ${{ property.price }}</p>
+    <p><span class="bold-text">Bedrooms:</span> {{ property.bedrooms }} | <span class="bold-text">Bathrooms:</span> {{ property.bathrooms }}</p>
+    <div class="description">
     <p>{{ property.description }}</p>
+    </div>
   </div>
 </template>
 
@@ -61,6 +62,33 @@ created() {
 
 <style scoped>
 div > img {
-  max-width: 200px;
+  max-width: 30%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  text-align: center;
+  color: #BA3F1D;
+}
+
+p {
+  text-align: center;
+}
+
+.description {
+  max-width: 35%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.description > p {
+  text-align: left;
+}
+
+.bold-text {
+  font-weight: 700;
 }
 </style>
