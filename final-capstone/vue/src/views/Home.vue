@@ -6,16 +6,14 @@
 </template>
 
 <script>
-import PropertyList from '../components/PropertyList.vue';
+import PropertyList from "../components/PropertyList.vue";
 
 export default {
   name: "home",
   components: {
-    PropertyList
-  }
+    PropertyList,
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
