@@ -9,6 +9,9 @@
     <div class="description">
     <p>{{ property.description }}</p>
     </div>
+    <div v-if="this.$store.state.user.role==='user'">
+    <button>Apply For Lease</button>
+    </div>
   </div>
 </template>
 
