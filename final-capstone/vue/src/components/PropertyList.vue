@@ -3,7 +3,6 @@
     <v-container
     fluid
     >
-          <router-link :to="{ name: 'property-details' }">
             <!-- Change to like to further details instead of home-->
             <v-flex 
             xs12 
@@ -15,6 +14,7 @@
               :key="property.propertyId"
               max-width="450" 
               hover>
+              <router-link :to="{ name: 'property-details', params: {id: property.propertyId} }">
               <v-img :src="property.photo"> </v-img>
               <v-card-title> {{ property.street }} </v-card-title>
               <v-card-text>
@@ -24,10 +24,10 @@
                 <p>{{ property.bedrooms }} Bedroom(s)</p>
                 <p>{{ property.bathrooms }} Bathroom(s)</p>
               </v-card-text>
+              </router-link>
             </v-card>
             </v-flex>
             
-          </router-link>
     </v-container>
   </div>
 </template>

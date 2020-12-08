@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :property="property">
     {{property.street}}
     <p v-if="property.street2 != ''">{{ property.street2 }}</p>
     <img :src="property.photo" />
