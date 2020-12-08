@@ -5,7 +5,15 @@ using System.Threading.Tasks;
 
 namespace Capstone.DAO
 {
-    public class LeaseSqlDAO
+    public class LeaseSqlDAO : ILeaseDAO
     {
+        private readonly string connectionString;
+
+        public LeaseSqlDAO(string dbConnectionString)
+        {
+            connectionString = dbConnectionString;
+        }
+
+       /* public List<Pending_Lease>*/
     }
 }
