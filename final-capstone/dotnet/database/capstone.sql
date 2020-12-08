@@ -39,6 +39,7 @@ CREATE TABLE address_table(
 
 CREATE TABLE properties (
 	property_id		INT IDENTITY(1,1)	NOT NULL,
+	landlord_id		INT					NOT NULL,
 	address_id		INT					NOT NULL,
 	userId			INT					NOT NULL,
 	bedrooms		INT					NOT NULL,
@@ -46,7 +47,7 @@ CREATE TABLE properties (
 	photo			VARCHAR(200),
 	prop_desc		VARCHAR(500)		NOT NULL,
 	price			DECIMAL				NOT NULL,
-	CONSTRAINT		PK_propertyId		PRIMARY KEY (property_id)
+	CONSTRAINT		PK_propertyId		PRIMARY KEY (property_id),
 );
 
 CREATE TABLE lease (
@@ -60,6 +61,12 @@ CREATE TABLE lease (
 	CONSTRAINT		FK_propertyId_prop	FOREIGN KEY (property_id)	REFERENCES properties (property_id)
 	);
 
+CREATE TABLE pending_leases (
+	lease_id		INT					NOT NULL,
+	userId			INT					NOT NULL,
+	CONSTRAINT		FK_user_id			FOREIGN KEY (userId)		REFERENCES users (userId),
+	CONSTRAINT		FK_lease_id			FOREIGN KEY (lease_id)		REFERENCES lease (lease_id),
+	);
 ALTER TABLE properties
 	ADD	CONSTRAINT	FK_addr_id	
 	FOREIGN KEY (address_id)			
@@ -97,4 +104,6 @@ INSERT INTO properties
 VALUES 
 	(2, 2, 2, 1, 'https://stmedia.stimg.co/1010121201_mavenrendering.jpg?fit=crop&crop=faces', 'Nice apartment with good view and spacing. Perfect for a couple or bachelor.', 1300);
 
+
+--populate default renter_information data
 GO
