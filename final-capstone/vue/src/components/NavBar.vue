@@ -12,17 +12,32 @@
       </div>
 
       <v-spacer></v-spacer>
+      <div v-if="this.$store.state.token === ''">
+        <router-link v-bind:to="{name: 'login'}">
+          <v-btn
+            outlined
+            raised 
+            rounded
+            color="#87ceeb"
+            >
+            Login
+          </v-btn>
+        </router-link>
+      </div>
 
-      <router-link v-bind:to="{name: 'login'}">
-        <v-btn
-          outlined
-          raised 
-          rounded
-          color="#87ceeb"
-          >
-          Login
-        </v-btn>
-      </router-link>
+      <div v-else>
+        <router-link v-bind:to="{name: 'logout'}">
+          <v-btn
+            outlined
+            raised 
+            rounded
+            color="#87ceeb"
+            >
+            Logout
+          </v-btn>
+        </router-link>
+      </div>
+
     </v-app-bar>
 </template>
 
@@ -31,7 +46,6 @@ export default {
     name: "nav-bar",
 
     data() {
-      return {}
     }
 
 }
