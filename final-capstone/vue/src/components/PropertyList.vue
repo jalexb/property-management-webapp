@@ -3,7 +3,7 @@
     <v-container
     fluid
     >
-          <router-link :to="{ name: 'home' }">
+          <router-link :to="{ name: 'property-details' }">
             <!-- Change to like to further details instead of home-->
             <v-flex 
             xs12 
