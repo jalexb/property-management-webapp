@@ -47,12 +47,4 @@ namespace Capstone.Models
         public string zip { get; set; }
     }
 
-    public class Lease
-    {
-        public int Lease_Id { get; set; }
-        public DateTime From_Date { get; set; }
-        public DateTime To_Date { get; set; }
-        public int User_Id { get; set; }
-	    public int Property_Id { get; set; }
-    }
 }

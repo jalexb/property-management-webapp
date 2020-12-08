@@ -5,6 +5,13 @@ using System.Threading.Tasks;
 
 namespace Capstone.Models
 {
+
+    public class PendingLeases
+    {
+        public int Lease_Id { get; set; }
+        public int User_Id { get; set; }
+    }
+
     public class Lease
     {
         public int Lease_Id { get; set; }
@@ -14,9 +21,4 @@ namespace Capstone.Models
         public int Property_Id { get; set; }
     }
 
-    public class PendingLeases
-    {
-        public int Lease_Id { get; set; }
-        public int User_Id { get; set; }
-    }
 }
