@@ -9,8 +9,8 @@
     <div class="description">
     <p>{{ property.description }}</p>
     </div>
-    <div v-if="this.$store.state.user.role==='user'">
-    <button>Apply For Lease</button>
+    <div v-if="this.$store.state.user.role==='user'" class="button">
+    <button><span class="button-text">Apply For Lease</span></button>
     </div>
   </div>
 </template>
@@ -93,5 +93,21 @@ p {
 
 .bold-text {
   font-weight: 700;
+}
+
+.button {
+  max-width: 15%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+  background-color: #BA3F1D;
+  align-content: center;
+}
+
+button {
+  color: white;
+  text-align: center;
+  margin-left: 20%;
 }
 </style>
