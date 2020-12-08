@@ -1,20 +1,20 @@
 <template>
   <div>
     <v-container
-    class="property mb-6"
-    v-for="property in properties"
-    :key="property.propertyId"
+    fluid
     >
-      <v-row 
-      :align="stretch"
-      no-gutters
-      >
-        <v-col
-        
-        >
           <router-link :to="{ name: 'home' }">
             <!-- Change to like to further details instead of home-->
-            <v-card max-width="450" hover>
+            <v-flex 
+            xs12 
+            flex-direction: row
+            justify-space-between
+            >
+              <v-card 
+              v-for="property in properties"
+              :key="property.propertyId"
+              max-width="450" 
+              hover>
               <v-img :src="property.photo"> </v-img>
               <v-card-title> {{ property.street }} </v-card-title>
               <v-card-text>
@@ -25,12 +25,9 @@
                 <p>{{ property.bathrooms }} Bathroom(s)</p>
               </v-card-text>
             </v-card>
+            </v-flex>
+            
           </router-link>
-        </v-col>
-      </v-row>
-
-      <v-responsive v-bind:key="`width-${property.propertyId}`" width="100%">
-      </v-responsive>
     </v-container>
   </div>
 </template>
@@ -70,6 +67,11 @@ export default {
 </script>
 
 <style>
+/* 
+* {
+  border: solid red 1px
+} */
+
 .property {
   margin: 15px;
 }
