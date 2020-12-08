@@ -7,5 +7,9 @@ const http = axios.create({
 export default {
     getProperties() {
         return http.get('/property');
+    },
+
+    getProperty(id) {
+        return http.get(`/property/${id}`);
     }
 }
