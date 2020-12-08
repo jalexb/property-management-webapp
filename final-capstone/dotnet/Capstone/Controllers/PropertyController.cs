@@ -20,7 +20,7 @@ namespace Capstone.Controllers {
         {
             IActionResult result;
 
-            List<PropertyAndAddress> properties = propertyDAO.getProperty();
+            List<PropertyAndAddress> properties = propertyDAO.getProperties();
 
             if(properties.Count <= 0)
             {
@@ -31,6 +31,24 @@ namespace Capstone.Controllers {
             {
                 //got list of properties
                 result = Ok(properties);
+            }
+
+            return result;
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetPropertyById(int id)
+        {
+            IActionResult result;
+            PropertyAndAddress property = propertyDAO.GetProperty(id);
+
+            if(property == null)
+            {
+                result = NoContent();
+            }
+            else
+            {
+                result = Ok(property);
             }
 
             return result;

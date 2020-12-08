@@ -1,6 +1,6 @@
 <template>
   <div :property="property">
-    {{property.street}}
+    <p>{{property.street}}</p>
     <p v-if="property.street2 != ''">{{ property.street2 }}</p>
     <img :src="property.photo" />
     <p>{{ property.city }}, {{ property.region }}</p>
