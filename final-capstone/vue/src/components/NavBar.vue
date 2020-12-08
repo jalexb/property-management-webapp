@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="#fadadd" dark>
+  <v-app-bar app color="#D9CFC1" dark>
       <div class="d-flex align-center">
         
         <router-link :to="{name: 'home'}">
@@ -18,7 +18,7 @@
             outlined
             raised 
             rounded
-            color="#87ceeb"
+            color="#BA3F1D"
             >
             Login
           </v-btn>

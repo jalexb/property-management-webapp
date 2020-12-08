@@ -8,7 +8,7 @@
             <v-flex 
             xs12 
             flex-direction: row
-            justify-space-between
+            justify-space-around
             >
               <v-card 
               v-for="property in properties"
