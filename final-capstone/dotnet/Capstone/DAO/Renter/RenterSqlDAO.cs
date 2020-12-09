@@ -40,7 +40,6 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@Email", renter_info.Email);
                     cmd.Parameters.AddWithValue("@Lease_Type", renter_info.Lease_Type);
                     cmd.Parameters.AddWithValue("@Salary", renter_info.Salary);
-                    cmd.Parameters.AddWithValue("@Employment_History", renter_info.Employment_History);
 
                     rowCount = cmd.ExecuteNonQuery();
                 }

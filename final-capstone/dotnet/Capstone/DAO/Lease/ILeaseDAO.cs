@@ -11,5 +11,6 @@ namespace Capstone.DAO
         int AddPendingLease(PendingLease lease);
         int ApprovePendingLease(Lease lease);
         int DeletePendingLease(int pending_id);
+        int AddUserInformation(RenterInformation renter_info);
     }
 }

@@ -16,7 +16,6 @@ namespace Capstone.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Lease_Type { get; set; }
-        public string Employment_History { get; set; }
         public decimal Salary { get; set; }
 
 

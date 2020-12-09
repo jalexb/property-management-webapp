@@ -31,7 +31,7 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand("INSERT INTO pending_leases(userId, property_id, from_date, to_date) " +
-                                                    "VALUES(@User_Id, @Property_Id, @FromDate, @ToDate)");
+                                                    "VALUES(@User_Id, @Property_Id, @FromDate, @ToDate)", conn);
 
                     cmd.Parameters.AddWithValue("@User_Id", lease.User_Id);
                     cmd.Parameters.AddWithValue("@Property_Id", lease.Property_Id);
@@ -144,6 +144,43 @@ namespace Capstone.DAO
             }
 
             return rowsAffected;
+
+        }
+
+        public int AddUserInformation(RenterInformation renter_info)
+        {
+
+            int rowCount = 0;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("INSERT INTO renter_information" +
+                                                    "(userId, first_name, last_name, current_address, " +
+                                                    "phone_number, email, lease_type, salary) " +
+                                                    "VALUES(@User_Id, @FirstName, @LastName, @Address, @PhoneNumber, " +
+                                                    "@Email, @Lease_Type, @Salary)", conn);
+
+                    cmd.Parameters.AddWithValue("@User_id", renter_info.User_Id);
+                    cmd.Parameters.AddWithValue("@FirstName", renter_info.FirstName);
+                    cmd.Parameters.AddWithValue("@LastName", renter_info.LastName);
+                    cmd.Parameters.AddWithValue("@PhoneNumber", renter_info.PhoneNumber);
+                    cmd.Parameters.AddWithValue("@Address", renter_info.Address);
+                    cmd.Parameters.AddWithValue("@Email", renter_info.Email);
+                    cmd.Parameters.AddWithValue("@Lease_Type", renter_info.Lease_Type);
+                    cmd.Parameters.AddWithValue("@Salary", renter_info.Salary);
+
+                    rowCount = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return rowCount;
 
         }
     }

@@ -27,14 +27,12 @@ namespace Capstone.Models
         public int Property_Id { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
-        public int Renter_Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Lease_Type { get; set; }
-        public string Employment_History { get; set; }
         public decimal Salary { get; set; }
     }
 
