@@ -50,6 +50,14 @@ CREATE TABLE properties (
 	CONSTRAINT		PK_propertyId		PRIMARY KEY (property_id),
 );
 
+CREATE TABLE property_user (
+	property_id		INT		NOT NULL,
+	userId			INT		NOT NULL,
+	CONSTRAINT		FK_property_to_user	FOREIGN KEY (property_id)	REFERENCES properties (property_id),
+	CONSTRAINT		FK_user_to_property	FOREIGN KEY (userId)	REFERENCES users (userId)
+);
+
+
 CREATE TABLE lease (
 	lease_id		INT IDENTITY(1,1)	NOT NULL,
 	from_date		DATE,
@@ -67,10 +75,6 @@ CREATE TABLE pending_leases (
 	property_id		INT					NOT NULL,
 	from_date		DATE,
 	to_date			DATE,
-	first_name		VARCHAR(50)			NOT NULL,
-	last_name		VARCHAR(50)			NOT NULL,
-	phone_num		VARCHAR(50)			NOT NULL,
-	email			VARCHAR(50)			NOT NULL,
 	is_approved		BOOLEAN,
 	CONSTRAINT		FK_property_id		FOREIGN KEY (property_id)	REFERENCES properties (property_id),
 	CONSTRAINT		FK_user_id			FOREIGN KEY (userId)		REFERENCES users (userId),
@@ -109,6 +113,8 @@ INSERT INTO users
 	(username, password_hash, salt, user_role) 
 VALUES 
 	('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
+
+
 
 --populate default address data
 INSERT INTO address_table

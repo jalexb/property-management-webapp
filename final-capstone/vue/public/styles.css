@@ -1,5 +1,14 @@
+div[data-app='true'] {
+    background-size: cover;
+    background-image: url("../src/assets/Background.jpg") !important;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
 
 div#app{
+    /* background-color: yellow; */
+    
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
