@@ -6,6 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import PropertyDetails from '../components/PropertyDetails.vue'
+import LeaseForm from '../views/LeaseForm.vue'
 
 Vue.use(Router)
 
@@ -58,6 +59,14 @@ const router = new Router({
       path: "/property/:id",
       name: "property-details",
       component: PropertyDetails,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/lease-form",
+      name: "lease-form",
+      component: LeaseForm,
       meta: {
         requiresAuth: false
       }

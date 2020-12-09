@@ -67,10 +67,16 @@ CREATE TABLE pending_leases (
 	property_id		INT					NOT NULL,
 	from_date		DATE,
 	to_date			DATE,
+	first_name		VARCHAR(50)			NOT NULL,
+	last_name		VARCHAR(50)			NOT NULL,
+	phone_num		VARCHAR(50)			NOT NULL,
+	email			VARCHAR(50)			NOT NULL,
+	is_approved		BOOLEAN,
 	CONSTRAINT		FK_property_id		FOREIGN KEY (property_id)	REFERENCES properties (property_id),
 	CONSTRAINT		FK_user_id			FOREIGN KEY (userId)		REFERENCES users (userId),
 	CONSTRAINT		FK_pending_id		PRIMARY KEY (pending_id)
 	);
+
 ALTER TABLE properties
 	ADD	CONSTRAINT	FK_addr_id	
 	FOREIGN KEY (address_id)			

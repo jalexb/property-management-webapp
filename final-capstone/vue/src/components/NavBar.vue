@@ -1,7 +1,6 @@
 <template>
   <v-app-bar app color="#D9CFC1" dark>
-      <div class="d-flex align-center">
-        
+      <div class="d-flex align-center">    
         <router-link :to="{name: 'home'}">
           <v-btn text>
             <v-avatar size='125'>
@@ -11,7 +10,19 @@
         </router-link>
       </div>
 
-      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>  <!-- if I take this out, it moves the button next to Login --> 
+      <router-link :to="{name: 'lease-form'}">
+           <v-btn
+            outlined
+            raised 
+            rounded
+            color="#BA3F1D"
+            >
+            Lease Application
+          </v-btn>
+        </router-link> 
+        
+        <v-spacer></v-spacer>
       <div v-if="this.$store.state.token === ''">
         <router-link v-bind:to="{name: 'login'}">
           <v-btn
