@@ -12,17 +12,16 @@
               <v-card 
               v-for="property in properties"
               :key="property.propertyId"
-              max-width="450" 
+              max-width="350"
               hover>
               <router-link :to="{ name: 'property-details', params: {id: property.propertyId} }">
               <v-img :src="property.photo"> </v-img>
-              <v-card-title> {{ property.street }} </v-card-title>
+              <v-card-title> 
+                {{ property.street }}
+                <span v-if="property.street2 != ''">&nbsp; - &nbsp; {{ property.street2 }}</span> 
+              </v-card-title>
               <v-card-text>
-                <p v-if="property.street2 != ''">{{ property.street2 }}</p>
-                <p>{{ property.city }}, {{ property.region }}</p>
-                <p>${{ property.price }}</p>
-                <p>{{ property.bedrooms }} Bedroom(s)</p>
-                <p>{{ property.bathrooms }} Bathroom(s)</p>
+                <p>{{ property.city }}, {{ property.region }} &nbsp; - &nbsp; ${{ property.price }}</p>
               </v-card-text>
               </router-link>
             </v-card>
