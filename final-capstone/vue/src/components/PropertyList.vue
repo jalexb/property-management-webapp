@@ -3,7 +3,6 @@
     <v-container
     fluid
     >
-            <!-- Change to like to further details instead of home-->
             <v-flex 
             xs12 
             flex-direction: row
@@ -66,10 +65,6 @@ export default {
 </script>
 
 <style>
-/* 
-* {
-  border: solid red 1px
-} */
 
 .property {
   margin: 15px;

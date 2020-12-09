@@ -1,5 +1,5 @@
 <template>
-  <div :property="property">
+  <div :property="property" class="details">
     <h1>{{property.street}}</h1>
     <p v-if="property.street2 != ''">{{ property.street2 }}</p>
     <img :src="property.photo" />
@@ -9,7 +9,8 @@
     <div class="description">
     <p>{{ property.description }}</p>
     </div>
-    <div v-if="this.$store.state.user.role==='user'" class="button">
+    <div v-if="userRole==='user'" class="button">
+    <router-link :to="{name: 'lease-form'}">
     <v-btn
             outlined
             raised 
@@ -18,6 +19,19 @@
             >
             Apply For Lease
       </v-btn>
+    </router-link>
+    </div>
+    <div v-if="userRole != 'user' & userRole != 'landlord' & userRole != 'maintenance'" class="button">
+    <router-link :to="{name: 'login'}">
+    <v-btn
+            outlined
+            raised 
+            rounded
+            color="#BA3F1D"
+            >
+            Login to Apply
+      </v-btn>
+    </router-link>
     </div>
   </div>
 </template>
@@ -28,6 +42,7 @@ import propertyService from "../services/PropertyService";
 export default {
 data() {
   return {
+    userRole: this.$store.state.user.role,
     property: {
       addressId: 0,
       bathrooms: 0,
@@ -71,11 +86,24 @@ created() {
 
 <style scoped>
 
+a {
+  text-decoration: none;
+}
+
+.details {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  max-width: 800px;
+  padding-bottom: 10px;
+}
+
 div > img {
-  max-width: 30%;
+  max-width: 40%;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 5px;
 }
 
 h1 {
@@ -85,10 +113,11 @@ h1 {
 
 p {
   text-align: center;
+  font-size: 1.1em;
 }
 
 .description {
-  max-width: 35%;
+  max-width: 60%;
   display: block;
   margin-left: auto;
   margin-right: auto;
