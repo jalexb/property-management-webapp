@@ -2,7 +2,7 @@
   <v-app-bar app color="#D9CFC1" dark>
       <div class="d-flex align-center">
         
-        <router-link :to="{name: 'home'}">
+        <router-link class="routerlink" :to="{name: 'home'}">
           <v-btn text>
             <v-avatar size='125'>
               <img src="@/assets/CapstoneLogo.png" alt="logo"/>
