@@ -1,5 +1,5 @@
 <template>
-     <form v-on:submit.prevent>
+     <form v-on:submit.prevent="saveApplication()">
     <div class="field">
      <h1>Lease Application</h1>
     </div>
@@ -91,8 +91,7 @@ export default {
                propertyid:0,
                fromdate:"",
                todate:"",
-               userid:0,
-               isapproved:false
+               userid:0
            },
            properties:[]
        }
