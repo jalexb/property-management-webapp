@@ -41,7 +41,6 @@ data() {
       region: "",
       street: "",
       street2: "",
-      userId: 0,
       zip: ""
     }
   }
