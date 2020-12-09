@@ -71,6 +71,23 @@ CREATE TABLE pending_leases (
 	CONSTRAINT		FK_user_id			FOREIGN KEY (userId)		REFERENCES users (userId),
 	CONSTRAINT		FK_pending_id		PRIMARY KEY (pending_id)
 	);
+
+CREATE TABLE renter_information ( 
+	renter_id			INT IDENTITY(1,1)	NOT NULL,
+	userId				INT					NOT NULL,
+	first_name			VARCHAR(64)			NOT NULL,
+	last_name			VARCHAR(64)			NOT NULL,
+	current_address		VARCHAR(64)			NOT NULL,
+	phone_number		VARCHAR(10)			NOT NULL,
+	email				VARCHAR(300)		NOT NULL,
+	lease_type			VARCHAR(64)			NOT NULL,
+	employement_history	VARCHAR(300)		NOT NULL,
+	salary				DECIMAL				NOT NULL,
+
+	CONSTRAINT		PK_renter_id		PRIMARY KEY (renter_id),
+	CONSTRAINT		FKuser_id			FOREIGN KEY (userId)		REFERENCES users (userId),
+
+	);
 ALTER TABLE properties
 	ADD	CONSTRAINT	FK_addr_id	
 	FOREIGN KEY (address_id)			
