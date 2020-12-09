@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <nav-bar />
-    <v-main>
+    <v-main class="container">
       <router-view />
     </v-main>
     <page-footer />
@@ -25,3 +25,11 @@ export default {
   }),
 };
 </script>
+
+<style lang="scss" scoped>
+
+.container{
+  background-image: url('~@/assets/Background.jpg');
+}
+
+</style>
