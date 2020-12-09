@@ -13,6 +13,7 @@ namespace Capstone.Controllers
     [ApiController]
     public class LeaseController : Controller
     {
+<<<<<<< HEAD
 
         private readonly ILeaseDAO leaseDAO;
         public LeaseController(ILeaseDAO _leaseDAO)
@@ -36,5 +37,23 @@ namespace Capstone.Controllers
             }
         }
              
+=======
+        private readonly ILeaseDAO _leaseDAO;
+        public LeaseController(ILeaseDAO leaseDAO)
+        {
+            _leaseDAO = leaseDAO;
+        }
+
+        [HttpPost("/lease")]
+        public IActionResult SaveApplication([FromBody]Lease lease)
+        {
+            var result = _leaseDAO.SaveApplication(lease);
+            if (result)
+            {
+                return Created(lease.Firstname, null);
+            }
+            return BadRequest(new { Message = "An error occurred and application was not saved" });
+        }
+>>>>>>> 443074b6524f4002f4cb155653cc3fc989615801
     }
 }
