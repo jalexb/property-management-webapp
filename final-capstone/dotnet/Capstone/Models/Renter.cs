@@ -6,8 +6,20 @@ using System.Threading.Tasks;
 
 namespace Capstone.Models
 {
-    public class Renter
+    public class RenterInformation
     {
-        bool SaveApplication(Lease lease);
+        public int Renter_Id { get; set; }
+        public int User_Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string Lease_Type { get; set; }
+        public string Employment_History { get; set; }
+        public decimal Salary { get; set; }
+
+
+        //Lease_Id, Property_id, User_Id, FirstName, LastName, Address, PhoneNumber, Email, Lease_Type, Employment_History, Salary, FromDate, ToDate
     }
 }

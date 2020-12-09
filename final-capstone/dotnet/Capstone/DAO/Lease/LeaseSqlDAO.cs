@@ -102,10 +102,10 @@ namespace Capstone.DAO
                     SqlCommand cmd = new SqlCommand("INSERT INTO lease(from_date, to_date, userId, property_id)" +
                                                     "VALUES(@From_date, @To_Date, @User_Id, @Property_Id)", conn);
 
-                    cmd.Parameters.AddWithValue("@From_date", lease.From_Date);
-                    cmd.Parameters.AddWithValue("@To_Date", lease.To_Date);
-                    cmd.Parameters.AddWithValue("@User_Id", lease.User_Id);
-                    cmd.Parameters.AddWithValue("@Property_Id", lease.Property_Id);
+                    cmd.Parameters.AddWithValue("@From_date", lease.Fromdate);
+                    cmd.Parameters.AddWithValue("@To_Date", lease.Todate);
+                    cmd.Parameters.AddWithValue("@User_Id", lease.Userid);
+                    cmd.Parameters.AddWithValue("@Property_Id", lease.Propertyid);
 
 
                     rowCount = cmd.ExecuteNonQuery();
