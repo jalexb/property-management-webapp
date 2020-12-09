@@ -26,7 +26,7 @@ namespace Capstone.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT property_id, properties.address_id, properties.userId, bedrooms, bathrooms, photo, prop_desc, price, " +
+                    SqlCommand cmd = new SqlCommand("SELECT property_id, properties.address_id, bedrooms, bathrooms, photo, prop_desc, price, " +
                                                     "property_type, street, street2, city, region, zip " +
                                                     "FROM properties " +
                                                     "INNER JOIN address_table ON properties.address_id = address_table.address_id;", conn);
@@ -54,7 +54,7 @@ namespace Capstone.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT property_id, properties.address_id, properties.userId, bedrooms, bathrooms, photo, prop_desc, price, " +
+                    SqlCommand cmd = new SqlCommand("SELECT property_id, properties.address_id, bedrooms, bathrooms, photo, prop_desc, price, " +
                                                     "property_type, street, street2, city, region, zip " +
                                                     "FROM properties " +
                                                     "INNER JOIN address_table ON properties.address_id = address_table.address_id " +
@@ -88,7 +88,6 @@ namespace Capstone.DAO
 
                 prop.propertyId = (int)reader["property_id"];
                 prop.addressId = (int)reader["address_id"];
-                prop.userId = (int)reader["userId"];
                 prop.Bedrooms = (int)reader["bedrooms"];
                 prop.Bathrooms = (int)reader["bathrooms"];
                 prop.Photo = (string)reader["photo"];

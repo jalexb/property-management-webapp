@@ -48,10 +48,35 @@ namespace Capstone.DAO
             catch (SqlException e)
             {
                 Console.WriteLine(e);
+                throw;
             }
 
             return rowCount;
 
+        }
+
+        public int AddUserToProperty(int propertyId, int userId)
+        {
+            int rowCount = 0;
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("INSERT INTO property_user (property_id, userId) VALUES (@propertyId, @userId)", conn);
+                    cmd.Parameters.AddWithValue("@propertyId", propertyId);
+                    cmd.Parameters.AddWithValue("@userId", userId);
+
+                    rowCount = cmd.ExecuteNonQuery();
+                }
+            }
+            catch(SqlException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            return rowCount;
         }
     }
 }
