@@ -75,7 +75,7 @@ CREATE TABLE pending_leases (
 	property_id		INT					NOT NULL,
 	from_date		DATE,
 	to_date			DATE,
-	is_approved		BOOLEAN,
+	is_approved		BIT,
 	CONSTRAINT		FK_property_id		FOREIGN KEY (property_id)	REFERENCES properties (property_id),
 	CONSTRAINT		FK_user_id			FOREIGN KEY (userId)		REFERENCES users (userId),
 	CONSTRAINT		FK_pending_id		PRIMARY KEY (pending_id)
@@ -90,7 +90,6 @@ CREATE TABLE renter_information (
 	phone_number		VARCHAR(10)			NOT NULL,
 	email				VARCHAR(300)		NOT NULL,
 	lease_type			VARCHAR(64)			NOT NULL,
-	employement_history	VARCHAR(300)		NOT NULL,
 	salary				DECIMAL				NOT NULL,
 
 	CONSTRAINT		PK_renter_id		PRIMARY KEY (renter_id),
