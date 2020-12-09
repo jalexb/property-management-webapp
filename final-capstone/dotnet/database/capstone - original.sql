@@ -77,6 +77,7 @@ CREATE TABLE pending_leases (
 	CONSTRAINT		FK_pending_id		PRIMARY KEY (pending_id)
 	);
 
+<<<<<<< HEAD
 CREATE TABLE renter_information ( 
 	renter_id			INT IDENTITY(1,1)	NOT NULL,
 	userId				INT					NOT NULL,
@@ -93,6 +94,8 @@ CREATE TABLE renter_information (
 	CONSTRAINT		FKuser_id			FOREIGN KEY (userId)		REFERENCES users (userId),
 
 	);
+=======
+>>>>>>> leaseForm
 ALTER TABLE properties
 	ADD	CONSTRAINT	FK_addr_id	
 	FOREIGN KEY (address_id)			

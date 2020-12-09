@@ -1,8 +1,13 @@
 <template>
   <v-app-bar app color="#D9CFC1" dark>
+<<<<<<< HEAD
       <div class="d-flex align-center">
         
         <router-link class="routerlink" :to="{name: 'home'}">
+=======
+      <div class="d-flex align-center">    
+        <router-link :to="{name: 'home'}">
+>>>>>>> leaseForm
           <v-btn text>
             <v-avatar size='125'>
               <img src="@/assets/CapstoneLogo.png" alt="logo"/>

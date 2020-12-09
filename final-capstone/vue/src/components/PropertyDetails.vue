@@ -10,7 +10,14 @@
     <p>{{ property.description }}</p>
     </div>
     <div v-if="this.$store.state.user.role==='user'" class="button">
-    <button><span class="button-text">Apply For Lease</span></button>
+    <v-btn
+            outlined
+            raised 
+            rounded
+            color="#BA3F1D"
+            >
+            Apply For Lease
+      </v-btn>
     </div>
   </div>
 </template>
@@ -64,6 +71,7 @@ created() {
 </script>
 
 <style scoped>
+
 div > img {
   max-width: 30%;
   display: block;
@@ -97,17 +105,12 @@ p {
 
 .button {
   max-width: 15%;
-  display: block;
+  display: flex;
+  justify-content: center;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 5px;
-  background-color: #BA3F1D;
   align-content: center;
 }
 
-button {
-  color: white;
-  text-align: center;
-  margin-left: 20%;
-}
 </style>

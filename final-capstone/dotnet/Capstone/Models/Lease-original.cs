@@ -37,6 +37,14 @@ namespace Capstone.Models
     public class Lease
     {
         public int Lease_Id { get; set; }
+<<<<<<< HEAD
+        public DateTime From_Date { get; set; }
+        public DateTime To_Date { get; set; }
+        public int User_Id { get; set; }
+        public int Property_Id { get; set; }
+
+        //From_date, To_Date, User_Id, Property_Id
+=======
         public DateTime Fromdate { get; set; }
         public DateTime Todate { get; set; }
         public int Userid { get; set; }
@@ -52,6 +60,7 @@ namespace Capstone.Models
 
 
 
+>>>>>>> leaseForm
     }
 
 }

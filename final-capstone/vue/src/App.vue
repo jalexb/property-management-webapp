@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-parallax src="@/assets/Background.jpg"> </v-parallax>
+    <v-parallax height=500 src="@/assets/Background.jpg"> </v-parallax>
     <nav-bar />
     <v-main>
       <router-view />
