@@ -117,7 +117,7 @@ VALUES
 
 INSERT INTO users (username, password_hash, salt, user_role)
 VALUES
-	('m','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'maintenance');
+	('m','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'maintenance'); -- password is a
 
 INSERT INTO users (username, password_hash, salt, user_role)
 VALUES
@@ -129,7 +129,7 @@ VALUES
 INSERT INTO address_table
 	(userId, property_type, street, street2, city, region, zip) 
 VALUES 
-	(1, 'House', '42 Wallaby Way', 'N/A', 'Syndey', 'North Carolina', 27009);
+	(4, 'House', '42 Wallaby Way', 'N/A', 'Syndey', 'North Carolina', 27009); --renter is userId 4
 INSERT INTO address_table
 	(userId, property_type, street, street2, city, region, zip) 
 VALUES 
