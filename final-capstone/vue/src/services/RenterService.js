@@ -10,11 +10,11 @@ const http = axios.create({
     },
     getUsersRenterInformation(userId) {
       return {
-          fullName: "Jacob Barnett",
-          email: "jabarnett97@gmail.com",
-          phoneNumber: "5677125972",
-          address: "808 East Wooster Street, Bowling Green, Ohio, 4584923",
-          userId: userId,
+          FullName: "Jacob Barnett",
+          Email: "jabarnett97@gmail.com",
+          PhoneNumber: "5677125972",
+          Address: "808 East Wooster Street, Bowling Green, Ohio, 4584923",
+          User_Id: userId,
       }
       
       //return http.get(`/renter/${userId}`);

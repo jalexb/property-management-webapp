@@ -9,19 +9,19 @@
     <form v-on:submit.prevent="addMaintenanceTicket">
         <div class="input">
             <label for="Name">Name</label> &nbsp;
-            <input type="text" v-model="userInfo.fullName" value="Name"/>
+            <input type="text" v-model="userInfo.FullName" value="Name"/>
         </div>
         <div class="input">
             <label for="Email">Email</label> &nbsp;
-            <input type="email" v-model="userInfo.email" value="Email"/>
+            <input type="email" v-model="userInfo.Email" value="Email"/>
         </div>
         <div class="input">
             <label for="PhoneNumber">Phone Number</label> &nbsp;
-            <input type="text" v-model="userInfo.phoneNumber" value="PhoneNumber"/>
+            <input type="text" v-model="userInfo.PhoneNumber" value="PhoneNumber"/>
         </div>
         <div class="input">
             <label for="Address">Address</label> &nbsp;
-            <input type="text" v-model="userInfo.address" value="Address"/>
+            <input type="text" v-model="userInfo.Address" value="Address"/>
         </div>
         <div class="input">
             <label for="Requests">Maintenance Description</label> &nbsp;
