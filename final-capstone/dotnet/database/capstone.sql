@@ -37,25 +37,36 @@ CREATE TABLE address_table(
 	CONSTRAINT		FK_userId_users		FOREIGN KEY (userId)		REFERENCES users (userId)	
 );
 
+CREATE TABLE landlord (
+	landlord_id		INT IDENTITY(1, 1)	NOT NULL,
+	userId			INT					NOT NULL,
+	CONSTRAINT		PK_landlordId		PRIMARY KEY (landlord_id),
+	CONSTRAINT		FK_landlord_user	FOREIGN KEY (userId)		REFERENCES users (userId)
+	
+);
+
+CREATE TABLE worker (
+	worker_id		INT IDENTITY(1, 1)	NOT NULL,
+	userId			INT					NOT NULL,
+	CONSTRAINT		PK_worker_id		PRIMARY KEY (worker_id),
+	CONSTRAINT		FK_worker_user		FOREIGN KEY (userId)		REFERENCES users (userId)
+	
+);
+
 CREATE TABLE properties (
 	property_id		INT IDENTITY(1,1)	NOT NULL,
 	landlord_id		INT					NOT NULL,
 	address_id		INT					NOT NULL,
-	userId			INT					NOT NULL,
 	bedrooms		INT					NOT NULL,
 	bathrooms		INT					NOT NULL,
 	photo			VARCHAR(200),
 	prop_desc		VARCHAR(500)		NOT NULL,
 	price			DECIMAL				NOT NULL,
 	CONSTRAINT		PK_propertyId		PRIMARY KEY (property_id),
+	CONSTRAINT		FK_prop_landlord	FOREIGN KEY (landlord_id)		REFERENCES landlord (landlord_id)
 );
 
-CREATE TABLE property_user (
-	property_id		INT		NOT NULL,
-	userId			INT		NOT NULL,
-	CONSTRAINT		FK_property_to_user	FOREIGN KEY (property_id)	REFERENCES properties (property_id),
-	CONSTRAINT		FK_user_to_property	FOREIGN KEY (userId)	REFERENCES users (userId)
-);
+
 
 
 CREATE TABLE lease (
@@ -64,21 +75,10 @@ CREATE TABLE lease (
 	to_date			DATE,
 	userId			INT					NOT NULL,
 	property_id		INT					NOT NULL,
+	current_status  VARCHAR(50)			NOT NULL,
 	CONSTRAINT		PK_lease_id			PRIMARY KEY (lease_id),
 	CONSTRAINT		FK_userId_user		FOREIGN KEY (userId)		REFERENCES users (userId),
 	CONSTRAINT		FK_propertyId_prop	FOREIGN KEY (property_id)	REFERENCES properties (property_id)
-	);
-
-CREATE TABLE pending_leases (
-	pending_id		INT	IDENTITY(1,1)	NOT NULL,
-	userId			INT					NOT NULL,
-	property_id		INT					NOT NULL,
-	from_date		DATE,
-	to_date			DATE,
-	is_approved		BIT,
-	CONSTRAINT		FK_property_id		FOREIGN KEY (property_id)	REFERENCES properties (property_id),
-	CONSTRAINT		FK_user_id			FOREIGN KEY (userId)		REFERENCES users (userId),
-	CONSTRAINT		FK_pending_id		PRIMARY KEY (pending_id)
 	);
 
 CREATE TABLE renter_information ( 
