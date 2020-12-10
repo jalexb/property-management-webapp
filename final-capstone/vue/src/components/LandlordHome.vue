@@ -1,5 +1,4 @@
 <template>
-    <div>
     <v-container
     fluid
     >
@@ -51,7 +50,6 @@
             </v-flex>
             
     </v-container>
-  </div>
 </template>
 
 <script>
