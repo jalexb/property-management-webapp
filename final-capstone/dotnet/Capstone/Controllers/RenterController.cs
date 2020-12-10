@@ -1,4 +1,5 @@
-﻿using Capstone.DAO.Renter;
+﻿using Capstone.DAO;
+using Capstone.DAO.Renter;
 using Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,23 +13,32 @@ namespace Capstone.Controllers
     [ApiController]
     public class RenterController : Controller
        {
-        private readonly IRenterService _renterService;
-        public RenterController(IRenterService renterService)
+        private readonly IRenterDAO renterDAO;
+        public RenterController(IRenterDAO renterService)
         {
-            _renterService = renterService; 
+            renterDAO = renterService; 
         }
         [HttpPost("/renter")]
-        public IActionResult SaveRenter([FromBody] RenterInformationRequest request)
+        public IActionResult SaveRenter([FromBody] RenterInformation request)
         {
 
 
-            bool lease_result = _renterService.SaveRenter(request);
+            int rowsAffected = renterDAO.AddUserInformation(request);
 
-            if (lease_result)
+            if (rowsAffected == 1)
             {
                 return Ok();
             }
             return BadRequest(new { Message = "An error occurred and renter was not saved" });
+        }
+
+        [HttpGet("/renter/{id}")]
+        public IActionResult getRenterInformation(int id, [FromBody]int property_id)
+        {
+            BasicRenterInformation renter_info = renterDAO.GetRenterInformation(id);
+            renter_info = renterDAO.GetRenterAddress(renter_info, property_id);
+
+            return Ok(renter_info);
         }
     }
 }

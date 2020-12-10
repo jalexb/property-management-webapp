@@ -16,20 +16,20 @@ namespace Capstone.Controllers
     {
              
 
-        private readonly ILeaseService _leaseService;
-        public LeaseController(ILeaseService leaseService)
+        private readonly ILeaseDAO _leaseService;
+        public LeaseController(ILeaseDAO leaseService)
         {
             _leaseService = leaseService;
         }
 
         [HttpPost("/lease")]
-        public IActionResult SaveApplication([FromBody]PendingLeasesRequest lease)
+        public IActionResult SaveApplication([FromBody]PendingLease lease)
         {
 
            
-            bool lease_result = _leaseService.SavePendingLease(lease);
+            int rowsAffected = _leaseService.AddPendingLease(lease);
             
-            if (lease_result)
+            if (rowsAffected >= 1)
             {
                 return Ok();
             }

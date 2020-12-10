@@ -9,5 +9,7 @@ namespace Capstone.DAO
     public interface IRenterDAO
     {
         int AddUserInformation(RenterInformation renter_info);
+        BasicRenterInformation GetRenterInformation(int userId);
+        BasicRenterInformation GetRenterAddress(BasicRenterInformation renter, int address_id);
     }
 }

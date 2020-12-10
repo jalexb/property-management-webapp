@@ -30,13 +30,14 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("INSERT INTO pending_leases(userId, property_id, from_date, to_date) " +
-                                                    "VALUES(@User_Id, @Property_Id, @FromDate, @ToDate)", conn);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO lease(userId, property_id, from_date, to_date, current_status) " +
+                                                    "VALUES(@User_Id, @Property_Id, @FromDate, @ToDate, @current_status)", conn);
 
-                    cmd.Parameters.AddWithValue("@User_Id", lease.User_Id);
-                    cmd.Parameters.AddWithValue("@Property_Id", lease.Property_Id);
+                    cmd.Parameters.AddWithValue("@User_Id", lease.UserId);
+                    cmd.Parameters.AddWithValue("@Property_Id", lease.PropertyId);
                     cmd.Parameters.AddWithValue("@FromDate", lease.FromDate);
                     cmd.Parameters.AddWithValue("@ToDate", lease.ToDate);
+                    cmd.Parameters.AddWithValue("@current_status", "pending");
 
                     rowCount = cmd.ExecuteNonQuery();
                 }
@@ -62,7 +63,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT pending_id, userId, property_id, from_date, to_date FROM pending_leases", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT userId, property_id, from_date, to_date FROM lease", conn);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -70,9 +71,8 @@ namespace Capstone.DAO
                     {
                         PendingLease lease = new PendingLease();
 
-                        lease.Pending_Id = (int)reader["pending_id"];
-                        lease.User_Id = (int)reader["userId"];
-                        lease.Property_Id = (int)reader["property_id"];
+                        lease.UserId = (int)reader["userId"];
+                        lease.PropertyId = (int)reader["property_id"];
                         lease.FromDate = (DateTime)reader["from_date"];
                         lease.ToDate = (DateTime)reader["to_date"];
 

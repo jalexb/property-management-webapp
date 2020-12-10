@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Capstone.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,11 +11,11 @@ namespace Capstone.Models
 
     public class PendingLease
     {
-        public int Pending_Id { get; set; }
-        public int User_Id { get; set; }
-        public int Property_Id { get; set; }
-        public DateTime FromDate { get; set; }
-        public DateTime ToDate { get; set; }
+        public int LeaseId { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public int UserId { get; set; }
+        public int PropertyId { get; set; }
 
         //Pending_Id, User_Id, Property_Id, FromDate, ToDate
     }

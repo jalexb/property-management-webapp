@@ -21,4 +21,13 @@ namespace Capstone.Models
 
         //Lease_Id, Property_id, User_Id, FirstName, LastName, Address, PhoneNumber, Email, Lease_Type, Employment_History, Salary, FromDate, ToDate
     }
+
+    public class BasicRenterInformation
+    {
+        public int User_Id { get; set; }
+        public string FullName { get; set; }
+        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+    }
 }
