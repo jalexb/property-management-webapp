@@ -1,0 +1,3 @@
+To refresh Data Entities when database has been changed, delete Entities folder if exist, then open Tools=>Nudget Package Manager=>Package Manager Console and run the following command:
+
+Scaffold-Dbcontext "Server=.\SQLEXPRESS;Database=final_capstone;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities

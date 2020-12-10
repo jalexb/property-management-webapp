@@ -64,11 +64,11 @@ const router = new Router({
       }
     },
     {
-      path: "/lease-form",
+      path: "/lease-form/:id",
       name: "lease-form",
       component: LeaseForm,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     }
   ]

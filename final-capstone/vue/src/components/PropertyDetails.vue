@@ -10,7 +10,7 @@
     <p>{{ property.description }}</p>
     </div>
     <div v-if="userRole==='user'" class="button">
-    <router-link :to="{name: 'lease-form'}">
+    <router-link :to="{path: '/lease-form/' + this.property.propertyId}">
     <v-btn
             outlined
             raised 

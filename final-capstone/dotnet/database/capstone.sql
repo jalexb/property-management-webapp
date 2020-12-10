@@ -86,7 +86,6 @@ CREATE TABLE renter_information (
 	userId				INT					NOT NULL,
 	first_name			VARCHAR(64)			NOT NULL,
 	last_name			VARCHAR(64)			NOT NULL,
-	current_address		VARCHAR(64)			NOT NULL,
 	phone_number		VARCHAR(10)			NOT NULL,
 	email				VARCHAR(300)		NOT NULL,
 	lease_type			VARCHAR(64)			NOT NULL,

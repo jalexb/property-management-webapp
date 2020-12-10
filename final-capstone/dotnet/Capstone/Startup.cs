@@ -9,6 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Capstone.DAO;
 using Capstone.Security;
+using Capstone.Entities;
+using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using Capstone.DAO.Lease;
+using Capstone.DAO.Renter;
 
 namespace Capstone
 {
@@ -25,7 +30,7 @@ namespace Capstone
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -36,7 +41,7 @@ namespace Capstone
             });
 
             string connectionString = Configuration.GetConnectionString("Project");
-
+            services.AddDbContext<final_capstoneContext>(options => options.UseSqlServer(connectionString));
             // configure jwt authentication
             var key = Encoding.ASCII.GetBytes(Configuration["JwtSecret"]);
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap[JwtRegisteredClaimNames.Sub] = "sub";
@@ -66,7 +71,10 @@ namespace Capstone
             services.AddTransient<IPropertyDAO>(m => new PropertySqlDAO(connectionString));
             services.AddTransient<ILeaseDAO>(m => new LeaseSqlDAO(connectionString));
             services.AddTransient<IRenterDAO>(m => new RenterSqlDAO(connectionString));
-            
+            services.AddScoped<ILeaseService, LeaseService>();
+            services.AddScoped<IRenterService, RenterService>();
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

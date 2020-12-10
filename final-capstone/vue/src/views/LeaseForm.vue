@@ -12,7 +12,7 @@
                 placeholder="First Name" 
                 required 
                 autofocus
-                v-model="application.firstname" /></div>
+                v-model="renter.firstName" /></div>
     <h3>Last Name:  </h3> 
         <input type="text" 
                 id="lastname" 
@@ -20,15 +20,8 @@
                 placeholder="Last Name" 
                 required 
                 autofocus
-                v-model="application.lastname" />
-    <h3>Date of Birth:  </h3> 
-        <input type="text" 
-                id="dob" 
-                class=lease-form 
-                placeholder="Date of Birth" 
-                required 
-                autofocus
-                v-model="application.dob" />
+                v-model="renter.lastName" />
+    
     <h3>Phone Number:  </h3> 
         <input type="text" 
                 id="phone-number" 
@@ -36,7 +29,7 @@
                 placeholder="phone-number" 
                 required 
                 autofocus
-                v-model="application.phonenumber" />
+                v-model="renter.phoneNumber" />
     <h3>email:  </h3> 
         <input type="text" 
                 id="email" 
@@ -44,12 +37,7 @@
                 placeholder="email Address" 
                 required 
                 autofocus
-                v-model="application.email" />
-    <h3>lease-property:  </h3> 
-        <select v-model="application.propertyid">
-            <option value="0">--Select--</option>
-            <option v-for="property in properties" v-bind:key="property.propertyId" :value="property.street">{{ property.street }}</option>
-        </select>
+                v-model="renter.email" />
     <h3>from-date:  </h3> 
         <input type="text" 
                 id="from-date" 
@@ -57,7 +45,7 @@
                 placeholder="from-date" 
                 required 
                 autofocus
-                v-model="application.fromdate" />
+                v-model="pendingLease.fromDate" />
     <h3>to-date:  </h3> 
         <input type="text" 
                 id="to-date" 
@@ -65,7 +53,7 @@
                 placeholder="to-date" 
                 required 
                 autofocus
-                v-model="application.todate" />
+                v-model="pendingLease.toDate" />
      </div>
 
     <div class="actions">
@@ -76,39 +64,58 @@
 
 <script>
 import LeaseService from "../services/LeaseService.js"
-import PropertyService from "../services/PropertyService.js"
+import RenterService from "../services/RenterService.js"
 
 export default {
    name:"lease-form",
    data(){
        return {
-           application:{
-               firstname:"",
-               lastname:"",
-               dob:"",
-               phonenumber:"", 
-               email:"",
-               propertyid:0,
-               fromdate:"",
-               todate:"",
-               userid:0
-           },
-           properties:[]
+           pendingLease:{
+  "userId": 0,
+  "propertyId": 0,
+  "fromDate": null,
+  "toDate": null,
+  "isApproved": null
+},
+renter:{
+  "userId": 0,
+  "firstName": null,
+  "lastName": null,
+  "currentAddress": null,
+  "phoneNumber": null,
+  "email": null,
+  "leaseType": null,
+  "salary": 0.0
+}
+        
        }
    },
-   created() {
-       PropertyService.getProperties().then(response=>{
-           if (response.status === 200){
-               this.properties = response.data;
-           }
-       })
+   created(){
+       this.pendingLease.propertyId = parseInt(this.$route.params.id);
    },
-    methods: {
+       methods: {
+           saveRenter(){
+               this.renter.userId = this.$store.state.user.userId;
+               RenterService.saveRenter(this.renter).then (response => {
+                   if (response.status == 200) {
+                       alert ("Renter information has been saved");
+                       this.$router.push('/');
+                   } else {
+                       alert ("There was problem saving the Renter information, not saved");
+                   }
+               })
+               .catch(error =>{
+                    console.log(error);
+                 alert("There was a problem with the renter info, not saved!");
+               })
+           },
         saveApplication() {
-            this.application.userid = this.$store.state.user.userid;
-            console.log(this.$store.state.user.userid);
-            LeaseService.submitLeaseForm(this.application) .then (response =>{
-                if (response.status === 201){
+            
+            this.pendingLease.userId = this.$store.state.user.userId;
+            console.log(this.$route.params.id);
+            LeaseService.submitLeaseForm(this.pendingLease) .then (response =>{
+                if (response.status === 200){
+                    this.saveRenter();
                     alert("Application has been saved");
                 }
                 else {
@@ -116,6 +123,10 @@ export default {
                 }
             }
             )
+            .catch(error=>{
+                console.log(error);
+                 alert("There was a problem with the application, not saved!");
+            })
         }
     }
 }

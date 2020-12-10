@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Capstone.DAO;
+using Capstone.DAO.Lease;
 using Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,37 +16,20 @@ namespace Capstone.Controllers
     {
              
 
-        private readonly ILeaseDAO _leaseDAO;
-        public LeaseController(ILeaseDAO leaseDAO)
+        private readonly ILeaseService _leaseService;
+        public LeaseController(ILeaseService leaseService)
         {
-            _leaseDAO = leaseDAO;
+            _leaseService = leaseService;
         }
 
         [HttpPost("/lease")]
-        public IActionResult SaveApplication([FromBody]PendingLeaseAndRenterInformation lease)
+        public IActionResult SaveApplication([FromBody]PendingLeasesRequest lease)
         {
 
-            PendingLease pending_lease = new PendingLease();
-            RenterInformation info = new RenterInformation();
-
-            info.Address = lease.Address;
-            info.Email = lease.Email;
-            info.FirstName = lease.FirstName;
-            info.LastName = lease.LastName;
-            info.Lease_Type = lease.Lease_Type;
-            info.PhoneNumber = lease.PhoneNumber;
-            info.Salary = lease.Salary;
-            info.User_Id = lease.User_Id;
-
-            pending_lease.FromDate = lease.FromDate;
-            pending_lease.ToDate = lease.ToDate;
-            pending_lease.User_Id = lease.User_Id;
-            pending_lease.Property_Id = lease.Property_Id;
-
-            int lease_result = _leaseDAO.AddPendingLease(pending_lease);
-            int renterInfo_result = _leaseDAO.AddUserInformation(info);
-
-            if (lease_result == 1 && renterInfo_result == 1)
+           
+            bool lease_result = _leaseService.SavePendingLease(lease);
+            
+            if (lease_result)
             {
                 return Ok();
             }

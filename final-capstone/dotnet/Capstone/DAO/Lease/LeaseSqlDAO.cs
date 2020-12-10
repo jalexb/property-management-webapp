@@ -89,7 +89,7 @@ namespace Capstone.DAO
             return list;
         }
 
-        public int ApprovePendingLease(Lease lease)
+        public int ApprovePendingLease(Capstone.Models.Lease lease)
         {
 
             int rowCount = 0;
