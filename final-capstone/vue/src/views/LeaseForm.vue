@@ -57,7 +57,7 @@
      </div>
 
     <div class="actions">
-      <button type="submit" class="btn btn-primary" v-on:click="saveApplication()">Save Application</button>
+      <button type="submit" class="btn btn-primary">Save Application</button>
     </div>
   </form>
 </template>
