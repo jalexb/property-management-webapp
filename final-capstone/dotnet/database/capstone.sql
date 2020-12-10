@@ -123,27 +123,36 @@ INSERT INTO users (username, password_hash, salt, user_role)
 VALUES
 	('l','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'landloard');
 
+--populate false landlord data
+INSERT INTO landlord
+	(userId)
+VALUES
+	(5);
+
 
 
 --populate default address data
 INSERT INTO address_table
 	(userId, property_type, street, street2, city, region, zip) 
 VALUES 
-	(4, 'House', '42 Wallaby Way', 'N/A', 'Syndey', 'North Carolina', 27009); --renter is userId 4
+	(3, 'House', '42 Wallaby Way', 'N/A', 'Syndey', 'North Carolina', 27009); --renter is userId 4
 INSERT INTO address_table
 	(userId, property_type, street, street2, city, region, zip) 
 VALUES 
-	(2, 'Apt', '500 Smith Rd', 'Building #3 Apt 12', 'San Francisco', 'California', 94016);
+	(1 , 'Apt', '500 Smith Rd', 'Building #3 Apt 12', 'San Francisco', 'California', 94016);
+
+
+
 
 --populate default property data
 INSERT INTO properties 
-	(address_id, landlord_id, userId, bedrooms, bathrooms, photo, prop_desc, price) 
+	(landlord_id, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
 VALUES 
-	(1, 2, 0, 3, 2, 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg', 'Lovely home just a few minutes away from the shore. With three bedrooms and two bathrooms it is sure to have plenty of space and amenities.', 2200);
+	(1, 1, 0, 3, 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg', 'Lovely home just a few minutes away from the shore. With three bedrooms and two bathrooms it is sure to have plenty of space and amenities.', 2200);
 INSERT INTO properties 
-	(address_id, landlord_id, userId, bedrooms, bathrooms, photo, prop_desc, price) 
+	(landlord_id, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
 VALUES 
-	(2, 2, 0, 2, 1, 'https://stmedia.stimg.co/1010121201_mavenrendering.jpg?fit=crop&crop=faces', 'Nice apartment with good view and spacing. Perfect for a couple or bachelor.', 1300);
+	(1, 1, 0, 2, 'https://stmedia.stimg.co/1010121201_mavenrendering.jpg?fit=crop&crop=faces', 'Nice apartment with good view and spacing. Perfect for a couple or bachelor.', 1300);
 
 
 --populate default renter_information data
