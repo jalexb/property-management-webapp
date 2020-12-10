@@ -121,7 +121,7 @@ VALUES
 
 INSERT INTO users (username, password_hash, salt, user_role)
 VALUES
-	('l','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'landloard');
+	('l','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'landlord');
 
 --populate false landlord data
 INSERT INTO landlord
