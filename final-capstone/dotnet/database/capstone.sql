@@ -152,7 +152,7 @@ VALUES
 INSERT INTO properties 
 	(landlord_id, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
 VALUES 
-	(1, 1, 0, 2, 'https://stmedia.stimg.co/1010121201_mavenrendering.jpg?fit=crop&crop=faces', 'Nice apartment with good view and spacing. Perfect for a couple or bachelor.', 1300);
+	(1, 2, 0, 2, 'https://stmedia.stimg.co/1010121201_mavenrendering.jpg?fit=crop&crop=faces', 'Nice apartment with good view and spacing. Perfect for a couple or bachelor.', 1300);
 
 
 --populate default renter_information data

@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import PropertyDetails from '../components/PropertyDetails.vue'
 import LeaseForm from '../views/LeaseForm.vue'
+import MaintenanceIssue from '@/views/MaintenenceTicket'
 
 Vue.use(Router)
 
@@ -70,7 +71,13 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: "/maintenance/:userId",
+      name: "maintenance-ticket",
+      component: MaintenanceIssue,
     }
+
   ]
 })
 
