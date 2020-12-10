@@ -1,8 +1,12 @@
 <template>
   <div class="home">
     <div v-if="userRole == 'user' || (userRole != 'user' & userRole != 'landlord' & userRole != 'maintenance' & userRole != 'renter')">
-    <h1>Property Listings</h1>
-    <property-list />
+      <h1>Property Listings</h1>
+      <property-list />
+    </div>
+    <div v-if="userRole == 'renter'">
+      <h1>Property Listings</h1>
+      <property-list />
     </div>
     <div v-if="userRole == 'landlord'">
       <h1>Landlord Services</h1>

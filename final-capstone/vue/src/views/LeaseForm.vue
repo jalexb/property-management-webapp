@@ -78,7 +78,7 @@ export default {
   "isApproved": null
 },
 renter:{
-  "userId": 0,
+  "user_Id": 0,
   "firstName": null,
   "lastName": null,
   "currentAddress": null,
@@ -95,7 +95,7 @@ renter:{
    },
        methods: {
            saveRenter(){
-               this.renter.userId = this.$store.state.user.userId;
+               this.renter.user_Id = this.$store.state.user.userId;
                RenterService.saveRenter(this.renter).then (response => {
                    if (response.status == 200) {
                        alert ("Renter information has been saved");
