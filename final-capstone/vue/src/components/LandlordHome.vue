@@ -4,10 +4,12 @@
     >
             <v-flex 
             xs12 
+            wrap
             flex-direction: row
             justify-space-around
             >
-              <v-card 
+              <v-card
+              class="ma-6"
               max-width="300"
               hover>
               <!--<router-link :to="{ name: 'property-details', params: {id: property.propertyId} }">-->
@@ -18,6 +20,7 @@
               <!--</router-link>-->
             </v-card>
             <v-card 
+              class="ma-6"
               max-width="300"
               hover>
               <!--<router-link :to="{ name: 'property-details', params: {id: property.propertyId} }">-->
@@ -27,7 +30,8 @@
               </v-card-title>
               <!--</router-link>-->
             </v-card>
-            <v-card 
+            <v-card
+              class="ma-6"
               max-width="300"
               hover>
               <!--<router-link :to="{ name: 'property-details', params: {id: property.propertyId} }">-->
@@ -38,6 +42,7 @@
               <!--</router-link>-->
             </v-card>
             <v-card 
+              class="ma-6"
               max-width="300"
               hover>
               <!--<router-link :to="{ name: 'property-details', params: {id: property.propertyId} }">-->

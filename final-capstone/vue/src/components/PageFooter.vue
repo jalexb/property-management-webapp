@@ -1,7 +1,7 @@
 <template>
   <v-footer padless>
     <v-row justify="center" no-gutters>
-      <v-col class="brown lighten-3 py-4 text-center white--text" cols="12">
+      <v-col class="primary lighten-3 py-4 text-center white--text" cols="12">
         {{ new Date().getFullYear() }} —
         <strong
           >Vuetify |
