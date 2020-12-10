@@ -1,4 +1,5 @@
-select * from pending_leases
+select * from users
+
 
 
 BEGIN TRANSACTION

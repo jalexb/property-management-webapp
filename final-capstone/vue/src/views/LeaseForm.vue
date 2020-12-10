@@ -39,7 +39,7 @@
                 autofocus
                 v-model="renter.email" />
     <h3>from-date:  </h3> 
-        <input type="text" 
+        <input type="date" 
                 id="from-date" 
                 class=from-date 
                 placeholder="from-date" 
@@ -47,7 +47,7 @@
                 autofocus
                 v-model="pendingLease.fromDate" />
     <h3>to-date:  </h3> 
-        <input type="text" 
+        <input type="date" 
                 id="to-date" 
                 class=to-date 
                 placeholder="to-date" 

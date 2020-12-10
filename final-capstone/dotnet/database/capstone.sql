@@ -111,6 +111,17 @@ INSERT INTO users
 	(username, password_hash, salt, user_role) 
 VALUES 
 	('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
+INSERT INTO users (username, password_hash, salt, user_role)
+VALUES
+	('r','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'renter');
+
+INSERT INTO users (username, password_hash, salt, user_role)
+VALUES
+	('m','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'maintenance');
+
+INSERT INTO users (username, password_hash, salt, user_role)
+VALUES
+	('l','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'landloard');
 
 
 
