@@ -23,6 +23,7 @@ namespace Capstone.DAO.Renter
             try
             {
                 var renterinfo = _mapper.Map<Entities.RenterInformation>(request);
+
                 _dbContext.RenterInformation.Add(renterinfo);
                 _dbContext.SaveChanges();
                 return true;
