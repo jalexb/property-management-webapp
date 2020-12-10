@@ -8,6 +8,7 @@ import store from '../store/index'
 import PropertyDetails from '../components/PropertyDetails.vue'
 import LeaseForm from '../views/LeaseForm.vue'
 import MaintenanceIssue from '@/views/MaintenenceTicket'
+import RenterTransactions from '../components/RenterTransactions.vue'
 
 Vue.use(Router)
 
@@ -76,8 +77,12 @@ const router = new Router({
       path: "/maintenance/:userId",
       name: "maintenance-ticket",
       component: MaintenanceIssue,
+    },
+    {
+    path: "/renter/transactions/:userId",
+    name: "renter-transactions",
+    component: RenterTransactions
     }
-
   ]
 })
 

@@ -24,5 +24,25 @@ const http = axios.create({
         return true;
       }
       return false;
+    },
+    getRenterTransactions(userId) {
+      //return http.get(`/renter/transactions/${userId}`);
+      return [
+          {
+            userId: userId,
+            transactionId: 1,
+            dueDate: '12-01-2020',
+            price: 800,
+            status: 'Paid'
+          },
+          {
+            userId: userId,
+            transactionId: 2,
+            dueDate: '01-01-2021',
+            price: 800,
+            status: 'Owed'
+          }
+        ]
+
     }
   }
