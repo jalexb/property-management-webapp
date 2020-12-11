@@ -134,11 +134,11 @@ VALUES
 INSERT INTO properties 
 	(userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
 VALUES 
-	(1, 1, 0, 3, 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg', 'Lovely home just a few minutes away from the shore. With three bedrooms and two bathrooms it is sure to have plenty of space and amenities.', 2200);
+	(5, 1, 0, 3, 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg', 'Lovely home just a few minutes away from the shore. With three bedrooms and two bathrooms it is sure to have plenty of space and amenities.', 2200);
 INSERT INTO properties 
 	(userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
 VALUES 
-	(1, 2, 0, 2, 'https://stmedia.stimg.co/1010121201_mavenrendering.jpg?fit=crop&crop=faces', 'Nice apartment with good view and spacing. Perfect for a couple or bachelor.', 1300);
+	(5, 2, 0, 2, 'https://stmedia.stimg.co/1010121201_mavenrendering.jpg?fit=crop&crop=faces', 'Nice apartment with good view and spacing. Perfect for a couple or bachelor.', 1300);
 
 
 --populate default renter_information data
@@ -151,6 +151,115 @@ INSERT INTO lease
 	(current_status, from_date, property_id, to_date, userId)
 VALUES
 	('Approved', '10-10-2020', 2, '10-10-2021', 3);
+
+
+INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) 
+VALUES 
+	(3, 'House', '75490 Nantucket Drive', 'N/A', 'Orlando', 'Florida', 32830);
+
+INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+VALUES 
+	(5, 3, 4, 3, 'https://media.istockphoto.com/photos/beautiful-luxury-home-exterior-at-twilight-picture-id1026205392?k=6&m=1026205392&s=612x612&w=0&h=pe0Pqbm7GKHl7cmEjf9Drc7Fp-JwJ6aTywsGfm5eQm4=', 'Luxury home with 4 bedrooms and 3 bathrooms.  Great for entertaining!', 3200);
+
+INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) 
+VALUES 
+	(3, 'Apartment', '2800 Madison Rd', 'Suite 802', 'Cincinnati', 'OH', 45208);
+
+INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+VALUES 
+	(5, 4, 2, 2, 'https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?cs=srgb&dl=pexels-sevenstorm-juhaszimrus-439391.jpg&fm=jpg', 'Rooftop terraces, 2 Bedrooms, 2 Bathrooms and 2 car garage, close to shopping and downtown', 1800);
+
+INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) 
+VALUES 
+	(3, 'Apartment', '2800 Madison Rd', 'Suite 201', 'Cincinnati', 'OH', 45208);
+
+INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+VALUES 
+	(5, 5, 2, 2, 'https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?cs=srgb&dl=pexels-sevenstorm-juhaszimrus-439391.jpg&fm=jpg', 'Rooftop terraces, 2 Bedrooms, 2 Bathrooms and 2 car garage, close to shopping and downtown', 1800);
+	
+INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) 
+VALUES 
+	(3, 'Apartment', '2800 Madison Rd', '205', 'Cincinnati', 'OH', 45208);
+
+INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+VALUES 
+	(5, 6, 1, 1, 'https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?cs=srgb&dl=pexels-sevenstorm-juhaszimrus-439391.jpg&fm=jpg', 'Upscale living in Downtown! Close to stadiums and museums.  On-site gym and pool.  Call for an appointment. ', 2200);
+
+INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) 
+VALUES 
+	(3, 'Apartment', '2800 Madison Rd', '404', 'Cincinnati', 'OH', 45208);
+
+INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+VALUES 
+	(5, 7, 3, 2, 'https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?cs=srgb&dl=pexels-sevenstorm-juhaszimrus-439391.jpg&fm=jpg', 'Rooftop terraces, 2 Bedrooms, 2 Bathrooms and 2 car garage, close to shopping and downtown', 3500);
+
+	INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) 
+VALUES 
+	(3, 'Apartment', '2800 Madison Rd', 'Suite 703', 'Cincinnati', 'OH', 45208);
+
+INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+VALUES 
+	(5, 8, 2, 1, 'https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?cs=srgb&dl=pexels-sevenstorm-juhaszimrus-439391.jpg&fm=jpg', 'Rooftop terraces, 2 Bedrooms, 2 Bathrooms and 2 car garage, close to shopping and downtown', 2450);
+
+INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) 
+VALUES 
+	(3, 'Apartment', '2800 Madison Rd', 'Suite 300', 'Cincinnati', 'OH', 45208);
+
+INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+VALUES 
+	(5, 9, 3, 1, 'https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?cs=srgb&dl=pexels-sevenstorm-juhaszimrus-439391.jpg&fm=jpg', 'Rooftop terraces, 2 Bedrooms, 2 Bathrooms and 2 car garage, close to shopping and downtown', 3450);
+
+INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) 
+VALUES 
+	(3, 'House', '507 Mountain View Ln', 'N/A', 'Vergennes', 'Vermont', 05491);
+
+INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+VALUES 
+	(5, 10, 2, 2, 'https://media.istockphoto.com/photos/winter-snow-craftman-cape-cod-style-home-picture-id162264365?k=6&m=162264365&s=612x612&w=0&h=bkOPRPuo9OR7JlIYJzDw0U0QNDBh-bIIWGOYb_O9Z0Q=', 'Quiet country living nestled in northern VT.  Close to Otter Creek', 4000);
+
+INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) 
+VALUES 
+	(3, 'House', '37942 Eagle Dr', 'N/A', 'Gatlinburg', 'Tennessee', 37738);
+
+INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+VALUES 
+	(5, 11, 2, 2, 'https://images.pexels.com/photos/1876045/pexels-photo-1876045.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', 'Peaceful mountain retreat with beautiful sunrises and sunsets.  Come smell the fresh mountain air while drinking your morning coffee!  Great for entertaining!', 4000);
+
+INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) 
+VALUES 
+	(3, 'House', '37942 Eagle Dr', 'N/A', 'Gatlinburg', 'Tennessee', 37738);
+
+INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+VALUES 
+	(5, 12, 2, 2, 'https://images.pexels.com/photos/2098405/pexels-photo-2098405.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', 'Lakeside living!  Dock your sailboat right in front of your house.  Enjoy the sounds of nature while using the hot tub!', 3800);
+
+INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) 
+VALUES 
+	(3, 'House', '9724 Rt 458', 'N/A', 'Goshen', 'OH', 45122);
+
+INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+VALUES 
+	(5, 13, 2, 2, 'https://images.pexels.com/photos/463734/pexels-photo-463734.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', 'This home offers 2 bedrooms and 2 bathrooms, updated kitchen and family room.  Lots of room to expand.', 2600);
+
+
+INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) 
+VALUES 
+	(3, 'House', '37 Bramble Rd', 'N/A', 'Kalamzazoo', 'MI', 49009);
+
+INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+VALUES 
+	(5, 14, 2, 1, 'https://images.pexels.com/photos/1123876/pexels-photo-1123876.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', 'Fixer Upper!  Make this home to your own liking.', 600);
+
+
+INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) 
+VALUES 
+	(3, 'Tiny House', '6626 Britton Ave', 'N/A', 'Cincinnati', 'OH', 45227);
+
+INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+VALUES 
+	(5, 15, 1, 1, 'https://thumbs.dreamstime.com/b/sumer-rain-over-tiny-house-summer-flowers-around-off-grid-83118571.jpg', 'Tiny home living at it best!  Downsize to the minimum and enjoy all the comforts while not using a lot real estate!', 800);
+
+
 
 
 GO

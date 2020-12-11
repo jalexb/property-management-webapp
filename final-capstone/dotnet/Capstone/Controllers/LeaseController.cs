@@ -16,9 +16,11 @@ namespace Capstone.Controllers
     {
              
 
-        private readonly ILeaseDAO _leaseService;
-        public LeaseController(ILeaseDAO leaseService)
+        private readonly ILeaseDAO _leaseDAO;
+        private readonly ILeaseService _leaseService;
+        public LeaseController(ILeaseDAO leaseDAO, ILeaseService leaseService)
         {
+            _leaseDAO = leaseDAO;
             _leaseService = leaseService;
         }
 
@@ -27,7 +29,7 @@ namespace Capstone.Controllers
         {
 
            
-            int rowsAffected = _leaseService.AddPendingLease(lease);
+            int rowsAffected = _leaseDAO.AddPendingLease(lease);
             
             if (rowsAffected >= 1)
             {
@@ -36,10 +38,13 @@ namespace Capstone.Controllers
             return BadRequest(new { Message = "An error occurred and application was not saved" });
         }
 
-        [HttpGet("/pendingApplications")]
+        [HttpGet]
+        [Route("/pendingApplications/{id:int}")]
         public IActionResult GetPendingApplications(int id)
         {
-            return Ok();
+            List<LeaseResponse> leaseResponses = _leaseService.GetPendingApplicationsByUserId(id);
+
+            return Ok(leaseResponses);
         }
     }
 }

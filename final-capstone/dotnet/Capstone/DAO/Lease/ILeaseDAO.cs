@@ -12,5 +12,6 @@ namespace Capstone.DAO
         int ApprovePendingLease(Capstone.Models.Lease lease);
         int DeletePendingLease(int pending_id);
         int AddUserInformation(RenterInformation renter_info);
+        
     }
 }

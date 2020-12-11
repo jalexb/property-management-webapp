@@ -13,5 +13,7 @@ namespace Capstone.Models
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
         public bool? IsApproved { get; set; }
+
+        public virtual PropertiesResponse Property { get; set; }
     }
 }
