@@ -5,8 +5,8 @@
       <property-list />
     </div>
     <div v-if="userRole == 'renter'">
-      <h1>Property Listings</h1>
-      <property-list />
+      <h1>Renter Services</h1>
+      <renter-home />
     </div>
     <div v-if="userRole == 'landlord'">
       <h1>Landlord Services</h1>
@@ -17,7 +17,7 @@
 
 <script>
 import LandlordHome from '../components/LandlordHome.vue';
-import PropertyList from "../components/PropertyList.vue";
+import RenterHome from "../components/RenterHome.vue";
 
 export default {
   data() {
@@ -27,7 +27,7 @@ export default {
   },
   name: "home",
   components: {
-    PropertyList,
+    RenterHome,
     LandlordHome
   },
 };
