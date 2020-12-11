@@ -141,4 +141,7 @@ p {
   align-content: center;
 }
 
+img {
+  max-height: 400px;
+}
 </style>
