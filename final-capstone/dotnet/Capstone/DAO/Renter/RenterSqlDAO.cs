@@ -87,7 +87,7 @@ namespace Capstone.DAO
 
         }
 
-        public BasicRenterInformation GetRenterAddress(BasicRenterInformation renter, int address_id)
+        public BasicRenterInformation GetRenterAddress(BasicRenterInformation renter)
         {
             string address = "";
             string street;
@@ -102,7 +102,7 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand("SELECT street, street2, city, region, zip FROM address_table WHERE address_id = @address_id", conn);
-                    cmd.Parameters.AddWithValue("@address_id", address_id);
+                    cmd.Parameters.AddWithValue("@address_id", renter.Property_Id);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 

@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using Capstone.DAO.Lease;
 using Capstone.DAO.Renter;
+using Capstone.DAO.Maintenance;
 
 namespace Capstone
 {
@@ -71,6 +72,7 @@ namespace Capstone
             services.AddTransient<IPropertyDAO>(m => new PropertySqlDAO(connectionString));
             services.AddTransient<ILeaseDAO>(m => new LeaseSqlDAO(connectionString));
             services.AddTransient<IRenterDAO>(m => new RenterSqlDAO(connectionString));
+            services.AddTransient<IMaintenanceDAO>(m => new MaintenanceSqlDAO(connectionString));
             services.AddScoped<ILeaseService, LeaseService>();
             services.AddScoped<IRenterService, RenterService>();
 
