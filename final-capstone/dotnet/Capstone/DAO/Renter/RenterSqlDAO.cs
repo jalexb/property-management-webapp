@@ -151,7 +151,5 @@ namespace Capstone.DAO
             return propertyId;
         }
 
-        
-
     }
 }

@@ -9,6 +9,7 @@ import PropertyDetails from '../components/PropertyDetails.vue'
 import LeaseForm from '../views/LeaseForm.vue'
 import MaintenanceIssue from '@/views/MaintenenceTicket'
 import RenterTransactions from '../components/RenterTransactions.vue'
+import PendingLeases from '../components/PendingLeases.vue'
 
 Vue.use(Router)
 

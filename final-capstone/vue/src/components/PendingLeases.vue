@@ -1,5 +1,7 @@
 <template>
+<div>
   <h1>Pending Leases</h1>
+</div>
 </template>
 
 <script>
