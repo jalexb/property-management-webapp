@@ -82,6 +82,11 @@ const router = new Router({
     path: "/renter/transactions/:userId",
     name: "renter-transactions",
     component: RenterTransactions
+    },
+    {
+      path: "/landlord/pending-leases",
+      name: "pending-leases",
+      component: PendingLeases
     }
   ]
 })

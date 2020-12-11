@@ -41,17 +41,17 @@
               </v-card-title>
               <!--</router-link>-->
             </v-card>
+            <router-link :to="{ name: 'pending-leases'}">
             <v-card 
               class="ma-6"
               max-width="300"
               hover>
-              <!--<router-link :to="{ name: 'property-details', params: {id: property.propertyId} }">-->
               <v-img src="https://st.depositphotos.com/1194063/4024/i/600/depositphotos_40243649-stock-photo-lease-agreement.jpg"> </v-img>
               <v-card-title> 
                 View Pending Applications
               </v-card-title>
-              <!--</router-link>-->
             </v-card>
+            </router-link>
             </v-flex>
             
     </v-container>
