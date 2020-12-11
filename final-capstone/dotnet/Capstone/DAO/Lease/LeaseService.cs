@@ -17,12 +17,12 @@ namespace Capstone.DAO.Lease
             _dbContext = dbContext;
             _mapper = mapper;
         }
-        public bool SavePendingLease(PendingLeasesRequest lease)
+        public bool SavePendingLease(LeaseRequest lease)
         {
             try
             {
-                var pendingLeases = _mapper.Map<Entities.PendingLeases>(lease);
-                _dbContext.PendingLeases.Add(pendingLeases);
+                var pendingLeases = _mapper.Map<Entities.Lease>(lease);
+                _dbContext.Lease.Add(pendingLeases);
                 _dbContext.SaveChanges();
                 return true;
             }

@@ -10,6 +10,7 @@ namespace Capstone.Entities
         public DateTime? ToDate { get; set; }
         public int UserId { get; set; }
         public int PropertyId { get; set; }
+        public string CurrentStatus { get; set; }
 
         public virtual Properties Property { get; set; }
         public virtual Users User { get; set; }

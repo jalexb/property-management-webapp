@@ -35,5 +35,11 @@ namespace Capstone.Controllers
             }
             return BadRequest(new { Message = "An error occurred and application was not saved" });
         }
+
+        [HttpGet("/pendingApplications")]
+        public IActionResult GetPendingApplications(int id)
+        {
+            return Ok();
+        }
     }
 }

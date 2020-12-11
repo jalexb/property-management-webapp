@@ -4,6 +4,6 @@ namespace Capstone.DAO.Lease
 {
     public interface ILeaseService
     {
-        bool SavePendingLease(PendingLeasesRequest lease);
+        bool SavePendingLease(LeaseRequest lease);
     }
 }
