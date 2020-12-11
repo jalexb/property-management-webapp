@@ -18,6 +18,7 @@
 <script>
 import LandlordHome from '../components/LandlordHome.vue';
 import RenterHome from "../components/RenterHome.vue";
+import PropertyList from "../components/PropertyList.vue"
 
 export default {
   data() {
@@ -27,6 +28,7 @@ export default {
   },
   name: "home",
   components: {
+    PropertyList,
     RenterHome,
     LandlordHome
   },
