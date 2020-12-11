@@ -88,6 +88,18 @@ CREATE TABLE maintenance_request (
 	property_id			INT					NOT NULL
 );
 
+CREATE TABLE transactions (
+	transaction_id		INT IDENTITY(1, 1)  NOT NULL,
+	lease_id			INT					NOT NULL,
+	property_id			INT					NOT NULL,
+	payment_due_date	DATE				NOT NULL,
+	paid				BIT					NOT NULL,
+
+	CONSTRAINT		PK_transaction_id	PRIMARY KEY(transaction_id),
+	CONSTRAINT		FK_lease_id_		FOREIGN KEY(lease_id) REFERENCES lease (lease_id),
+	CONSTRAINT		FK_property_id_trans FOREIGN KEY(property_id) REFERENCES properties (property_id)
+);
+
 ALTER TABLE properties
 	ADD	CONSTRAINT	FK_addr_id	
 	FOREIGN KEY (address_id)			

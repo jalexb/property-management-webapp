@@ -35,6 +35,76 @@ const http = axios.create({
             dueDate: '01-01-2021',
             price: 800,
             status: 'Owed'
+          },
+          {
+            userId: userId,
+            transactionId: 2,
+            dueDate: '01-01-2021',
+            price: 800,
+            status: 'Owed'
+          },
+          {
+            userId: userId,
+            transactionId: 2,
+            dueDate: '01-01-2021',
+            price: 800,
+            status: 'Owed'
+          },
+          {
+            userId: userId,
+            transactionId: 2,
+            dueDate: '01-01-2021',
+            price: 800,
+            status: 'Owed'
+          },
+          {
+            userId: userId,
+            transactionId: 2,
+            dueDate: '01-01-2021',
+            price: 800,
+            status: 'Owed'
+          },
+          {
+            userId: userId,
+            transactionId: 2,
+            dueDate: '01-01-2021',
+            price: 800,
+            status: 'Owed'
+          },
+          {
+            userId: userId,
+            transactionId: 2,
+            dueDate: '01-01-2021',
+            price: 800,
+            status: 'Owed'
+          },
+          {
+            userId: userId,
+            transactionId: 2,
+            dueDate: '01-01-2021',
+            price: 800,
+            status: 'Owed'
+          },
+          {
+            userId: userId,
+            transactionId: 2,
+            dueDate: '01-01-2021',
+            price: 800,
+            status: 'Owed'
+          },
+          {
+            userId: userId,
+            transactionId: 2,
+            dueDate: '01-01-2021',
+            price: 800,
+            status: 'Owed'
+          },
+          {
+            userId: userId,
+            transactionId: 2,
+            dueDate: '01-01-2021',
+            price: 800,
+            status: 'Owed'
           }
         ]
 
