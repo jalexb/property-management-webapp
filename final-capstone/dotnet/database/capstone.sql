@@ -37,33 +37,17 @@ CREATE TABLE address_table(
 	CONSTRAINT		FK_userId_users		FOREIGN KEY (userId)		REFERENCES users (userId)	
 );
 
-CREATE TABLE landlord (
-	landlord_id		INT IDENTITY(1, 1)	NOT NULL,
-	userId			INT					NOT NULL,
-	CONSTRAINT		PK_landlordId		PRIMARY KEY (landlord_id),
-	CONSTRAINT		FK_landlord_user	FOREIGN KEY (userId)		REFERENCES users (userId)
-	
-);
-
-CREATE TABLE worker (
-	worker_id		INT IDENTITY(1, 1)	NOT NULL,
-	userId			INT					NOT NULL,
-	CONSTRAINT		PK_worker_id		PRIMARY KEY (worker_id),
-	CONSTRAINT		FK_worker_user		FOREIGN KEY (userId)		REFERENCES users (userId)
-	
-);
-
 CREATE TABLE properties (
 	property_id		INT IDENTITY(1,1)	NOT NULL,
-	landlord_id		INT					NOT NULL,
+	userId			INT					NOT NULL,
 	address_id		INT					NOT NULL,
 	bedrooms		INT					NOT NULL,
 	bathrooms		INT					NOT NULL,
-	photo			VARCHAR(200),
+	photo			VARCHAR(500),
 	prop_desc		VARCHAR(500)		NOT NULL,
 	price			DECIMAL				NOT NULL,
 	CONSTRAINT		PK_propertyId		PRIMARY KEY (property_id),
-	CONSTRAINT		FK_prop_landlord	FOREIGN KEY (landlord_id)		REFERENCES landlord (landlord_id)
+	CONSTRAINT		FK_prop_user	FOREIGN KEY (userId)		REFERENCES users (userId)
 );
 
 
@@ -95,6 +79,15 @@ CREATE TABLE renter_information (
 	CONSTRAINT		FKuser_id			FOREIGN KEY (userId)		REFERENCES users (userId),
 
 	);
+
+CREATE TABLE maintenance_request (
+	request_id			INT IDENTITY(1, 1)	NOT NULL,
+	renter_id			INT					NOT NULL,
+	userId				INT	,
+	request_info		VARCHAR(500)		NOT NULL,
+	property_id			INT					NOT NULL
+);
+
 ALTER TABLE properties
 	ADD	CONSTRAINT	FK_addr_id	
 	FOREIGN KEY (address_id)			
@@ -123,13 +116,6 @@ INSERT INTO users (username, password_hash, salt, user_role)
 VALUES
 	('l','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'landlord');
 
---populate false landlord data
-INSERT INTO landlord
-	(userId)
-VALUES
-	(5);
-
-
 
 --populate default address data
 INSERT INTO address_table
@@ -146,14 +132,25 @@ VALUES
 
 --populate default property data
 INSERT INTO properties 
-	(landlord_id, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+	(userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
 VALUES 
 	(1, 1, 0, 3, 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg', 'Lovely home just a few minutes away from the shore. With three bedrooms and two bathrooms it is sure to have plenty of space and amenities.', 2200);
 INSERT INTO properties 
-	(landlord_id, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
+	(userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) 
 VALUES 
 	(1, 2, 0, 2, 'https://stmedia.stimg.co/1010121201_mavenrendering.jpg?fit=crop&crop=faces', 'Nice apartment with good view and spacing. Perfect for a couple or bachelor.', 1300);
 
 
 --populate default renter_information data
+
+INSERT INTO	renter_information 
+	(userId, first_name, last_name, lease_type, phone_number, salary, email)
+VALUES 
+	(3, 'B', 'G', '1 year', '4444444444', '100000', 'bg@bg.com');
+INSERT INTO lease
+	(current_status, from_date, property_id, to_date, userId)
+VALUES
+	('Approved', '10-10-2020', 2, '10-10-2021', 3);
+
+
 GO
