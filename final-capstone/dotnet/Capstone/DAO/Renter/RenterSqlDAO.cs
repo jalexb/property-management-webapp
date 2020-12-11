@@ -137,7 +137,8 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT property_id FROM lease WHERE userId = 8", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT property_id FROM lease WHERE userId = @userID", conn);
+                    cmd.Parameters.AddWithValue("userID", userID);
 
                     propertyId = (int)cmd.ExecuteScalar();
                 }
