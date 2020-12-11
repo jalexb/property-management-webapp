@@ -33,9 +33,10 @@ namespace Capstone.Controllers
         }
 
         [HttpGet("/renter/{id}")]
-        public IActionResult getRenterInformation(int id, [FromBody]int property_id)
+        public IActionResult getRenterInformation(int id)
         {
             BasicRenterInformation renter_info = renterDAO.GetRenterInformation(id);
+            int property_id = renterDAO.GetRenterPropertyIdFromLease(id);
             renter_info = renterDAO.GetRenterAddress(renter_info, property_id);
 
             return Ok(renter_info);

@@ -128,5 +128,29 @@ namespace Capstone.DAO
             return renter;
         }
 
+        public int GetRenterPropertyIdFromLease(int userID)
+        {
+            int propertyId = 0;
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT property_id FROM lease WHERE userId = 8", conn);
+
+                    propertyId = (int)cmd.ExecuteScalar();
+                }
+
+            }
+            catch(SqlException e)
+            {
+                Console.WriteLine(e);
+            }
+            return propertyId;
+        }
+
+        
+
     }
 }

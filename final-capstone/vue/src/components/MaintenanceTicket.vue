@@ -6,22 +6,22 @@
         Please note that you are allowing our staff to enter your home to complete the service.</p>
             <p>Please verify that all this information is correct and then fill out the description of what is wrong.</p>
 
-    <form v-on:submit.prevent="addMaintenanceTicket">
+    <form :user="user()" v-on:submit.prevent="addMaintenanceTicket">
         <div class="input">
             <label for="Name">Name</label> &nbsp;
-            <input type="text" v-model="userInfo.FullName" value="Name"/>
+            <input type="text" v-model="User.FullName" value="Name"/>
         </div>
         <div class="input">
             <label for="Email">Email</label> &nbsp;
-            <input type="email" v-model="userInfo.Email" value="Email"/>
+            <input type="email" v-model="User.Email" value="Email"/>
         </div>
         <div class="input">
             <label for="PhoneNumber">Phone Number</label> &nbsp;
-            <input type="text" v-model="userInfo.PhoneNumber" value="PhoneNumber"/>
+            <input type="text" v-model="User.PhoneNumber" value="PhoneNumber"/>
         </div>
         <div class="input">
             <label for="Address">Address</label> &nbsp;
-            <input type="text" v-model="userInfo.Address" value="Address"/>
+            <input type="text" v-model="User.Address" value="Address"/>
         </div>
         <div class="input">
             <label for="Requests">Maintenance Description</label> &nbsp;
@@ -42,20 +42,19 @@ export default {
 
     data() { 
         return {
-            userInfo: this.user(),
+            User: {},
             requests: "",
             propertyId: 0,
         } 
     },
     methods: {
         user() {
-            return RenterService.getUsersRenterInformation(1)
-            /*.then(response => {
-                alert(response);
-                return response.data;
+            return RenterService.getUsersRenterInformation(this.$store.state.user.userId)
+            .then(response => {
+                this.User = response.data;
             }).catch(error => {
                 alert(error);
-            })*/
+            })
         },
         addMaintenanceTicket() {
             RenterService.addMaintenanceTicket(this.requests);
