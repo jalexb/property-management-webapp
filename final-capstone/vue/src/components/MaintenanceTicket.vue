@@ -6,22 +6,22 @@
         Please note that you are allowing our staff to enter your home to complete the service.</p>
             <p>Please verify that all this information is correct and then fill out the description of what is wrong.</p>
 
-    <form :user="user()" v-on:submit.prevent="addMaintenanceTicket">
+    <form v-on:submit.prevent="addMaintenanceTicket">
         <div class="input">
             <label for="Name">Name</label> &nbsp;
-            <input type="text" v-model="User.FullName" value="Name"/>
+            <input type="text" v-model="User.fullName" value="Name"/>
         </div>
         <div class="input">
             <label for="Email">Email</label> &nbsp;
-            <input type="email" v-model="User.Email" value="Email"/>
+            <input type="email" v-model="User.email" value="Email"/>
         </div>
         <div class="input">
             <label for="PhoneNumber">Phone Number</label> &nbsp;
-            <input type="text" v-model="User.PhoneNumber" value="PhoneNumber"/>
+            <input type="text" v-model="User.phoneNumber" value="PhoneNumber"/>
         </div>
         <div class="input">
             <label for="Address">Address</label> &nbsp;
-            <input type="text" v-model="User.Address" value="Address"/>
+            <input type="text" v-model="User.address" value="Address"/>
         </div>
         <div class="input">
             <label for="Requests">Maintenance Description</label> &nbsp;
@@ -42,7 +42,7 @@ export default {
 
     data() { 
         return {
-            User: {},
+            User: this.user(),
             requests: "",
             propertyId: 0,
         } 

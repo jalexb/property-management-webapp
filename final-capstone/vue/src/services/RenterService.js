@@ -9,7 +9,7 @@ const http = axios.create({
         return http.post('/renter', form);
     },
     getUsersRenterInformation(userId) {
-      return http.get('/renter/' + userId);
+      return http.get('renter/' + userId);
       
       //return http.get(`/renter/${userId}`);
     },
