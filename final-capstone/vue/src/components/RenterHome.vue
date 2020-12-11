@@ -19,17 +19,18 @@
               </v-card-title>
               <!--</router-link>-->
             </v-card>
-            <v-card 
-              class="ma-6"
-              max-width="300"
-              hover>
-              <!--<router-link :to="{ name: 'property-details', params: {id: property.propertyId} }">-->
-              <v-img src="https://media.noria.com/sites/Uploads/2019/1/29/6043ff94-3285-4abc-b169-6ab2793a0c24_Strategies%20to%20Reduce%20Maintenance%20Costs_extra_large.jpeg"> </v-img>
-              <v-card-title> 
-                Submit a Maintenance Request
-              </v-card-title>
-              <!--</router-link>-->
-            </v-card>
+            <router-link :to="{name: 'maintenance-ticket', params: {id: this.$store.state.user.userId}}">
+              <v-card 
+                class="ma-6"
+                max-width="300"
+                hover>
+                <!--<router-link :to="{ name: 'property-details', params: {id: property.propertyId} }">-->
+                <v-img src="https://media.noria.com/sites/Uploads/2019/1/29/6043ff94-3285-4abc-b169-6ab2793a0c24_Strategies%20to%20Reduce%20Maintenance%20Costs_extra_large.jpeg"/>          <v-card-title> 
+                  Submit a Maintenance Request
+                </v-card-title>
+                <!--</router-link>-->
+              </v-card>
+            </router-link>
             </v-flex>
             
     </v-container>
