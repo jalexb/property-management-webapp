@@ -47,13 +47,9 @@
                 autofocus
                 v-model="pendingLease.fromDate" />
     <h3>to-date:  </h3> 
-        <input type="date" 
-                id="to-date" 
-                class=to-date 
-                placeholder="to-date" 
-                required 
-                autofocus
-                v-model="pendingLease.toDate" />
+        <div>&nbsp;
+            {{setToDate()}}
+        </div>
      </div>
 
     <div class="actions">
@@ -70,23 +66,23 @@ export default {
    name:"lease-form",
    data(){
        return {
-           pendingLease:{
-  "userId": 0,
-  "propertyId": 0,
-  "fromDate": null,
-  "toDate": null,
-  "isApproved": null
-},
-renter:{
-  "user_Id": 0,
-  "firstName": null,
-  "lastName": null,
-  "currentAddress": null,
-  "phoneNumber": null,
-  "email": null,
-  "leaseType": null,
-  "salary": 0.0
-}
+        pendingLease:{
+            "userId": 0,
+            "propertyId": 0,
+            "fromDate": null,
+            "toDate": null,
+            "isApproved": null
+        },
+        renter:{
+            "user_Id": 0,
+            "firstName": null,
+            "lastName": null,
+            "currentAddress": null,
+            "phoneNumber": null,
+            "email": null,
+            "leaseType": null,
+            "salary": 0.0
+        }
         
        }
    },
@@ -94,6 +90,17 @@ renter:{
        this.pendingLease.propertyId = parseInt(this.$route.params.id);
    },
        methods: {
+           setToDate() { //don't look at it, just know that it works :,)
+               if(this.pendingLease.fromDate !== null) {
+                   let fromDate = new Date(this.pendingLease.fromDate)
+                   let nextYear = fromDate.getFullYear() + 1
+                   let thisMonth = fromDate.getUTCMonth() + 1;
+                   let thisDay = fromDate.getUTCDate();
+                   let toDate = nextYear + '-' + thisMonth + '-' + ((thisDay < 10) ? '0' + thisDay : thisDay);
+                   this.pendingLease.toDate = toDate;
+                   return thisMonth + '/' + thisDay + '/' + nextYear //12/11/2020
+               }
+           },
            saveRenter(){
                this.renter.user_Id = this.$store.state.user.userId;
                RenterService.saveRenter(this.renter).then (response => {
