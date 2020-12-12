@@ -14,6 +14,6 @@ ROLLBACK TRANSACTION
 
 SELECT transaction_id,transactions.lease_id, transactions.property_id, payment_due_date, late_fees, paid, amount_paid, lease.userId, properties.price
 FROM transactions
-JOIN lease ON lease.lease_id = transactions.lease_id
-JOIN properties ON properties.property_id = lease.property_id
-WHERE lease.userId = 2;
+FULL OUTER JOIN lease ON lease.lease_id = transactions.lease_id
+FULL OUTER JOIN properties ON properties.property_id = lease.property_id
+WHERE lease.userId = 3;

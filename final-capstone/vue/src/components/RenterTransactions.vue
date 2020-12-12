@@ -54,11 +54,11 @@ data () {
     }
 },
 created () {
-    this.transactions = RenterService.getRenterTransactions(this.currentUser);//.then(response => {
-        //if(response.status===200){
-            //this.transactions = response.data;
-        //}
-    } /*.catch(error => {
+    this.transactions = RenterService.getRenterTransactions(this.$store.state.currentUser.userId).then(response => {
+        if(response.status===200){
+            this.transactions = response.data;
+        }
+    }).catch(error => {
         if (error.response) {
           alert(
             "Error retrieving transactions. Response from server was " +
@@ -70,8 +70,8 @@ created () {
         } else {
           alert("Error retrieving transactions. Request could not be created.");
         }
-    });*/
-//}
+    });
+}
 }
 </script>
 

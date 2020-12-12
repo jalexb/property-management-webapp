@@ -93,9 +93,9 @@ CREATE TABLE transactions (
 	lease_id			INT					NOT NULL,
 	property_id			INT					NOT NULL,
 	payment_due_date	DATE				NOT NULL,
-	late_fees			INT					NOT NULL,
+	late_fees			DECIMAL				NOT NULL,
 	paid				BIT					NOT NULL,
-	amount_paid			INT					NOT NULL
+	amount_paid			DECIMAL				NOT NULL
 
 	CONSTRAINT		PK_transaction_id	PRIMARY KEY(transaction_id),
 	CONSTRAINT		FK_lease_id_		FOREIGN KEY(lease_id) REFERENCES lease (lease_id),
@@ -274,6 +274,8 @@ VALUES
 	(5, 15, 1, 1, 'https://thumbs.dreamstime.com/b/sumer-rain-over-tiny-house-summer-flowers-around-off-grid-83118571.jpg', 'Tiny home living at it best!  Downsize to the minimum and enjoy all the comforts while not using a lot real estate!', 800);
 
 
-
+--populate default transaction data
+INSERT INTO transactions (lease_id, property_id, payment_due_date, late_fees, paid, amount_paid)
+VALUES (1, 2, '01-01-2021', 0, 0, 0);
 
 GO
