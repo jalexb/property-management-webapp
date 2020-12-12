@@ -31,11 +31,10 @@ namespace Capstone.DAO.Maintenance
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand("INSERT INTO maintenance_request" +
-                                                        "(renter_id, userId, request_info, property_id) " +
+                                                        "(renter_id, request_info, property_id) " +
                                                     "VALUES" +
-                                                        "(@Renter_Id, @UserId, @Request_Info, @Property_Id)", conn);
+                                                        "(@Renter_Id, @Request_Info, @Property_Id)", conn);
                     cmd.Parameters.AddWithValue("@Renter_Id", ticket.Renter_Id);
-                    cmd.Parameters.AddWithValue("@UserId", ticket.UserId);
                     cmd.Parameters.AddWithValue("@Request_Info", ticket.Request_Info);
                     cmd.Parameters.AddWithValue("@Property_Id", ticket.Property_Id);
 
