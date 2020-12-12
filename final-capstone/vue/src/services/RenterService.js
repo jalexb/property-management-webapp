@@ -14,10 +14,7 @@ const http = axios.create({
       //return http.get(`/renter/${userId}`);
     },
     addMaintenanceTicket(serviceDetails) {
-      if(serviceDetails.length > 0) {
-        return true;
-      }
-      return false;
+      return http.post('/submit/ticket/', serviceDetails);
     },
     getRenterTransactions(userId) {
       //return http.get(`/renter/transactions/${userId}`);

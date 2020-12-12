@@ -6,7 +6,7 @@
         Please note that you are allowing our staff to enter your home to complete the service.</p>
             <p>Please verify that all this information is correct and then fill out the description of what is wrong.</p>
 
-    <form v-on:submit.prevent="addMaintenanceTicket">
+    <form v-on:submit.prevent="addMaintenanceTicket()">
         <div class="input">
             <label for="Name">Name</label> &nbsp;
             <input type="text" v-model="User.fullName" value="Name"/>
@@ -25,7 +25,7 @@
         </div>
         <div class="input">
             <label for="Requests">Maintenance Description</label> &nbsp;
-            <input type="text" v-model="requests" value="Requests"/>
+            <input type="text" v-model="ticket.Request_Info" value="Requests"/>
         </div>
         <div class="submit">
             <input type="submit" />
@@ -45,9 +45,19 @@ export default {
             User: this.user(),
             requests: "",
             propertyId: 0,
+
+            ticket: {
+                Request_Info: "",
+                UserId: null,
+
+            }
         } 
     },
     methods: {
+        populateTicket() {
+            this.ticket.Renter_Id = this.User.user_Id;
+            this.ticket.Property_Id = this.User.property_Id;
+        },
         user() {
             return RenterService.getUsersRenterInformation(this.$store.state.user.userId)
             .then(response => {
@@ -56,18 +66,25 @@ export default {
                 alert(error);
             })
         },
-        addMaintenanceTicket() {
-            RenterService.addMaintenanceTicket(this.requests);
-            
-            /*.then(response => {
-                if(response.data === true) {
-                    alert(response.data)
+        addMaintenanceTicket() { 
+            this.populateTicket();
+            console.log(this.ticket);
+            RenterService.addMaintenanceTicket(this.ticket)
+            .then(response => {
+                if(response.status === 200) {
+                    alert("Ticket received. We will get back with you soon!");
+                    this.$router.push('/');
                 }
-            })*/
+            }).catch(error => {
+                alert(error);
+            })
         }
     }
 }
+
 </script>
+
+
 
 
 <style>
