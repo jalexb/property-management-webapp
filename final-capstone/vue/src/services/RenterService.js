@@ -18,5 +18,8 @@ const http = axios.create({
     },
     getRenterTransactions(userId) {
       return http.get(`/transaction/${userId}`);
+    },
+    rentPayment(transactionId, transaction) {
+      return http.put(`/transaction/${transactionId}`, transaction);
     }
   }

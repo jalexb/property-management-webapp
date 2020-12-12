@@ -49,9 +49,11 @@ namespace Capstone.DAO.Transaction
         public List<Models.Transaction> ConvertToTransaction(SqlDataReader reader)
         {
             List<Models.Transaction> transactionsList = new List<Models.Transaction>();
-            Models.Transaction transaction = new Models.Transaction();
+            
             while (reader.Read())
             {
+                Models.Transaction transaction = new Models.Transaction();
+
                 transaction.Transaction_Id = (int)reader["transaction_id"];
                 transaction.Lease_Id = (int)reader["lease_id"];
                 transaction.Property_Id = (int)reader["property_id"];
