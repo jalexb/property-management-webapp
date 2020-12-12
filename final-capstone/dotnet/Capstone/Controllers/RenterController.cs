@@ -36,10 +36,16 @@ namespace Capstone.Controllers
         public IActionResult getRenterInformation(int id)
         {
             BasicRenterInformation renter_info = renterDAO.GetRenterInformation(id);
-            renter_info.Property_Id = renterDAO.GetRenterPropertyIdFromLease(id);
-            renter_info = renterDAO.GetRenterAddress(renter_info);
+            if (renter_info.User_Id != 0)
+            {
+                renter_info.Property_Id = renterDAO.GetRenterPropertyIdFromLease(id);
+                renter_info = renterDAO.GetRenterAddress(renter_info);
+                return Ok(renter_info);
+            }
 
-            return Ok(renter_info);
+            return BadRequest();
+
+            
         }
     }
 }

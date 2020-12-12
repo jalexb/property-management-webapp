@@ -105,13 +105,10 @@ export default {
            getRenterInformation() {
                return RenterService.getUsersRenterInformation(this.$store.state.user.userId)
             .then(response => {
-                console.log(response.data);
                 this.renter = response.data;
                 let firstAndLast = response.data.fullName.split(' ');
                 this.renter.firstName = firstAndLast[0];
                 this.renter.lastName = firstAndLast[1];
-            }).catch(error => {
-                alert(error);
             })
            },
            saveRenter(){
