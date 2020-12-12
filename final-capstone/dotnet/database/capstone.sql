@@ -93,6 +93,7 @@ CREATE TABLE transactions (
 	lease_id			INT					NOT NULL,
 	property_id			INT					NOT NULL,
 	payment_due_date	DATE				NOT NULL,
+	late_fees			INT					NOT NULL,
 	paid				BIT					NOT NULL,
 
 	CONSTRAINT		PK_transaction_id	PRIMARY KEY(transaction_id),
