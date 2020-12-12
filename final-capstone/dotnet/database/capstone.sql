@@ -278,4 +278,7 @@ VALUES
 INSERT INTO transactions (lease_id, property_id, payment_due_date, late_fees, paid, amount_paid)
 VALUES (1, 2, '01-01-2021', 0, 0, 0);
 
+INSERT INTO transactions (lease_id, property_id, payment_due_date, late_fees, paid, amount_paid)
+VALUES (1, 2, '02-01-2021', 0, 0, 0);
+
 GO

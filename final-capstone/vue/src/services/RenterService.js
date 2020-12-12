@@ -18,27 +18,5 @@ const http = axios.create({
     },
     getRenterTransactions(userId) {
       return http.get(`/transaction/${userId}`);
-      /*
-      return [
-          {
-            userId: userId,
-            transactionId: 1,
-            dueDate: '12-01-2020',
-            amountDue: 800,
-            lateFees: 0,
-            amountPaid: 800,
-            amountLeft: 0
-          },
-          {
-            userId: userId,
-            transactionId: 2,
-            dueDate: '01-01-2021',
-            amountDue: 800,
-            lateFees: 0,
-            amountPaid: 0,
-            amountLeft: 800
-          }
-        ]
-        */
     }
   }

@@ -5,41 +5,18 @@
   v-for="transaction in transactions"
   :key="transaction.transactionId"
   max-width="600"
-  class="ma-6"
+  class="mx-auto px-2 my-4 py-1"
   >
-  <p> Due Date {{transaction.payment_Due_Date}} </p>
-  <p> Rent Price ${{transaction.rent_Price}} </p>
-  <p> Late Fees ${{transaction.late_Fees}} </p>
-  <p> Amount Paid ${{transaction.amount_Paid}} </p>
-  <p> Amount Due ${{transaction.amount_Due}} </p>
+  <p> <span>Due Date</span> <span>{{transaction.payment_Due_Date}}</span> </p>
+  <hr>
+  <p> <span>Rent Price</span> <span>${{transaction.rent_Price}}</span> </p>
+  <hr>
+  <p> <span>Late Fees</span> <span>${{transaction.late_Fees}}</span> </p>
+  <hr>
+  <p> <span>Amount Paid</span> <span>${{transaction.amount_Paid}}</span> </p>
+  <hr>
+  <p> <span>Amount Due</span> <span>${{transaction.amount_Due}}</span> </p>
   </v-card>
-  <!--<v-simple-table
-  fixed-header
-  height="400"
-  >
-  <div class="table-div">
-  <table>
-      <thead>
-          <tr>
-              <th>Due Date</th>
-              <th>Amount</th>
-              <th>Status</th>
-          </tr>
-      </thead>
-      <tbody v-for="transaction in transactions" v-bind:key="transaction.transactionId">
-          <tr>
-              <td> {{transaction.dueDate}} </td>
-              <td> ${{transaction.price}} </td>
-              <td> {{transaction.status}} </td>
-              <td v-if="transaction.status === 'Owed'">
-                  <button class="pay-btn">Pay Now</button>
-              </td>
-              <td v-else>&nbsp;</td>
-          </tr>
-      </tbody>
-  </table>
-  </div>
-  </v-simple-table>-->
 </div>
 </template>
 
@@ -76,34 +53,10 @@ created () {
 </script>
 
 <style scoped>
-
-.table-div {
-    margin-right: auto;
-    margin-left: auto;
-    background-color: white;
-    max-width: 60%;
+p {
+    margin: 5px 0 5px 0;
+    display: flex;
+    justify-content: space-between;
 }
 
-table {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 100%;
-}
-
-tbody:nth-child(2n) {
-    background-color: lightgray;
-}
-
-td {
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
-.pay-btn {
-    color: blue;
-}
-
-.pay-btn:hover {
-    text-decoration: underline;
-}
 </style>
