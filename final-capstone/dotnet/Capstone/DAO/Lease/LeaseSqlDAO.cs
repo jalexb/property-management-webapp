@@ -52,9 +52,9 @@ namespace Capstone.DAO
 
 
         //get pending leases
-        public List<PendingLease> GetPendingLeases()
+        public List<PendingLeaseAndRenterInformation> GetLandlordsPendingLeases(int landlord_id)
         {
-            List<PendingLease> list = new List<PendingLease>();
+            List<PendingLeaseAndRenterInformation> list = new List<PendingLeaseAndRenterInformation>();
 
 
             try
@@ -63,20 +63,33 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT userId, property_id, from_date, to_date FROM lease", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT lease_id, lease.from_date, lease.to_date, lease.userId, lease.property_id, lease.current_status " +
+                                                    "FROM lease INNER JOIN properties ON properties.property_id = lease.property_id " +
+                                                    "WHERE properties.userId LIKE(SELECT userId FROM users WHERE userId = @landlord_id) " +
+                                                    "AND lease.current_status = 'pending'", conn);
+                    cmd.Parameters.AddWithValue("@landlord_id", landlord_id);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while(reader.Read())
                     {
-                        PendingLease lease = new PendingLease();
+                        Models.Lease lease = new Models.Lease();
+                        lease.Lease_Id = (int)reader["lease_id"];
+                        lease.User_Id = (int)reader["userId"];
+                        lease.Property_Id = (int)reader["property_id"];
+                        lease.From_Date = (DateTime)reader["from_date"];
+                        lease.To_Date = (DateTime)reader["to_date"];
+                        lease.Lease_Type = (string)reader["current_status"];
 
-                        lease.UserId = (int)reader["userId"];
-                        lease.PropertyId = (int)reader["property_id"];
-                        lease.FromDate = (DateTime)reader["from_date"];
-                        lease.ToDate = (DateTime)reader["to_date"];
 
-                        list.Add(lease);
+                        BasicRenterInformation renter_info = GetRenterInformation(lease.User_Id);
+
+                        PendingLeaseAndRenterInformation leaseAndRenter = new PendingLeaseAndRenterInformation();
+
+                        leaseAndRenter.Pending_Lease = lease;
+                        leaseAndRenter.Renter_Info = renter_info;
+
+                        list.Add(leaseAndRenter);
                     }
                 }
             }
@@ -89,7 +102,39 @@ namespace Capstone.DAO
             return list;
         }
 
-        public int ApprovePendingLease(Capstone.Models.Lease lease)
+        public Models.Lease GetLease(int lease_id)
+        {
+            Models.Lease lease = new Models.Lease();
+
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT lease_id, from_date, to_date, userId, property_id, current_status FROM lease WHERE lease_id = @lease_id", conn);
+                    cmd.Parameters.AddWithValue("@lease_id", lease_id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    lease.Lease_Id = (int)reader["lease_id"];
+                    lease.From_Date = (DateTime)reader["from_date"];
+                    lease.To_Date = (DateTime)reader["lease_id"];
+                    lease.User_Id = (int)reader["lease_id"];
+                    lease.Property_Id = (int)reader["lease_id"];
+                    lease.Lease_Id = (int)reader["lease_id"];
+                    lease.Lease_Type = (string)reader["current_status"];
+                }
+            }
+            catch(SqlException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return lease;
+        }
+
+        public int ApprovePendingLease(int lease_id)
         {
 
             int rowCount = 0;
@@ -99,13 +144,8 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("INSERT INTO lease(from_date, to_date, userId, property_id)" +
-                                                    "VALUES(@From_date, @To_Date, @User_Id, @Property_Id)", conn);
-
-                    cmd.Parameters.AddWithValue("@From_date", lease.From_Date);
-                    cmd.Parameters.AddWithValue("@To_Date", lease.To_Date);
-                    cmd.Parameters.AddWithValue("@User_Id", lease.User_Id);
-                    cmd.Parameters.AddWithValue("@Property_Id", lease.Property_Id);
+                    SqlCommand cmd = new SqlCommand("UPDATE lease SET current_status = 'approved' WHERE lease_id = @lease_id;", conn);
+                    cmd.Parameters.AddWithValue("@lease_id", lease_id);
 
 
                     rowCount = cmd.ExecuteNonQuery();
@@ -147,9 +187,42 @@ namespace Capstone.DAO
 
         }
 
-        public int AddUserInformation(RenterInformation renter_info)
+        public BasicRenterInformation GetRenterInformation(int userId)
         {
 
+            BasicRenterInformation renterInfo = new BasicRenterInformation();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT first_name, last_name, phone_number, email FROM renter_information WHERE userId = @userId", conn);
+                    cmd.Parameters.AddWithValue("@userId", userId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        renterInfo.FullName = (string)reader["first_name"] + " " + (string)reader["last_name"];
+                        renterInfo.PhoneNumber = (string)reader["phone_number"];
+                        renterInfo.Email = (string)reader["email"];
+                        renterInfo.User_Id = userId;
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return renterInfo;
+
+        }
+
+        public int RejectPendingLease(int lease_id)
+        {
             int rowCount = 0;
             try
             {
@@ -157,20 +230,9 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("INSERT INTO renter_information" +
-                                                    "(userId, first_name, last_name, current_address, " +
-                                                    "phone_number, email, lease_type, salary) " +
-                                                    "VALUES(@User_Id, @FirstName, @LastName, @Address, @PhoneNumber, " +
-                                                    "@Email, @Lease_Type, @Salary)", conn);
+                    SqlCommand cmd = new SqlCommand("UPDATE lease SET current_status = 'rejected' WHERE lease_id = @lease_id;", conn);
+                    cmd.Parameters.AddWithValue("@lease_id", lease_id);
 
-                    cmd.Parameters.AddWithValue("@User_id", renter_info.User_Id);
-                    cmd.Parameters.AddWithValue("@FirstName", renter_info.FirstName);
-                    cmd.Parameters.AddWithValue("@LastName", renter_info.LastName);
-                    cmd.Parameters.AddWithValue("@PhoneNumber", renter_info.PhoneNumber);
-                    cmd.Parameters.AddWithValue("@Address", renter_info.Address);
-                    cmd.Parameters.AddWithValue("@Email", renter_info.Email);
-                    cmd.Parameters.AddWithValue("@Lease_Type", renter_info.Lease_Type);
-                    cmd.Parameters.AddWithValue("@Salary", renter_info.Salary);
 
                     rowCount = cmd.ExecuteNonQuery();
                 }
@@ -181,7 +243,6 @@ namespace Capstone.DAO
             }
 
             return rowCount;
-
         }
     }
 }

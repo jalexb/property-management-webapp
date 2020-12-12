@@ -15,19 +15,18 @@
           <th>Approve / Reject Application</th>
         </tr>
         <tr
-        v-for="pendingLease in pendingLeases" 
-        :key="pendingLease.Lease_Id"
-        :property_id="pendingLease.Property_Id"
+        v-for="data in datas" 
+        :key="data.lease_Id"
         hover>
-          <td>{{pendingLease.User_Info.fullName}}</td>
-          <td>{{pendingLease.User_Info.email}}</td>
-          <td>{{pendingLease.User_Info.phoneNumber}}</td>
-          <td>{{pendingLease.From_Date}}</td>
-          <td>{{pendingLease.To_Date}}</td>
-          <td>{{pendingLease.User_Info.address}}</td>
+          <td>{{data.renter_Info.fullName}}</td>
+          <td>{{data.renter_Info.email}}</td>
+          <td>{{data.renter_Info.phoneNumber}}</td>
+          <td>{{data.pending_Lease.from_Date}}</td>
+          <td>{{data.pending_Lease.to_Date}}</td>
+          <td>{{data.renter_Info.address}}</td>
           <td>
-            <v-button v-on:click="approveLease(pendingLease.Lease_Id)" class="approve"> Approve </v-button> &nbsp;
-            <v-button v-on:click="rejectLease(pendingLease.Lease_Id)" class="reject"> Reject </v-button>
+            <button v-on:click="approveLease(data.pending_Lease.lease_Id)" class="approve"> Approve </button> &nbsp;
+            <button v-on:click="rejectLease(data.pending_Lease.lease_Id)" class="reject"> Reject </button>
           </td>
         </tr>
       </table>
@@ -45,28 +44,49 @@ export default {
   name: 'pending-leases',
   data() {
     return {
-      pendingLeases:[{
-          Lease_Id: null, 
-          From_Date: null, 
-          To_Date: null, 
-          User_Id: null,
-          userInfo: /*{address, email, fullName, phoneNumber, property_Id, user_Id}*/ null,
-          Property_Id: null,
-          }],
-      userId: this.$store.state.userId,
+      datas:[{
+        pending_Lease: {
+            lease_Id: null, 
+            from_Date: null, 
+            to_Date: null, 
+            user_Id: null,
+            property_Id: null,
+        },
+        renter_Info: {
+          address: null,
+          email: null,
+          fullName: null,
+          phoneNumber: null,
+          property_Id: null,
+          user_Id: null,
+        }
+      }],
+        
+      userId: null,
       
     }
   },
   created() {
     //returns and object with pendingLeases with that lease's userInformation.
-      this.pendingLeases = LandlordService.getPendingLeases();
+      this.userId = this.$store.state.user.userId;
+      this.getInformation();
+      
   },
   methods: {
     //get renter information
-    
+    getInformation() {
+      LandlordService.getPendingLeases(this.userId).then(response => {
+        this.datas = response.data;
+      });
+    },
     //approve lease
     approveLease(leaseId) {
-      LandlordService.approveLease(leaseId);
+      LandlordService.approveLease(leaseId).then(response => {
+        if(response.status === 200) {
+          alert('Accepted');
+          this.getInformation();
+        }
+      });
     },
     //reject lease
     rejectLease(leaseId) {

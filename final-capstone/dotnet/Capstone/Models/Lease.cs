@@ -23,18 +23,8 @@ namespace Capstone.Models
 
     public class PendingLeaseAndRenterInformation
     {
-        public int Pending_Id { get; set; }
-        public int User_Id { get; set; }
-        public int Property_Id { get; set; }
-        public DateTime FromDate { get; set; }
-        public DateTime ToDate { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Email { get; set; }
-        public string Lease_Type { get; set; }
-        public decimal Salary { get; set; }
+        public Lease Pending_Lease { get; set; }
+        public BasicRenterInformation Renter_Info { get; set; }
     }
 
     public class Lease
@@ -44,7 +34,8 @@ namespace Capstone.Models
         public DateTime To_Date { get; set; }
         public int User_Id { get; set; }
         public int Property_Id { get; set; }
-        //Lease_Id, From_Date, To_Date, User_Id, Property_Id
+        public string Lease_Type { get; set; }
+        //Lease_Id, From_Date, To_Date, User_Id, Property_Id, Lease_Type
     }
 
 }

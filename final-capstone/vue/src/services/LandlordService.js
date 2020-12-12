@@ -6,9 +6,9 @@ const http = axios.create({
 
 export default {
     //get pending leases
-    getPendingLeases() {
-      //http.get('/pendingLeases/' + userId)
-      return [
+    getPendingLeases(landlordId) {
+      return http.get('/lease/pending/' + landlordId)
+      /*return [
         {
           Lease_Id: 2, 
           From_Date: '2020-12-17', 
@@ -54,7 +54,7 @@ export default {
             user_Id:6,
           }
         }
-      ]
+      ]*/
     },
     approveLease(leaseId) {
       return http.post('lease/approve/' + leaseId);

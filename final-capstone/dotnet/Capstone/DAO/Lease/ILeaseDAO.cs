@@ -9,9 +9,11 @@ namespace Capstone.DAO
     public interface ILeaseDAO
     {
         int AddPendingLease(PendingLease lease);
-        int ApprovePendingLease(Capstone.Models.Lease lease);
+        int ApprovePendingLease(int lease_id);
         int DeletePendingLease(int pending_id);
-        int AddUserInformation(RenterInformation renter_info);
-        
+        Models.Lease GetLease(int lease_id);
+        int RejectPendingLease(int lease_id);
+        List<PendingLeaseAndRenterInformation> GetLandlordsPendingLeases(int landlord_id);
+        BasicRenterInformation GetRenterInformation(int userId);
     }
 }
