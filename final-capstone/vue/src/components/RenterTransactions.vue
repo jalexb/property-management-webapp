@@ -7,11 +7,11 @@
   max-width="600"
   class="ma-6"
   >
-  <p> Date {{transaction.dueDate}} </p>
-  <p> Amount Due ${{transaction.amountDue}} </p>
-  <p> Late Fees ${{transaction.lateFees}} </p>
-  <p> Amount Paid ${{transaction.amountPaid}} </p>
-  <p> Amount Left ${{transaction.amountLeft}} </p>
+  <p> Due Date {{transaction.payment_Due_Date}} </p>
+  <p> Rent Price ${{transaction.rent_Price}} </p>
+  <p> Late Fees ${{transaction.late_Fees}} </p>
+  <p> Amount Paid ${{transaction.amount_Paid}} </p>
+  <p> Amount Due ${{transaction.amount_Due}} </p>
   </v-card>
   <!--<v-simple-table
   fixed-header
@@ -49,12 +49,12 @@ import RenterService from '../services/RenterService';
 export default {
 data () {
     return {
-        currentUser: this.$store.state.user,
+        currentUserId: this.$store.state.user.userId,
         transactions: []
     }
 },
 created () {
-    this.transactions = RenterService.getRenterTransactions(this.$store.state.currentUser.userId).then(response => {
+    RenterService.getRenterTransactions(this.currentUserId).then(response => {
         if(response.status===200){
             this.transactions = response.data;
         }
