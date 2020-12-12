@@ -40,15 +40,11 @@ namespace Capstone.Models
     public class Lease
     {
         public int Lease_Id { get; set; }
-        public DateTime Fromdate { get; set; }
-        public DateTime Todate { get; set; }
-        public int Userid { get; set; }
-        public int Propertyid { get; set; }
-
-
-
-
-
+        public DateTime From_Date { get; set; }
+        public DateTime To_Date { get; set; }
+        public int User_Id { get; set; }
+        public int Property_Id { get; set; }
+        //Lease_Id, From_Date, To_Date, User_Id, Property_Id
     }
 
 }
