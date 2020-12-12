@@ -27,7 +27,7 @@ namespace Capstone.Controllers
 
             transactions = transactionDAO.GetTransactionsById(id);
 
-            if(transactions != null)
+            if(transactions.Count != 0)
             {
                 result = Ok(transactions);
             }
