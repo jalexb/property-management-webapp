@@ -95,6 +95,7 @@ CREATE TABLE transactions (
 	payment_due_date	DATE				NOT NULL,
 	late_fees			INT					NOT NULL,
 	paid				BIT					NOT NULL,
+	amount_paid			INT					NOT NULL
 
 	CONSTRAINT		PK_transaction_id	PRIMARY KEY(transaction_id),
 	CONSTRAINT		FK_lease_id_		FOREIGN KEY(lease_id) REFERENCES lease (lease_id),
