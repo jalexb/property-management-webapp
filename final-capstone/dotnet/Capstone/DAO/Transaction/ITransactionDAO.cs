@@ -7,5 +7,6 @@ namespace Capstone.DAO.Transaction
 {
     public interface ITransactionDAO
     {
+        List<Models.Transaction> GetTransactionsById(int id);
     }
 }

@@ -1,10 +1,22 @@
 <template>
 <div>
   <h1>Rent Transactions</h1>
+  <v-card
+  v-for="transaction in transactions"
+  :key="transaction.transactionId"
+  max-width="600"
+  class="ma-6"
+  >
+  <p> Date {{transaction.dueDate}} </p>
+  <p> Amount Due ${{transaction.amountDue}} </p>
+  <p> Late Fees ${{transaction.lateFees}} </p>
+  <p> Amount Paid ${{transaction.amountPaid}} </p>
+  <p> Amount Left ${{transaction.amountLeft}} </p>
+  </v-card>
   <!--<v-simple-table
   fixed-header
   height="400"
-  >-->
+  >
   <div class="table-div">
   <table>
       <thead>
@@ -27,7 +39,7 @@
       </tbody>
   </table>
   </div>
-  <!--</v-simple-table>-->
+  </v-simple-table>-->
 </div>
 </template>
 

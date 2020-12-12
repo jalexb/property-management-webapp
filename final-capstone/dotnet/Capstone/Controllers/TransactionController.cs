@@ -4,9 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Capstone.Models;
 
 namespace Capstone.Controllers
 {
+    [Route("[controller]")]
+    [ApiController]
     public class TransactionController : Controller
     {
 
@@ -16,5 +19,20 @@ namespace Capstone.Controllers
             transactionDAO = _transactionDAO;
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetTransactionsByRenterId(int id)
+        {
+            List<Transaction> transactions = new List<Transaction>();
+            IActionResult result = BadRequest();
+
+            transactions = transactionDAO.GetTransactionsById(id);
+
+            if(transactions != null)
+            {
+                result = Ok(transactions);
+            }
+
+            return result;
+        }
     }
 }
