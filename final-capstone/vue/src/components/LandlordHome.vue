@@ -15,7 +15,7 @@
               <!--<router-link :to="{ name: 'property-details', params: {id: property.propertyId} }">-->
               <v-img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg"> </v-img>
               <v-card-title> 
-                List Available Properties
+                Add Available Properties
               </v-card-title>
               <!--</router-link>-->
             </v-card>
