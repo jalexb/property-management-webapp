@@ -88,6 +88,7 @@ export default {
    },
    created(){
        this.pendingLease.propertyId = parseInt(this.$route.params.id);
+       this.getRenterInformation();
    },
        methods: {
            setToDate() { //don't look at it, just know that it works :,)
@@ -100,6 +101,18 @@ export default {
                    this.pendingLease.toDate = toDate;
                    return thisMonth + '/' + thisDay + '/' + nextYear //12/11/2020
                }
+           },
+           getRenterInformation() {
+               return RenterService.getUsersRenterInformation(this.$store.state.user.userId)
+            .then(response => {
+                console.log(response.data);
+                this.renter = response.data;
+                let firstAndLast = response.data.fullName.split(' ');
+                this.renter.firstName = firstAndLast[0];
+                this.renter.lastName = firstAndLast[1];
+            }).catch(error => {
+                alert(error);
+            })
            },
            saveRenter(){
                this.renter.user_Id = this.$store.state.user.userId;

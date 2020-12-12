@@ -85,12 +85,18 @@ export default {
         if(response.status === 200) {
           alert('Accepted');
           this.getInformation();
+          //populate transaction table with 12 months of rent due.
         }
       });
     },
     //reject lease
     rejectLease(leaseId) {
-      LandlordService.rejectLease(leaseId);
+      LandlordService.rejectLease(leaseId).then(response => {
+        if(response.status === 200) {
+          alert('Rejected');
+          this.getInformation();
+        }
+      });
     }
   }
 }
