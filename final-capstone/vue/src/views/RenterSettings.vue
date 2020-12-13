@@ -49,11 +49,11 @@ export default {
         }
       })
       .catch(error=>{
-        alert("An error occurred on updating the renter information.");
+        alert("An error occurred on updating the renter information.", error);
       })
     }
   }
-  
+
 };
 </script>
 

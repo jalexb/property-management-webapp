@@ -114,7 +114,7 @@ export default {
       LandlordService.rejectLease(data.pending_Lease.lease_Id).then(response => {
         if(response.status === 200) {
           alert('Rejected');
-          //this.getInformation();
+          this.getInformation();
         }
       });
     },
