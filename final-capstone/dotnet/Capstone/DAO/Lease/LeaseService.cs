@@ -28,6 +28,17 @@ namespace Capstone.DAO.Lease
             return _mapper.Map<List<LeaseResponse>>(leases);
         }
 
+        public List<int> GetUnavailablePropertyIds()
+        {
+            return _dbContext.Lease.Where(l => l.CurrentStatus == "Approved").Select(l => l.PropertyId).ToList();
+        }
+
+        public bool IsDupilcateLease(PendingLease lease)
+        {
+            // checks to make sure the user hasn't applied for a lease on the same property
+            return _dbContext.Lease.Any(l => l.UserId == lease.UserId && l.PropertyId == lease.PropertyId);
+        }
+
         public bool SavePendingLease(LeaseRequest lease)
         {
             try

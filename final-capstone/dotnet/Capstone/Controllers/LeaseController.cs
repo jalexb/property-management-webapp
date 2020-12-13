@@ -27,7 +27,10 @@ namespace Capstone.Controllers
         [HttpPost("/lease")]
         public IActionResult SaveApplication([FromBody] PendingLease lease)
         {
-
+            if (_leaseService.IsDupilcateLease(lease))
+            {
+                return BadRequest(new { Message = "An error occurred - user has already applied for a lease on this property" });
+            }
 
             int rowsAffected = _leaseDAO.AddPendingLease(lease);
 

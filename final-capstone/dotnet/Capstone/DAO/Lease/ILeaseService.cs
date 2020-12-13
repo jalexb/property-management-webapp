@@ -7,5 +7,7 @@ namespace Capstone.DAO.Lease
     {
         bool SavePendingLease(LeaseRequest lease);
         List<LeaseResponse> GetPendingApplicationsByUserId(int id);
+        bool IsDupilcateLease(PendingLease lease);
+        List<int> GetUnavailablePropertyIds();
     }
 }
