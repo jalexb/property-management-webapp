@@ -6,35 +6,37 @@
   :key="transaction.transactionId"
   max-width="600"
   class="mx-auto px-2 my-4 py-1"
+  hover
   >
-  <p> <span>Due Date</span> <span>{{new Date(transaction.payment_Due_Date).toDateString()}}</span> </p>
-  <hr>
-  <p> <span>Rent Price</span> <span>${{transaction.rent_Price}}</span> </p>
-  <hr>
-  <p> <span>Late Fees</span> <span>${{transaction.late_Fees}}</span> </p>
-  <hr>
-  <p> <span>Amount Paid</span> <span>${{transaction.amount_Paid}}</span> </p>
-  <hr>
-  <p> <span>Amount Due</span> <span>${{transaction.amount_Due}}</span> </p>
-  <hr>
-  <v-row justify="center">
-  <v-btn v-if="transaction.paid===false && onPayScreen===false"
-  v-on:click="onPayScreen = true" 
-  outlined
-  raised 
-  rounded
-  color="#BA3F1D">
-  Pay Now
-  </v-btn>
-  </v-row>
+    <p> <span>Due Date</span> <span>{{new Date(transaction.payment_Due_Date).toDateString()}}</span> </p>
+    <hr>
+    <p> <span>Rent Price</span> <span>${{transaction.rent_Price}}</span> </p>
+    <hr>
+    <p> <span>Late Fees</span> <span>${{transaction.late_Fees}}</span> </p>
+    <hr>
+    <p> <span>Amount Paid</span> <span>${{transaction.amount_Paid}}</span> </p>
+    <hr>
+    <p> <span>Amount Due</span> <span>${{transaction.amount_Due}}</span> </p>
+    <hr v-if="!transaction.paid">
+
+    <v-row justify="center">
+    <v-btn v-if="!transaction.paid && !onPayScreen"
+    v-on:click="onPayScreen = true" 
+    outlined
+    raised 
+    rounded
+    color="#BA3F1D">
+    Pay Now
+    </v-btn>
+    </v-row>
 
   <div v-if="onPayScreen">
   <p>
       <span>
         <label for="amount">Amount: $</label>
-        <input type="number" name="amount" id="amount" v-model="transaction.amount_Paid">
+        <input type="number" name="amount" id="amount" v-model="amount_Paid">
       </span>
-  <v-btn v-if="transaction.paid===false && onPayScreen"
+  <v-btn v-if="!transaction.paid && onPayScreen"
   v-on:click="payRent(transaction.transaction_Id, transaction)"
   outlined
   raised 
@@ -69,11 +71,16 @@ data () {
                 }
             }
         ],
+        amount_Paid: 0,
         onPayScreen: false
     }
 },
 created () {
-    RenterService.getRenterTransactions(this.currentUserId).then(response => {
+    this.getTransactions(this.currentUserId);
+},
+methods: {
+    getTransactions(userId) {
+        RenterService.getRenterTransactions(userId).then(response => {
         if(response.status===200){
             this.transactions = response.data;
         }
@@ -90,10 +97,34 @@ created () {
           alert("Error retrieving transactions. Request could not be created.");
         }
     });
-},
-methods: {
+    },
     payRent(transactionId, transaction) {
-        RenterService.rentPayment(transactionId, transaction);
+        if(this.amount_Paid > 0) {
+            let payment_Due_Date = new Date(transaction.payment_Due_Date).toISOString();
+            transaction.amount_Paid = parseInt(this.amount_Paid);
+            transaction.payment_Due_Date = payment_Due_Date.substring(0, 10);
+            RenterService.rentPayment(transactionId, transaction).then(response => {
+                if(response.status===200) {
+                    alert("Your payment has been received!");
+                    this.getTransactions(this.currentUserId);
+                }
+            }).catch(error => {
+                if (error.response) {
+                    alert(
+                    "Error making payment. Response from server was " +
+                     error.response.statusText +
+                     "."
+            );
+                } else if (error.request) {
+                alert("Error making payment. Could not connect to server.");
+                } else {
+                 alert("Error making payment. Request could not be created.");
+                }
+            });
+        }
+        else {
+            alert("Please enter a valid amount of payment.");
+        }
     }
 }
 }

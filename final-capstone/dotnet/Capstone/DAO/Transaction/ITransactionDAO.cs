@@ -10,5 +10,6 @@ namespace Capstone.DAO.Transaction
     {
         List<Models.Transaction> GetTransactionsById(int id);
         int AddTransaction(Models.Transaction transaction);
+        int MakePayment(int transactionId, Models.Transaction transaction);
     }
 }

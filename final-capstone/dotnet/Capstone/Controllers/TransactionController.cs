@@ -57,5 +57,24 @@ namespace Capstone.Controllers
             return result;
         }
 
+        [HttpPut("{transactionId}")]
+        public IActionResult PayRent(int transactionId, Transaction transaction)
+        {
+            IActionResult result = BadRequest();
+            int rowsAffected;
+            
+            if(transaction.Amount_Paid > 0)
+            {
+                rowsAffected = transactionDAO.MakePayment(transactionId, transaction);
+
+                if (rowsAffected > 0)
+                {
+                    result = Ok();
+                }
+            }
+            
+            return result;
+        }
+
     }
 }
