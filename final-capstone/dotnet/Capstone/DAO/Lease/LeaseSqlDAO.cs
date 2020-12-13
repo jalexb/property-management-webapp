@@ -63,7 +63,12 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT lease_id, lease.from_date, lease.to_date, lease.userId, lease.property_id, lease.current_status FROM lease INNER JOIN properties ON properties.property_id = lease.property_id INNER JOIN users ON lease.userId = users.userId WHERE properties.userId LIKE(SELECT userId FROM users WHERE userId = 5) AND lease.current_status = 'pending' AND users.user_role = 'user'", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT lease_id, lease.from_date, lease.to_date, lease.userId, lease.property_id, lease.current_status " +
+                                                    "FROM lease " +
+                                                    "INNER JOIN properties ON properties.property_id = lease.property_id " +
+                                                    "INNER JOIN users ON lease.userId = users.userId " +
+                                                    "WHERE properties.userId LIKE(SELECT userId FROM users WHERE userId = @landlord_id) " +
+                                                    "AND lease.current_status = 'pending' AND users.user_role = 'user'", conn);
                     cmd.Parameters.AddWithValue("@landlord_id", landlord_id);
 
                     SqlDataReader reader = cmd.ExecuteReader();
