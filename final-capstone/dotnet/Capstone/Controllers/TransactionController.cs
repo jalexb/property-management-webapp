@@ -34,5 +34,28 @@ namespace Capstone.Controllers
 
             return result;
         }
+
+        [HttpPut("add")]
+        public IActionResult leaseAccepted_PopulateTransactions(InitialTransaction initializedTransaction)
+        {
+            IActionResult result = BadRequest();
+            int rowsAffected = 0;
+
+            List<Transaction> transactionList = initializedTransaction.InitializedTransactions();
+
+            foreach (Transaction transaction in transactionList)
+            {
+                rowsAffected = rowsAffected + transactionDAO.AddTransaction(transaction);
+            }
+            
+
+            if(rowsAffected == transactionList.Count())
+            {
+                result = NoContent();
+            }
+
+            return result;
+        }
+
     }
 }

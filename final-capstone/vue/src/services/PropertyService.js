@@ -11,5 +11,9 @@ export default {
 
     getProperty(id) {
         return http.get(`/property/${id}`);
+    },
+
+    getPrice(property_id) {
+        return http.get('/property/price/' + property_id);
     }
 }

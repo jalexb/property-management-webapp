@@ -2,6 +2,8 @@ select * from users
 
 SELECT * FROM maintenance_request
 
+SELECT lease_id, property_id, payment_due_date, late_fees FROM transactions
+
 
 
 BEGIN TRANSACTION

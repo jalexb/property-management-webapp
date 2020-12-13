@@ -151,5 +151,29 @@ namespace Capstone.DAO
             return propertyId;
         }
 
+        public int SetUserRoleToRenter(int userId)
+        {
+            int rowsAffected = 0;
+
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("UPDATE users SET user_role='renter' WHERE userId = @userId", conn);
+
+                    cmd.Parameters.AddWithValue("@userId", userId);
+
+                    rowsAffected = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+            }
+            return rowsAffected;
+        }
+
     }
 }

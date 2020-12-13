@@ -111,5 +111,29 @@ namespace Capstone.DAO
             }
             return properties;
         }
+
+        public decimal GetPropertyPrice(int property_id)
+        {
+            decimal price = 0;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT price FROM properties WHERE property_id = @property_id", conn);
+                    cmd.Parameters.AddWithValue("@property_id", property_id);
+
+                    price = (decimal)cmd.ExecuteScalar();
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return price;
+        }
     }
 }

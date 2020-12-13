@@ -47,5 +47,19 @@ namespace Capstone.Controllers
 
             
         }
+
+        [HttpPut("/renter/userRole/{id}")]
+        public IActionResult setUserTorenter(int id)
+        {
+            IActionResult result = BadRequest();
+
+            int rowsAffected = renterDAO.SetUserRoleToRenter(id);
+
+            if(rowsAffected == 1)
+            {
+                result = Ok();
+            }
+            return result;
+        }
     }
 }

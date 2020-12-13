@@ -68,5 +68,34 @@ namespace Capstone.DAO.Transaction
 
             return transactionsList;
         }
+
+        public int AddTransaction(Models.Transaction transaction)
+        {
+            int rowsAffected = 0;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("INSERT INTO " +
+                                                    "transactions ( lease_id, property_id, payment_due_date, late_fees, paid, amount_paid ) " +
+                                                    "VALUES (@Lease_Id, @Property_Id, @Payment_Due_Date, @Late_Fees, @Paid, @Amount_Paid)", conn);
+                    cmd.Parameters.AddWithValue("@Lease_Id", transaction.Lease_Id);
+                    cmd.Parameters.AddWithValue("@Property_Id", transaction.Property_Id);
+                    cmd.Parameters.AddWithValue("@Payment_Due_Date", transaction.Payment_Due_Date);
+                    cmd.Parameters.AddWithValue("@Late_Fees", 0);
+                    cmd.Parameters.AddWithValue("@Paid", 0);
+                    cmd.Parameters.AddWithValue("@Amount_Paid", 0);
+
+                    rowsAffected = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return rowsAffected;
+        }
     }
 }

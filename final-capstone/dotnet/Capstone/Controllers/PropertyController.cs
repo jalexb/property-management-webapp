@@ -53,5 +53,17 @@ namespace Capstone.Controllers {
 
             return result;
         }
+
+
+
+        //this method is for getting the rent_due for a Transaction Model
+        [HttpGet("price/{property_id}")]
+        public decimal GetPropertyPrice(int property_id)
+        {
+
+            decimal price = propertyDAO.GetPropertyPrice(property_id);
+
+            return price;
+        }
     }
 }

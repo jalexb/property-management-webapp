@@ -12,5 +12,6 @@ namespace Capstone.DAO
         BasicRenterInformation GetRenterInformation(int userId);
         BasicRenterInformation GetRenterAddress(BasicRenterInformation renter);
         int GetRenterPropertyIdFromLease(int userID);
+        int SetUserRoleToRenter(int userId);
     }
 }

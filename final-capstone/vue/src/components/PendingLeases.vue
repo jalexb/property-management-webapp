@@ -25,8 +25,8 @@
           <td>{{data.pending_Lease.to_Date}}</td>
           <td>{{data.renter_Info.address}}</td>
           <td>
-            <button v-on:click="approveLease(data.pending_Lease.lease_Id)" class="approve"> Approve </button> &nbsp;
-            <button v-on:click="rejectLease(data.pending_Lease.lease_Id)" class="reject"> Reject </button>
+            <button v-on:click="approveLease(data)" class="approve"> Approve </button> &nbsp;
+            <button v-on:click="rejectLease(data)" class="reject"> Reject </button>
           </td>
         </tr>
       </table>
@@ -39,6 +39,9 @@
 
 <script>
 import LandlordService from '@/services/LandlordService';
+import TransactionService from '@/services/TransactionService';
+import PropertyService from '@/services/PropertyService'
+import RenterService from '@/services/RenterService';
 
 export default {
   name: 'pending-leases',
@@ -46,11 +49,11 @@ export default {
     return {
       datas:[{
         pending_Lease: {
-            lease_Id: null, 
-            from_Date: null, 
-            to_Date: null, 
-            user_Id: null,
-            property_Id: null,
+          lease_Id: null, 
+          from_Date: null, 
+          to_Date: null, 
+          user_Id: null,
+          property_Id: null,
         },
         renter_Info: {
           address: null,
@@ -59,9 +62,10 @@ export default {
           phoneNumber: null,
           property_Id: null,
           user_Id: null,
-        }
+        },
+        rent_Price: null,
       }],
-        
+      
       userId: null,
       
     }
@@ -80,23 +84,70 @@ export default {
       });
     },
     //approve lease
-    approveLease(leaseId) {
-      LandlordService.approveLease(leaseId).then(response => {
+    approveLease(data) {
+      LandlordService.approveLease(data.pending_Lease.lease_Id).then(response => {
         if(response.status === 200) {
           alert('Accepted');
-          this.getInformation();
+          
           //populate transaction table with 12 months of rent due.
+          data = this.addRentPriceToDate(data);
+          console.log(data);
+          data = this.populateTransactions(data);
+          this.updateUserRole(data.renter_Info.user_Id);
+
+          this.getInformation();
         }
       });
     },
+
+    addRentPriceToDate(data) {
+      PropertyService.getPrice(data.pending_Lease.property_Id)
+      .then(response => 
+      { 
+          data.rent_Price = response.data
+      })
+
+      return data;
+    },
     //reject lease
-    rejectLease(leaseId) {
-      LandlordService.rejectLease(leaseId).then(response => {
+    rejectLease(data) {
+      LandlordService.rejectLease(data.pending_Lease.lease_Id).then(response => {
         if(response.status === 200) {
           alert('Rejected');
-          this.getInformation();
+          //this.getInformation();
         }
       });
+    },
+    //Populate transaction table with 12 months of rent, 1 at a time.
+    //throws from dateand to date to the backend, let the back end handle it.
+    populateTransactions(data) {
+      //Lease_Id, Property_Id, Payment_Due_Date
+
+      let toDate = new Date(data.pending_Lease.to_Date).toISOString();
+      let fromDate = new Date(data.pending_Lease.from_Date).toISOString();
+      let initialTransaction = {
+        Lease_Id: data.pending_Lease.lease_Id,
+        Property_Id: data.pending_Lease.property_Id,
+        From_Date: fromDate.substring(0,10),
+        To_Date: toDate.substring(0,10),
+        Rent_Price: data.rent_Price,
+      };
+
+      
+
+      //console.log(initialTransaction);
+
+      TransactionService.leaseAccepted_PopulateTransactions( initialTransaction )
+      .catch(error => {
+          console.log(error);
+      })
+
+      return data;
+    },
+
+    updateUserRole(userId) {
+      console.log(userId);
+      RenterService.updateRole_UserToRenter(userId).catch(error => console.log(error));
     }
   }
 }

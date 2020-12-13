@@ -11,5 +11,6 @@ namespace Capstone.DAO
         List<PropertyAndAddress> getProperties();
 
         PropertyAndAddress GetProperty(int id);
+        decimal GetPropertyPrice(int property_id);
     }
 }

@@ -21,5 +21,8 @@ const http = axios.create({
     },
     rentPayment(transactionId, transaction) {
       return http.put(`/transaction/${transactionId}`, transaction);
+    },
+    updateRole_UserToRenter(userId) {
+        return http.put('/renter/userRole/' + userId)
     }
   }
