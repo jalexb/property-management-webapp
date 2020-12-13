@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Capstone.Models
 {
-    public class RenterInformationRequest
+    public class RenterInformationResponse
     {
         public int RenterId { get; set; }
         public int UserId { get; set; }

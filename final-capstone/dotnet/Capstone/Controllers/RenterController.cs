@@ -14,9 +14,11 @@ namespace Capstone.Controllers
     public class RenterController : Controller
        {
         private readonly IRenterDAO renterDAO;
-        public RenterController(IRenterDAO renterService)
+        private readonly IRenterService renterService;
+        public RenterController(IRenterDAO _renterDAO, IRenterService _renterService)
         {
-            renterDAO = renterService; 
+            renterDAO = _renterDAO;
+            renterService = _renterService;
         }
         [HttpPost("/renter")]
         public IActionResult SaveRenter([FromBody] RenterInformation request)
@@ -46,6 +48,31 @@ namespace Capstone.Controllers
             return BadRequest();
 
             
+        }
+        [HttpGet("/renterinfo/{id}")]
+        public IActionResult getRenterInfo(int id)
+        {
+            RenterInformationResponse renterInformationResponse = renterService.GetRenterInfo(id);
+            if (renterInformationResponse != null)
+            {
+               return Ok(renterInformationResponse);
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPut("/renter")]
+        public IActionResult updateRenter([FromBody]RenterInformationRequest request)
+        {
+            IActionResult result = BadRequest();
+
+            bool isSuccess = renterService.UpdateRenter(request);
+
+            if (isSuccess)
+            {
+                result = Ok();
+            }
+            return result;
         }
 
         [HttpPut("/renter/userRole/{id}")]

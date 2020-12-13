@@ -10,6 +10,7 @@ import LeaseForm from '../views/LeaseForm.vue'
 import MaintenanceIssue from '@/views/MaintenenceTicket'
 import RenterTransactions from '../components/RenterTransactions.vue'
 import PendingLeases from '../components/PendingLeases.vue'
+import RenterSettings from '../views/RenterSettings.vue'
 
 Vue.use(Router)
 
@@ -78,6 +79,14 @@ const router = new Router({
       path: "/maintenance/:userId",
       name: "maintenance-ticket",
       component: MaintenanceIssue,
+    },
+    {
+      path: "/renter-settings",
+      name: "renter-settings",
+      component: RenterSettings,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
     path: "/renter/transactions/:userId",

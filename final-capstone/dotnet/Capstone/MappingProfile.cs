@@ -12,6 +12,7 @@ namespace Capstone
         public MappingProfile()
         {
             CreateMap<RenterInformationRequest, Entities.RenterInformation>();
+            CreateMap<Entities.RenterInformation, RenterInformationResponse>();
             CreateMap<LeaseRequest, Entities.Lease>();
             CreateMap<Entities.Lease, LeaseResponse>();
             CreateMap<Entities.Properties, PropertiesResponse>();
