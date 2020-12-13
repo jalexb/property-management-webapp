@@ -32,6 +32,11 @@ namespace Capstone.DAO.Lease
             return leaseResponses;
         }
 
+        public List<LeaseResponse> GetPendingApplicationsByUserId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<int> GetUnavailablePropertyIds()
         {
             return _dbContext.Lease.Where(l => l.CurrentStatus == "Approved").Select(l => l.PropertyId).ToList();
