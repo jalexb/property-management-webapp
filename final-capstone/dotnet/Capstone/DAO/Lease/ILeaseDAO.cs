@@ -14,6 +14,7 @@ namespace Capstone.DAO
         Models.Lease GetLease(int lease_id);
         int RejectPendingLease(int lease_id);
         List<PendingLeaseAndRenterInformation> GetLandlordsPendingLeases(int landlord_id);
+        bool CheckIfUserAppliedForThisProperty(int userId, int property_id);
         BasicRenterInformation GetRenterInformation(int userId);
     }
 }

@@ -41,14 +41,29 @@ namespace Capstone.Controllers
             return BadRequest(new { Message = "An error occurred and application was not saved" });
         }
 
-        //[HttpGet]
-        //[Route("/pendingApplications/{id:int}")]
-        //public IActionResult GetPendingApplications(int id)
-        //{
-        //    List<LeaseResponse> leaseResponses = _leaseService.GetPendingApplicationsByUserId(id);
+        [HttpGet]
+        [Route("/pendingApplications/{id:int}")]
+        public IActionResult GetPendingApplications(int id)
+        {
+            List<LeaseResponse> leaseResponses = _leaseService.GetPendingApplicationsByUserId(id);
 
-        //    return Ok(leaseResponses);
-        //}
+            return Ok(leaseResponses);
+        }
+        [HttpPost("{user_id}")]
+        public IActionResult HasUserAppliedForLease(int user_id, int property_id)
+        {
+            bool result = _leaseDAO.CheckIfUserAppliedForThisProperty(user_id, property_id);
+
+            if(result == true)
+            {
+                return Ok(true);
+            }
+
+            return BadRequest(false);
+
+
+
+        }
 
         [HttpGet]
         [Route("/completedApplications")]

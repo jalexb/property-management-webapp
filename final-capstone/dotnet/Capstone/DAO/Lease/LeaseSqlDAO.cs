@@ -50,6 +50,32 @@ namespace Capstone.DAO
             return rowCount;
         }
 
+        public bool CheckIfUserAppliedForThisProperty(int userId, int property_id)
+        {
+            bool result = false;
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT userId FROM lease WHERE userId = @userId AND property_id = @property_id");
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.Parameters.AddWithValue("@property_id", property_id);
+
+                    result = (int)cmd.ExecuteScalar() == userId ? true : false;
+
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                throw;     
+            }
+
+
+            return result;
+        }
 
         //get pending leases
         public List<PendingLeaseAndRenterInformation> GetLandlordsPendingLeases(int landlord_id)
