@@ -15,5 +15,7 @@ namespace Capstone.Models
         public string Photo { get; set; }
         public string PropDesc { get; set; }
         public decimal Price { get; set; }
+        public virtual AddressTableResponse Address { get; set; }
+
     }
 }

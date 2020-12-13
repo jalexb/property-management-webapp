@@ -16,12 +16,13 @@ namespace Capstone.Entities
         }
 
         public virtual DbSet<AddressTable> AddressTable { get; set; }
-        public virtual DbSet<Landlord> Landlord { get; set; }
         public virtual DbSet<Lease> Lease { get; set; }
         public virtual DbSet<Properties> Properties { get; set; }
         public virtual DbSet<RenterInformation> RenterInformation { get; set; }
+        public virtual DbSet<Transactions> Transactions { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<Worker> Worker { get; set; }
+
+        // Unable to generate entity type for table 'dbo.maintenance_request'. Please see the warning messages.
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -86,21 +87,6 @@ namespace Capstone.Entities
                     .HasConstraintName("FK_userId_users");
             });
 
-            modelBuilder.Entity<Landlord>(entity =>
-            {
-                entity.ToTable("landlord");
-
-                entity.Property(e => e.LandlordId).HasColumnName("landlord_id");
-
-                entity.Property(e => e.UserId).HasColumnName("userId");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Landlord)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_landlord_user");
-            });
-
             modelBuilder.Entity<Lease>(entity =>
             {
                 entity.ToTable("lease");
@@ -153,11 +139,9 @@ namespace Capstone.Entities
 
                 entity.Property(e => e.Bedrooms).HasColumnName("bedrooms");
 
-                entity.Property(e => e.LandlordId).HasColumnName("landlord_id");
-
                 entity.Property(e => e.Photo)
                     .HasColumnName("photo")
-                    .HasMaxLength(200)
+                    .HasMaxLength(500)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Price)
@@ -170,17 +154,19 @@ namespace Capstone.Entities
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
+                entity.Property(e => e.UserId).HasColumnName("userId");
+
                 entity.HasOne(d => d.Address)
                     .WithMany(p => p.Properties)
                     .HasForeignKey(d => d.AddressId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_addr_id");
 
-                entity.HasOne(d => d.Landlord)
+                entity.HasOne(d => d.User)
                     .WithMany(p => p.Properties)
-                    .HasForeignKey(d => d.LandlordId)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_prop_landlord");
+                    .HasConstraintName("FK_prop_user");
             });
 
             modelBuilder.Entity<RenterInformation>(entity =>
@@ -235,6 +221,46 @@ namespace Capstone.Entities
                     .HasConstraintName("FKuser_id");
             });
 
+            modelBuilder.Entity<Transactions>(entity =>
+            {
+                entity.HasKey(e => e.TransactionId)
+                    .HasName("PK_transaction_id");
+
+                entity.ToTable("transactions");
+
+                entity.Property(e => e.TransactionId).HasColumnName("transaction_id");
+
+                entity.Property(e => e.AmountPaid)
+                    .HasColumnName("amount_paid")
+                    .HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.LateFees)
+                    .HasColumnName("late_fees")
+                    .HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.LeaseId).HasColumnName("lease_id");
+
+                entity.Property(e => e.Paid).HasColumnName("paid");
+
+                entity.Property(e => e.PaymentDueDate)
+                    .HasColumnName("payment_due_date")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.PropertyId).HasColumnName("property_id");
+
+                entity.HasOne(d => d.Lease)
+                    .WithMany(p => p.Transactions)
+                    .HasForeignKey(d => d.LeaseId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_lease_id_");
+
+                entity.HasOne(d => d.Property)
+                    .WithMany(p => p.Transactions)
+                    .HasForeignKey(d => d.PropertyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_property_id_trans");
+            });
+
             modelBuilder.Entity<Users>(entity =>
             {
                 entity.HasKey(e => e.UserId)
@@ -267,21 +293,6 @@ namespace Capstone.Entities
                     .HasColumnName("username")
                     .HasMaxLength(50)
                     .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<Worker>(entity =>
-            {
-                entity.ToTable("worker");
-
-                entity.Property(e => e.WorkerId).HasColumnName("worker_id");
-
-                entity.Property(e => e.UserId).HasColumnName("userId");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Worker)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_worker_user");
             });
         }
     }

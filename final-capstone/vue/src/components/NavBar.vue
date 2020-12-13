@@ -12,6 +12,10 @@
       </div>
 
       <v-spacer></v-spacer>
+      <div v-if="this.$store.state.user.role === 'admin'">
+        <router-link v-bind:to="{name: 'completed-applications'}">View Completed Applications</router-link>
+      </div>
+      <v-spacer></v-spacer>
       <div v-if="this.$store.state.token === ''">
         <router-link v-bind:to="{name: 'login'}">
           <v-btn

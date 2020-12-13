@@ -5,6 +5,11 @@ namespace Capstone.Entities
 {
     public partial class Lease
     {
+        public Lease()
+        {
+            Transactions = new HashSet<Transactions>();
+        }
+
         public int LeaseId { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
@@ -14,5 +19,6 @@ namespace Capstone.Entities
 
         public virtual Properties Property { get; set; }
         public virtual Users User { get; set; }
+        public virtual ICollection<Transactions> Transactions { get; set; }
     }
 }
