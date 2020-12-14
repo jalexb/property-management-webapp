@@ -38,7 +38,7 @@ namespace Capstone.DAO.Landlord
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT property_id, properties.address_id, property_type, photo, street, street2, price " +
+                    SqlCommand cmd = new SqlCommand("SELECT property_id, properties.address_id, property_type, photo, street, street2, price, zip, region, city " +
                                                     "FROM properties " +
                                                     "INNER JOIN address_table on address_table.address_id = properties.address_id " +
                                                     "WHERE properties.userId = @landlord_id", conn);
@@ -55,6 +55,12 @@ namespace Capstone.DAO.Landlord
                         property.AddressId = (int)reader["address_id"];
                         property.Photo = (string)reader["photo"];
                         property.Price = (decimal)reader["price"];
+                        property.Street = (string)reader["street"];
+                        property.Street2 = (string)reader["street2"];
+                        property.Zip = (int)reader["zip"];
+                        property.Region = (string)reader["region"];
+                        property.City = (string)reader["city"];
+                        property.Property_Type = (string)reader["property_type"];
 
                         properties.Add(property);
                         

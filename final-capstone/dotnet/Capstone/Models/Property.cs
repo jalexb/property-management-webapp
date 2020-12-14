@@ -65,7 +65,7 @@ namespace Capstone.Models
         public string Street2 { get; set; }
         public string City { get; set; }
         public string Region { get; set; }
-        public string Zip { get; set; } //Street Street 2 City Region Zip
+        public int Zip { get; set; } //Street Street 2 City Region Zip
         public string Address 
         { 
             get 
