@@ -1,6 +1,7 @@
 <template>
   <div class="settings-page">
     <v-form>
+      <h1>User Settings</h1>
       <v-text-field
         v-model="renterInfo.email"
         label="Email"
