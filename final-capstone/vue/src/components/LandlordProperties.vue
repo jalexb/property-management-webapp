@@ -38,6 +38,15 @@
             <v-card-title @click="VacantShowing = !VacantShowing">Vacant Properties</v-card-title>
             <v-slide-group
             v-show="VacantShowing">
+                    <v-btn
+                    outlined
+                    raised 
+                    rounded
+                    color="#BA3F1D"
+                    v-on:click="addingNewProperty=true"
+                    >
+                    Add New Property
+                    </v-btn>
                     <v-card
                     v-for="vacantProperty in properties.vacantProperties"
                     :key="vacantProperty.addressId"
@@ -53,8 +62,52 @@
                         </v-card-text>
                     </v-card>
             </v-slide-group>
+            </v-card>
+
+            <v-form v-show="addingNewProperty">
+                <label for="property-type">Property Type: </label>
+                <input type="text" name="property-type" id="property-type" v-bind="newProperty.address.property_Type" style="display: block" />
+                <label for="street">Street: </label>
+                <input type="text" name="street" id="street" v-bind="newProperty.address.street" style="display: block" />
+                <label for="street2">Street2: </label>
+                <input type="text" name="street2" id="street2" v-bind="newProperty.address.street2" style="display: block" />
+                <label for="city">City: </label>
+                <input type="text" name="city" id="city" v-bind="newProperty.address.city" style="display: block" />
+                <label for="region">Region: </label>
+                <input type="text" name="region" id="region" v-bind="newProperty.address.region" style="display: block" />
+                <label for="zip">Zip: </label>
+                <input type="number" name="zip" id="zip" v-bind="newProperty.address.zip" style="display: block" />
+                <label for="bedrooms">Bedrooms: </label>
+                <input type="number" name="bedrooms" id="bedrooms" v-bind="newProperty.property.bedrooms" style="display: block" />
+                <label for="bathrooms">Bathrooms: </label>
+                <input type="number" name="bathrooms" id="bathrooms" v-bind="newProperty.property.bathrooms" style="display: block" />
+                <label for="photo">Link to Photo: </label>
+                <input type="text" name="photo" id="photo" v-bind="newProperty.property.photo" style="display: block" />
+                <label for="description">Description: </label>
+                <input type="text" name="description" id="description" v-bind="newProperty.property.description" style="display: block" />
+                <label for="price">Price: </label>
+                <input type="number" name="price" id="price" v-bind="newProperty.property.price" style="display: block" />
+
+                <v-btn
+                outlined
+                raised 
+                rounded
+                color="success"
+                v-on:click="this.createNewProperty(this.newProperty);"
+                >
+                Submit
+                </v-btn>
+                <v-btn
+                outlined
+                raised 
+                rounded
+                color="warning"
+                v-on:click="addingNewProperty=false"
+                >
+                Cancel
+                </v-btn>
+            </v-form>
         </v-card>
-      </v-card>
   </div>
 </template>
 
@@ -70,6 +123,26 @@ export default {
             OccupiedShowing: false,
             CurrentIncomeShowing: false,
             PotentialIncomeShowing: false,
+            addingNewProperty: false,
+            newProperty: {
+                address: {
+                    userId: this.$store.state.user.userId,
+                    property_Type: '',
+                    street: '',
+                    street2: '',
+                    city: '',
+                    region: '',
+                    zip: 0
+                },
+                property: {
+                    userId: this.$store.state.user.userId,
+                    bedrooms: 0,
+                    bathrooms: 0,
+                    photo: '',
+                    description: '',
+                    price: 0
+                }
+            }
         }
     },
     created () {
@@ -81,6 +154,48 @@ export default {
                 console.log(response);
                 this.properties = response.data;
             })
+        },
+        addNewProperty(newProperty) {
+            LandlordService.createNewProperty(newProperty).then(response => {
+                if(response.status===201) {
+                    alert("New property has successfully been added!");
+                    this.resetNewProperty();
+                    this.getAllProperties();
+                }
+            }).catch(error => {
+                if (error.response) {
+                alert(
+                "Error creating property. Response from server was " +
+                    error.response.statusText +
+                    "."
+                );
+                } else if (error.request) {
+                    alert("Error creating property. Could not connect to server.");
+                } else {
+                    alert("Error creating property. Request could not be created.");
+                }
+            });
+        },
+        resetNewProperty() {
+            this.newProperty = {
+                address: {
+                    userId: this.$store.state.user.userId,
+                    property_Type: '',
+                    street: '',
+                    street2: '',
+                    city: '',
+                    region: '',
+                    zip: 0
+                },
+                property: {
+                    userId: this.$store.state.user.userId,
+                    bedrooms: 0,
+                    bathrooms: 0,
+                    photo: '',
+                    description: '',
+                    price: 0
+                }
+            }
         }
     }
 }

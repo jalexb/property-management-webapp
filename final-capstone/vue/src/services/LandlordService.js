@@ -17,5 +17,8 @@ export default {
     },
     getLandlordProperties(landlord_id) {
       return http.get('/getAllProperties/' + landlord_id)
+    },
+    createNewProperty(newProperty) {
+      return http.post('/addNewProperty', newProperty);
     }
 }
