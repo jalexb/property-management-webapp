@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="#D9CFC1" dark>
+  <v-app-bar app color="primary lighten-3">
       <div class="d-flex align-center">
         
         <router-link class="routerlink" :to="{name: 'home'}">
@@ -29,10 +29,8 @@
       <div v-if="this.$store.state.token === ''">
         <router-link v-bind:to="{name: 'login'}">
           <v-btn
-            outlined
-            raised 
             rounded
-            color="#BA3F1D"
+            color="secondary"
             >
             Login
           </v-btn>
@@ -40,12 +38,12 @@
       </div>
 
       <div v-else>
-        <router-link v-bind:to="{name: 'logout'}">
+        <router-link
+
+         v-bind:to="{name: 'logout'}">
           <v-btn
-            outlined
-            raised 
             rounded
-            color="#87ceeb"
+            color="secondary"
             >
             Logout
           </v-btn>
