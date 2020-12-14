@@ -76,6 +76,7 @@ namespace Capstone
             services.AddTransient<IRenterDAO>(m => new RenterSqlDAO(connectionString));
             services.AddTransient<ILandlordDAO>(m => new LandlordSqlDAO(connectionString));
             services.AddTransient<ITransactionDAO>(m => new TransactionSqlDAO(connectionString));
+            services.AddTransient<IMaintenanceDAO>(m => new MaintenanceSqlDAO(connectionString));
             services.AddScoped<ILeaseService, LeaseService>();
             services.AddScoped<IRenterService, RenterService>();
 

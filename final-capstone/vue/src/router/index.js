@@ -12,6 +12,7 @@ import RenterTransactions from '../components/RenterTransactions.vue'
 import PendingLeases from '../components/PendingLeases.vue'
 import RenterSettings from '../views/RenterSettings.vue'
 import CompletedApplications from '../views/CompletedApplications.vue'
+import LandlordProperties from '@/views/LandlordProperties'
 
 Vue.use(Router)
 
@@ -103,6 +104,11 @@ const router = new Router({
       path: "/completed-applications",
       name: "completed-applications",
       component: CompletedApplications
+    },
+    {
+      path: "/landlord/properties",
+      name: "landlord-properties",
+      component: LandlordProperties
     }
   ]
 })

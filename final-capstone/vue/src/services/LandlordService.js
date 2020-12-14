@@ -14,5 +14,8 @@ export default {
     },
     rejectLease(leaseId) {
       return http.post('lease/reject/' + leaseId);
+    },
+    getLandlordProperties(landlord_id) {
+      return http.get('/getAllProperties/' + landlord_id)
     }
 }

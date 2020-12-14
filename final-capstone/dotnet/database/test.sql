@@ -4,7 +4,13 @@ SELECT * FROM maintenance_request
 
 SELECT lease_id, property_id, payment_due_date, late_fees FROM transactions
 
+SELECT * FROM properties INNER JOIN address_table on address_table.address_id = properties.address_id WHERE properties.userId = @landlord_id
 
+SELECT * FROM properties WHERE userId = 5
+
+SELECT * FROM lease
+
+SELECT lease_id, from_date, to_date, userId, property_id FROM lease WHERE property_id = 2 AND (current_status = 'approved' OR current_status = 'Approved') 
 
 BEGIN TRANSACTION
 
