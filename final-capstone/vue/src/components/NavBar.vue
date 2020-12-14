@@ -32,9 +32,8 @@
 
          v-bind:to="{name: 'logout'}">
           <v-btn
-            outlined
             rounded
-            color="#secondary"
+            color="secondary"
             >
             Logout
           </v-btn>
