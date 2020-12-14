@@ -1,76 +1,87 @@
 <template>
-  <div class="renter-settings">
-    <div class="form-group">
-    <label>email</label>
-    <input type="text" id="email" placeholder="email" v-model="renterInfo.email" />
-    </div>
-    <div class="form-group">
-      <label>Phone Number</label>
-    <input type="text" id="phoneNumber" placeholder="phone Number" v-model="renterInfo.phoneNumber" />
-    </div>
-    <br />
-    <button type="submit" v-on:click="updateRenterInfo()" >Update Renter Info</button>
+  <div class="settings-page">
+    <v-form>
+      <v-text-field
+        v-model="renterInfo.email"
+        label="Email"
+        required
+        prepend-icon="mdi-email"
+      >
+      </v-text-field>
+
+      <v-text-field
+        v-model="renterInfo.phoneNumber"
+        label="Phone Number"
+        required
+        prepend-icon="mdi-phone-classic"
+      >
+      </v-text-field>
+
+      <v-btn type="submit" outlined rounded color="primary"
+        >Update Settings</v-btn
+      >
+    </v-form>
   </div>
 </template>
 
 <script>
-import RenterService from "../services/RenterService.js"
-
+import RenterService from "../services/RenterService.js";
 
 export default {
   data() {
     return {
       renterInfo: {
-      "renterId": 0,
-      "userId": 0,
-      "firstName": null,
-      "lastName": null,
-      "phoneNumber": null,
-      "email": null,
-      "leaseType": null,
-      "salary": 0.0
-      }
-    }
+        renterId: 0,
+        userId: 0,
+        firstName: null,
+        lastName: null,
+        phoneNumber: null,
+        email: null,
+        leaseType: null,
+        salary: 0.0,
+      },
+    };
   },
   name: "renter-settings",
-  created(){
-    RenterService.getRenterInfo(this.$store.state.user.userId).then(response=>{
-      if(response.status === 200){
-        this.renterInfo = response.data;
+  created() {
+    RenterService.getRenterInfo(this.$store.state.user.userId).then(
+      (response) => {
+        if (response.status === 200) {
+          this.renterInfo = response.data;
+        }
       }
-    })
+    );
   },
   methods: {
-    updateRenterInfo(){
-      RenterService.updateRenterInfo(this.renterInfo).then(response=>{
-        if(response.status === 200){
-          alert("Updated Renter infomation successfully.");
-          this.$router.push("/");
-        }
-      })
-      .catch(error=>{
-        alert("An error occurred on updating the renter information.", error);
-      })
-    }
-  }
-
+    updateRenterInfo() {
+      RenterService.updateRenterInfo(this.renterInfo)
+        .then((response) => {
+          if (response.status === 200) {
+            alert("Updated Renter infomation successfully.");
+            this.$router.push("/");
+          }
+        })
+        .catch((error) => {
+          alert("An error occurred on updating the renter information.", error);
+        });
+    },
+  },
 };
 </script>
 
 <style scoped>
+.settings-page {
+  width: 80%;
+  height: 100%;
+  margin-left: 10%;
+  background-color: white;
+  padding: 10px;
+}
 h1 {
   text-align: center;
 }
 
-.form-group {
-  padding: 20px;
-}
-label {
-  padding: 20px;
-  font-weight: bold;
-}
-button {
-  padding: 20px;
-  font-weight: bold;
+.input {
+  margin-bottom: 10px;
 }
 </style>

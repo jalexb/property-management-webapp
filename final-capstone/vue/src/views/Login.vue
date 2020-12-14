@@ -42,7 +42,9 @@
                 ></v-text-field>
                 <v-btn type="submit" color="secondary">Login</v-btn>
                 <v-spacer></v-spacer>
-                <router-link :to="{ name: 'register' }">Need an account?</router-link>
+                <router-link :to="{ name: 'register' }"
+                  >Need an account?</router-link
+                >
               </v-form>
             </v-card-text>
           </v-card>
