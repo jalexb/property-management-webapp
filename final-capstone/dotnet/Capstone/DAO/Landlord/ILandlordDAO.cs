@@ -10,5 +10,6 @@ namespace Capstone.DAO.Landlord
     {
         List<LandlordProperty> GetLandlordProperties(int landlord_id);
         int AddNewPropertyAndAddress(Property property, Address address);
+        int UpdatePropertyByPropertyId(Property property);
     }
 }

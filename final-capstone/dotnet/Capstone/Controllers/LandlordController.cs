@@ -124,15 +124,20 @@ namespace Capstone.Controllers
 
             return result;
         }
-        /*
+        
         [HttpPut("/updateProperty/{propertyId}")]
-        public IActionResult UpdatePropertyByPropertyId(int propertyId)
+        public IActionResult UpdatePropertyByPropertyId(int propertyId, Property property)
         {
             IActionResult result = BadRequest();
-            int rowsAffected = landlordDAO.UpdatePropertyByPropertyId(propertyId);
+            int rowsAffected = landlordDAO.UpdatePropertyByPropertyId(property);
 
+            if(rowsAffected > 0)
+            {
+                result = Ok();
+            }
 
-        }*/
+            return result;
+        }
 
         private RenterInformationWithTransactionHistory populateRenterAndTransactions(Lease lease)
         {

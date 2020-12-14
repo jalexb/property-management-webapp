@@ -123,5 +123,39 @@ namespace Capstone.DAO.Landlord
 
             return rowsAffected;
         }
+
+        public int UpdatePropertyByPropertyId(Property property) 
+        {
+            int rowsAffected = 0;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("UPDATE properties " +
+                                                    "SET userId = @userId, address_id = @address_id, bedrooms = @bedrooms, " +
+                                                    "bathrooms = @bathrooms, photo = @photo, prop_desc = @prop_desc, price = @price " +
+                                                    "WHERE property_id = @property_id", conn);
+                    cmd.Parameters.AddWithValue("@userId", property.userId);
+                    cmd.Parameters.AddWithValue("@address_id", property.addressId);
+                    cmd.Parameters.AddWithValue("@bedrooms", property.Bedrooms);
+                    cmd.Parameters.AddWithValue("@bathrooms", property.Bathrooms);
+                    cmd.Parameters.AddWithValue("@photo", property.Photo);
+                    cmd.Parameters.AddWithValue("@prop_desc", property.Description);
+                    cmd.Parameters.AddWithValue("@price", property.Price);
+                    cmd.Parameters.AddWithValue("@property_id", property.propertyId);
+
+                    rowsAffected = cmd.ExecuteNonQuery();
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return rowsAffected;
+        }
     }
 }
