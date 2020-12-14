@@ -13,8 +13,18 @@
 
       <v-spacer></v-spacer>
       <div v-if="this.$store.state.user.role === 'admin'">
-        <router-link v-bind:to="{name: 'completed-applications'}">View Completed Applications</router-link>
+        <router-link v-bind:to="{name: 'completed-applications'}">
+          <v-btn
+            outlined
+            raised 
+            rounded
+            color="#BA3F1D"
+            >
+            View Completed Applications
+          </v-btn>
+        </router-link>
       </div>
+
       <v-spacer></v-spacer>
       <div v-if="this.$store.state.token === ''">
         <router-link v-bind:to="{name: 'login'}">
