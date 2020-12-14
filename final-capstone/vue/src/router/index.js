@@ -71,7 +71,7 @@ const router = new Router({
       name: "lease-form",
       component: LeaseForm,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
