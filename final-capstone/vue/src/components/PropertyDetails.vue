@@ -40,47 +40,58 @@
 import propertyService from "../services/PropertyService";
 
 export default {
-data() {
-  return {
-    userRole: this.$store.state.user.role,
-    property: {
-      addressId: 0,
-      bathrooms: 0,
-      bedrooms: 0,
-      city: "",
-      description: "",
-      photo: "",
-      price: 0,
-      propertyId: 0,
-      property_Type: "",
-      region: "",
-      street: "",
-      street2: "",
-      zip: ""
+  data() {
+    return {
+      userRole: this.$store.state.user.role,
+      property: {
+        addressId: 0,
+        bathrooms: 0,
+        bedrooms: 0,
+        city: "",
+        description: "",
+        photo: "",
+        price: 0,
+        propertyId: 0,
+        property_Type: "",
+        region: "",
+        street: "",
+        street2: "",
+        zip: ""
+      }
+    }
+  },
+
+  created() {
+    const propId = this.$route.params.id;
+    propertyService.getProperty(propId).then(response => {
+      if(response.status===200) {
+        this.property = response.data;
+      }
+    }).catch(error => {
+      if (error.response) {
+            alert(
+              "Error retrieving property. Response from server was " +
+                error.response.statusText +
+                "."
+            );
+          } else if (error.request) {
+            alert("Error retrieving property. Could not connect to server.");
+          } else {
+            alert("Error retrieving property. Request could not be created.");
+          }
+    });
+
+    this.checkIfUserAppliedForThisProperty();
+  },
+  methods: {
+    checkIfUserAppliedForThisProperty() {
+      propertyService.checkIfUserAppliedForProperty(this.property.addressId, this.$store.state.user.userId)
+      .then(response => {
+        console.log(response.data);
+
+      })
     }
   }
-},
-
-created() {
-  const propId = this.$route.params.id;
-  propertyService.getProperty(propId).then(response => {
-    if(response.status===200) {
-      this.property = response.data;
-    }
-  }).catch(error => {
-    if (error.response) {
-          alert(
-            "Error retrieving property. Response from server was " +
-              error.response.statusText +
-              "."
-          );
-        } else if (error.request) {
-          alert("Error retrieving property. Could not connect to server.");
-        } else {
-          alert("Error retrieving property. Request could not be created.");
-        }
-  });
-}
 }
 </script>
 

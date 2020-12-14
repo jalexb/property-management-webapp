@@ -10,6 +10,9 @@ import LeaseForm from '../views/LeaseForm.vue'
 import MaintenanceIssue from '@/views/MaintenenceTicket'
 import RenterTransactions from '../components/RenterTransactions.vue'
 import PendingLeases from '../components/PendingLeases.vue'
+import RenterSettings from '../views/RenterSettings.vue'
+import CompletedApplications from '../views/CompletedApplications.vue'
+import LandlordProperties from '@/views/LandlordProperties'
 
 Vue.use(Router)
 
@@ -80,6 +83,14 @@ const router = new Router({
       component: MaintenanceIssue,
     },
     {
+      path: "/renter-settings",
+      name: "renter-settings",
+      component: RenterSettings,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
     path: "/renter/transactions/:userId",
     name: "renter-transactions",
     component: RenterTransactions
@@ -88,6 +99,16 @@ const router = new Router({
       path: "/landlord/pending-leases",
       name: "pending-leases",
       component: PendingLeases
+    },
+    {
+      path: "/completed-applications",
+      name: "completed-applications",
+      component: CompletedApplications
+    },
+    {
+      path: "/landlord/properties",
+      name: "landlord-properties",
+      component: LandlordProperties
     }
   ]
 })

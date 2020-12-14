@@ -7,5 +7,9 @@ const http = axios.create({
   export default {
     submitLeaseForm(form) {
         return http.post('/lease', form);
+    },
+    getCompletedApplications(){
+      return http.get('/completedApplications');
     }
+
   }

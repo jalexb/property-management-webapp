@@ -13,6 +13,12 @@ const http = axios.create({
       
       //return http.get(`/renter/${userId}`);
     },
+    getRenterInfo(userId) {
+      return http.get('renterinfo/' + userId);
+    },
+    updateRenterInfo(renterinfo) {
+      return http.put('renter/', renterinfo);
+    },
     addMaintenanceTicket(serviceDetails) {
       return http.post('/submit/ticket/', serviceDetails);
     },

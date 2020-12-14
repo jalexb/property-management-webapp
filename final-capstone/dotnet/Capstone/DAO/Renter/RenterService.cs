@@ -18,6 +18,13 @@ namespace Capstone.DAO.Renter
             _dbContext = dbContext;
             _mapper = mapper;
         }
+
+        public RenterInformationResponse GetRenterInfo(int id)
+        {
+            var renterInfo = _dbContext.RenterInformation.Where(i => i.UserId == id).FirstOrDefault();
+            return _mapper.Map<RenterInformationResponse>(renterInfo);
+        }
+
         public bool SaveRenter(RenterInformationRequest request)
         {
             try
@@ -25,6 +32,23 @@ namespace Capstone.DAO.Renter
                 var renterinfo = _mapper.Map<Entities.RenterInformation>(request);
 
                 _dbContext.RenterInformation.Add(renterinfo);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
+        public bool UpdateRenter(RenterInformationRequest request)
+        {
+            try
+            {
+                var renterinfo = _mapper.Map<Entities.RenterInformation>(request);
+
+                _dbContext.Update(renterinfo);
                 _dbContext.SaveChanges();
                 return true;
             }

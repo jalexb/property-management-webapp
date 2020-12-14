@@ -2,6 +2,8 @@
 using Capstone.DAO;
 using Capstone.Models;
 using System.Collections.Generic;
+using Capstone.DAO.Lease;
+using System.Linq;
 
 namespace Capstone.Controllers { 
 
@@ -10,18 +12,20 @@ namespace Capstone.Controllers {
     public class PropertyController : Controller
     {
         private readonly IPropertyDAO propertyDAO;
-        public PropertyController(IPropertyDAO _propDAO)
+        private readonly ILeaseService leaseService;  
+        public PropertyController(IPropertyDAO _propDAO, ILeaseService _leaseService) 
         {
             propertyDAO = _propDAO;
+            leaseService = _leaseService;
         }
 
         [HttpGet]
-        public IActionResult GetAllProperties()
+        public IActionResult GetAvailableProperties()
         {
             IActionResult result;
 
             List<PropertyAndAddress> properties = propertyDAO.getProperties();
-
+            List<int> unavailablePropertyIds = leaseService.GetUnavailablePropertyIds();
             if(properties.Count <= 0)
             {
                 //wasn't able to get list of properties
@@ -29,8 +33,9 @@ namespace Capstone.Controllers {
             } 
             else
             {
-                //got list of properties
-                result = Ok(properties);
+                //got list of available properties
+                var availableProperties = properties.Where(p => !unavailablePropertyIds.Contains(p.propertyId)).ToList();
+                result = Ok(availableProperties);
             }
 
             return result;

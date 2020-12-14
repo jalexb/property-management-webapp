@@ -46,6 +46,36 @@ namespace Capstone.DAO.Transaction
             return transactions;
         }
 
+        public List<Models.Transaction> GetTransactionsByLeaseId(int lease_id)
+        {
+            List<Models.Transaction> transactions = new List<Models.Transaction>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT transaction_id,transactions.lease_id, transactions.property_id, payment_due_date, " +
+                                                    "late_fees, paid, amount_paid, lease.userId, properties.price " +
+                                                    "FROM transactions " +
+                                                    "INNER JOIN lease ON lease.lease_id = transactions.lease_id " +
+                                                    "INNER JOIN properties ON properties.property_id = lease.property_id " +
+                                                    "WHERE lease.lease_id = @lease_id; ", conn);
+                    cmd.Parameters.AddWithValue("@lease_id", lease_id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    transactions = ConvertToTransaction(reader);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return transactions;
+        }
+
         public List<Models.Transaction> ConvertToTransaction(SqlDataReader reader)
         {
             List<Models.Transaction> transactionsList = new List<Models.Transaction>();
@@ -93,6 +123,44 @@ namespace Capstone.DAO.Transaction
             catch (SqlException e)
             {
                 Console.WriteLine(e);
+            }
+
+            return rowsAffected;
+        }
+
+        public int MakePayment(int transactionId, Models.Transaction transaction)
+        {
+            int rowsAffected = 0;
+            SqlCommand cmd;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    if(transaction.Amount_Due == 0)
+                    {
+                        cmd = new SqlCommand("UPDATE transactions " +
+                                             "SET amount_paid = @Amount_Paid, paid = 1 " +
+                                             "WHERE transaction_id = @transactionId", conn);
+                        
+                    }
+                    else
+                    {
+                        cmd = new SqlCommand("UPDATE transactions " +
+                                             "SET amount_paid = @Amount_Paid " +
+                                             "WHERE transaction_id = @transactionId", conn);
+                    }
+                    cmd.Parameters.AddWithValue("@Amount_Paid", transaction.Amount_Paid);
+                    cmd.Parameters.AddWithValue("@transactionId", transactionId);
+
+                    rowsAffected = cmd.ExecuteNonQuery();
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
 
             return rowsAffected;

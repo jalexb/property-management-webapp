@@ -8,17 +8,17 @@
             flex-direction: row
             justify-space-around
             >
+            <router-link :to="{name: 'landlord-properties'}">
               <v-card
               class="ma-6"
               max-width="400"
               hover>
-              <!--<router-link :to="{ name: 'property-details', params: {id: property.propertyId} }">-->
-              <v-img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg"> </v-img>
-              <v-card-title> 
-                Add Available Properties
-              </v-card-title>
-              <!--</router-link>-->
-            </v-card>
+                <v-img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg"> </v-img>
+                <v-card-title> 
+                  Add Available Properties
+                </v-card-title>
+              </v-card>
+            </router-link>
             <v-card 
               class="ma-6"
               max-width="400"

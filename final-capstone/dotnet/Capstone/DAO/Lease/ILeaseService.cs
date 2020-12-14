@@ -6,6 +6,9 @@ namespace Capstone.DAO.Lease
     public interface ILeaseService
     {
         bool SavePendingLease(LeaseRequest lease);
+        bool IsDupilcateLease(PendingLease lease);
+        List<int> GetUnavailablePropertyIds();
+        List<LeaseResponse> GetCompletedApplications();
         List<LeaseResponse> GetPendingApplicationsByUserId(int id);
     }
 }

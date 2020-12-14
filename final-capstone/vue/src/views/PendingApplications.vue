@@ -39,7 +39,7 @@
                 autofocus
                 v-model="renter.email" />
     <h3>from-date:  </h3> 
-        <input type="date" 
+        <input type="text" 
                 id="from-date" 
                 class=from-date 
                 placeholder="from-date" 
@@ -47,7 +47,7 @@
                 autofocus
                 v-model="pendingLease.fromDate" />
     <h3>to-date:  </h3> 
-        <input type="date" 
+        <input type="text" 
                 id="to-date" 
                 class=to-date 
                 placeholder="to-date" 
@@ -57,7 +57,7 @@
      </div>
 
     <div class="actions">
-      <button type="submit" class="btn btn-primary">Save Application</button>
+      <button type="submit" class="btn btn-primary" v-on:click="saveApplication()">Save Application</button>
     </div>
   </form>
 </template>
@@ -71,46 +71,45 @@ export default {
    data(){
        return {
            pendingLease:{
-  "userId": 0,
-  "propertyId": 0,
-  "fromDate": null,
-  "toDate": null,
-  "isApproved": null
-},
-renter:{
-  "user_Id": 0,
-  "firstName": null,
-  "lastName": null,
-  "currentAddress": null,
-  "phoneNumber": null,
-  "email": null,
-  "leaseType": null,
-  "salary": 0.0
-}
+                "userId": 0,
+                "propertyId": 0,
+                "fromDate": null,
+                "toDate": null,
+                "isApproved": null
+            },
+            renter:{
+                "userId": 0,
+                "firstName": null,
+                "lastName": null,
+                "currentAddress": null,
+                "phoneNumber": null,
+                "email": null,
+                "leaseType": null,
+                "salary": 0.0
+            }
         
        }
    },
    created(){
        this.pendingLease.propertyId = parseInt(this.$route.params.id);
    },
-       methods: {
-           saveRenter(){
-               this.renter.user_Id = this.$store.state.user.userId;
-               RenterService.saveRenter(this.renter).then (response => {
-                   if (response.status == 200) {
-                       alert ("Renter information has been saved");
-                       this.$router.push('/');
-                   } else {
-                       alert ("There was problem saving the Renter information, not saved");
-                   }
-               })
-               .catch(error =>{
-                    console.log(error);
-                 alert("There was a problem with the renter info, not saved!");
-               })
-           },
+    methods: {
+        saveRenter(){
+            this.renter.userId = this.$store.state.user.userId;
+            RenterService.saveRenter(this.renter).then (response => {
+                if (response.status == 200) {
+                    alert ("Renter information has been saved");
+                    this.$router.push('/');
+                } else {
+                    alert ("There was problem saving the Renter information, not saved");
+                }
+            })
+            .catch(error =>{
+                console.log(error);
+                alert("There was a problem with the renter info, not saved!");
+            })
+        },
         saveApplication() {
-            
             this.pendingLease.userId = this.$store.state.user.userId;
             console.log(this.$route.params.id);
             LeaseService.submitLeaseForm(this.pendingLease) .then (response =>{

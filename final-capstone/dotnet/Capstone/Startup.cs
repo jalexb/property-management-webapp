@@ -16,6 +16,7 @@ using Capstone.DAO.Lease;
 using Capstone.DAO.Renter;
 using Capstone.DAO.Maintenance;
 using Capstone.DAO.Transaction;
+using Capstone.DAO.Landlord;
 
 namespace Capstone
 {
@@ -73,8 +74,9 @@ namespace Capstone
             services.AddTransient<IPropertyDAO>(m => new PropertySqlDAO(connectionString));
             services.AddTransient<ILeaseDAO>(m => new LeaseSqlDAO(connectionString));
             services.AddTransient<IRenterDAO>(m => new RenterSqlDAO(connectionString));
-            services.AddTransient<IMaintenanceDAO>(m => new MaintenanceSqlDAO(connectionString));
+            services.AddTransient<ILandlordDAO>(m => new LandlordSqlDAO(connectionString));
             services.AddTransient<ITransactionDAO>(m => new TransactionSqlDAO(connectionString));
+            services.AddTransient<IMaintenanceDAO>(m => new MaintenanceSqlDAO(connectionString));
             services.AddScoped<ILeaseService, LeaseService>();
             services.AddScoped<IRenterService, RenterService>();
 
