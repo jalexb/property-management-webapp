@@ -8,8 +8,8 @@ namespace Capstone.Models
 
     public class PropertyAndAddress
     {
-        public int propertyId { get; set; }
-        public int addressId { get; set; }
+        public int? propertyId { get; set; }
+        public int? addressId { get; set; }
         public int userId { get; set; }
         public int Bedrooms { get; set; }
         public decimal Bathrooms { get; set; }
@@ -26,8 +26,8 @@ namespace Capstone.Models
     }
     public class Property
     {
-        public int propertyId { get; set; }
-        public int addressId { get; set; } 
+        public int? propertyId { get; set; }
+        public int? addressId { get; set; } 
         public int userId { get; set; }
         public int Bedrooms { get; set; }
         public decimal Bathrooms { get; set; }
@@ -40,12 +40,12 @@ namespace Capstone.Models
     public class Address
     {
         public int User_Id { get; set; } 
-        public int Property_Type { get; set; }
+        public string Property_Type { get; set; }
         public string Street { get; set; }
         public string Street2 { get; set; }
         public string city { get; set; }
         public string region { get; set; }
-        public string zip { get; set; }
+        public int zip { get; set; }
     }
 
     public class LandlordPropertyAndRenter

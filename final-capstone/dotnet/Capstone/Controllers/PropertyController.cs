@@ -34,7 +34,7 @@ namespace Capstone.Controllers {
             else
             {
                 //got list of available properties
-                var availableProperties = properties.Where(p => !unavailablePropertyIds.Contains(p.propertyId)).ToList();
+                var availableProperties = properties.Where(p => !unavailablePropertyIds.Contains((int)p.propertyId)).ToList();
                 result = Ok(availableProperties);
             }
 

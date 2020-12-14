@@ -78,5 +78,50 @@ namespace Capstone.DAO.Landlord
             return properties;
 
         }
+
+        public int AddNewPropertyAndAddress(Property property, Address address)
+        {
+            int rowsAffected = 0;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand addressCmd = new SqlCommand("INSERT INTO address_table (userId, property_type, street, street2, city, region, zip) " +
+                                                           "VALUES (@userId, @property_type, @street, @street2, @city, @region, @zip)", conn);
+                    addressCmd.Parameters.AddWithValue("@userId", address.User_Id);
+                    addressCmd.Parameters.AddWithValue("@property_type", address.Property_Type);
+                    addressCmd.Parameters.AddWithValue("@street", address.Street);
+                    addressCmd.Parameters.AddWithValue("@street2", address.Street2);
+                    addressCmd.Parameters.AddWithValue("@city", address.city);
+                    addressCmd.Parameters.AddWithValue("@region", address.region);
+                    addressCmd.Parameters.AddWithValue("@zip", address.zip);
+
+                    rowsAffected = addressCmd.ExecuteNonQuery();
+                    
+                    if(rowsAffected > 0)
+                    {
+                        SqlCommand propertyCmd = new SqlCommand("INSERT INTO properties (userId, address_id, bedrooms, bathrooms, photo, prop_desc, price) " +
+                                                            "VALUES (@userId, (SELECT MAX(address_id) FROM address_table), @bedrooms, @bathrooms, @photo, @prop_desc, @price)", conn);
+                        propertyCmd.Parameters.AddWithValue("@userId", property.userId);
+                        propertyCmd.Parameters.AddWithValue("@bedrooms", property.Bedrooms);
+                        propertyCmd.Parameters.AddWithValue("@bathrooms", property.Bathrooms);
+                        propertyCmd.Parameters.AddWithValue("@photo", property.Photo);
+                        propertyCmd.Parameters.AddWithValue("@prop_desc", property.Description);
+                        propertyCmd.Parameters.AddWithValue("@price", property.Price);
+
+                        rowsAffected += propertyCmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return rowsAffected;
+        }
     }
 }

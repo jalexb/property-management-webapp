@@ -80,6 +80,60 @@ namespace Capstone.Controllers
 
         }
 
+        [HttpPost("/addNewProperty")]
+        public IActionResult CreateNewPropertyAndAddress(PropertyAndAddress newProperty)
+        {
+            IActionResult result = BadRequest();
+
+            if (newProperty.Bedrooms < 0 || newProperty.Bathrooms < 0 || newProperty.Price < 0 || newProperty.zip < 0 || newProperty.zip.ToString().Length < 5 || newProperty.zip.ToString().Length > 5)
+            {
+                return result;
+            }
+
+            Property property = new Property();
+            Address address = new Address();
+
+            property.userId = newProperty.userId;
+            property.Bedrooms = newProperty.Bedrooms;
+            property.Bathrooms = newProperty.Bathrooms;
+            property.Photo = newProperty.Photo;
+            property.Description = newProperty.Description;
+            property.Price = newProperty.Price;
+
+            address.User_Id = newProperty.userId;
+            address.Property_Type = newProperty.Property_Type;
+            address.Street = newProperty.Street;
+            if(newProperty.Street2=="")
+            {
+                address.Street2 = "N/A";
+            }
+            else
+            {
+                address.Street2 = newProperty.Street2;
+            }
+            address.city = newProperty.city;
+            address.region = newProperty.region;
+            address.zip = newProperty.zip;
+
+            int rowsAffected = landlordDAO.AddNewPropertyAndAddress(property, address);
+
+            if(rowsAffected > 0)
+            {
+                result = NoContent();
+            }
+
+            return result;
+        }
+        /*
+        [HttpPut("/updateProperty/{propertyId}")]
+        public IActionResult UpdatePropertyByPropertyId(int propertyId)
+        {
+            IActionResult result = BadRequest();
+            int rowsAffected = landlordDAO.UpdatePropertyByPropertyId(propertyId);
+
+
+        }*/
+
         private RenterInformationWithTransactionHistory populateRenterAndTransactions(Lease lease)
         {
             RenterInformationWithTransactionHistory renter = new RenterInformationWithTransactionHistory();

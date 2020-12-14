@@ -9,5 +9,6 @@ namespace Capstone.DAO.Landlord
     public interface ILandlordDAO
     {
         List<LandlordProperty> GetLandlordProperties(int landlord_id);
+        int AddNewPropertyAndAddress(Property property, Address address);
     }
 }

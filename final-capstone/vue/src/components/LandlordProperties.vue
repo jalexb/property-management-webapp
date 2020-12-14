@@ -66,34 +66,34 @@
 
             <v-form v-show="addingNewProperty">
                 <label for="property-type">Property Type: </label>
-                <input type="text" name="property-type" id="property-type" v-bind="newProperty.address.property_Type" style="display: block" />
+                <input type="text" name="property-type" id="property-type" v-model="newProperty.property_Type" style="display: block" />
                 <label for="street">Street: </label>
-                <input type="text" name="street" id="street" v-bind="newProperty.address.street" style="display: block" />
+                <input type="text" name="street" id="street" v-model="newProperty.street" style="display: block" />
                 <label for="street2">Street2: </label>
-                <input type="text" name="street2" id="street2" v-bind="newProperty.address.street2" style="display: block" />
+                <input type="text" name="street2" id="street2" v-model="newProperty.street2" style="display: block" />
                 <label for="city">City: </label>
-                <input type="text" name="city" id="city" v-bind="newProperty.address.city" style="display: block" />
+                <input type="text" name="city" id="city" v-model="newProperty.city" style="display: block" />
                 <label for="region">Region: </label>
-                <input type="text" name="region" id="region" v-bind="newProperty.address.region" style="display: block" />
+                <input type="text" name="region" id="region" v-model="newProperty.region" style="display: block" />
                 <label for="zip">Zip: </label>
-                <input type="number" name="zip" id="zip" v-bind="newProperty.address.zip" style="display: block" />
+                <input type="number" name="zip" id="zip" v-model="newProperty.zip" style="display: block" />
                 <label for="bedrooms">Bedrooms: </label>
-                <input type="number" name="bedrooms" id="bedrooms" v-bind="newProperty.property.bedrooms" style="display: block" />
+                <input type="number" name="bedrooms" id="bedrooms" v-model="newProperty.bedrooms" style="display: block" />
                 <label for="bathrooms">Bathrooms: </label>
-                <input type="number" name="bathrooms" id="bathrooms" v-bind="newProperty.property.bathrooms" style="display: block" />
+                <input type="number" name="bathrooms" id="bathrooms" v-model="newProperty.bathrooms" style="display: block" />
                 <label for="photo">Link to Photo: </label>
-                <input type="text" name="photo" id="photo" v-bind="newProperty.property.photo" style="display: block" />
+                <input type="text" name="photo" id="photo" v-model="newProperty.photo" style="display: block" />
                 <label for="description">Description: </label>
-                <input type="text" name="description" id="description" v-bind="newProperty.property.description" style="display: block" />
+                <input type="text" name="description" id="description" v-model="newProperty.description" style="display: block" />
                 <label for="price">Price: </label>
-                <input type="number" name="price" id="price" v-bind="newProperty.property.price" style="display: block" />
+                <input type="number" name="price" id="price" v-model="newProperty.price" style="display: block" />
 
                 <v-btn
                 outlined
                 raised 
                 rounded
                 color="success"
-                v-on:click="this.createNewProperty(this.newProperty);"
+                v-on:click="addNewProperty(newProperty)"
                 >
                 Submit
                 </v-btn>
@@ -125,23 +125,18 @@ export default {
             PotentialIncomeShowing: false,
             addingNewProperty: false,
             newProperty: {
-                address: {
                     userId: this.$store.state.user.userId,
                     property_Type: '',
                     street: '',
-                    street2: '',
+                    street2: 'N/A',
                     city: '',
                     region: '',
-                    zip: 0
-                },
-                property: {
-                    userId: this.$store.state.user.userId,
+                    zip: 0,
                     bedrooms: 0,
                     bathrooms: 0,
                     photo: '',
                     description: '',
                     price: 0
-                }
             }
         }
     },
@@ -157,7 +152,7 @@ export default {
         },
         addNewProperty(newProperty) {
             LandlordService.createNewProperty(newProperty).then(response => {
-                if(response.status===201) {
+                if(response.status===204) {
                     alert("New property has successfully been added!");
                     this.resetNewProperty();
                     this.getAllProperties();
