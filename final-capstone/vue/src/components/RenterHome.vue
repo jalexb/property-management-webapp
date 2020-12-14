@@ -35,9 +35,9 @@
               class="ma-6"
               max-width="350"
               hover>
-              <v-img max-height="200" src="https://www.investopedia.com/thmb/M-we6mdLUgezNP-XsAoli0Lf070=/2121x1414/filters:fill(auto,1)/GettyImages-974812152-705d0a6d517947fb8946a3c887d528be.jpg"> </v-img>
+              <v-img max-height="200" src="https://media.istockphoto.com/vectors/gear-icon-outline-icon-business-services-technical-help-gear-support-vector-id1024061294?k=6&m=1024061294&s=612x612&w=0&h=jbvUYCFO0v99ciwU461v-YqZBnGMkDG6li6KPW09m5s="> </v-img>
               <v-card-title> 
-                User Settings - find a new picture
+                User Settings
               </v-card-title>
             </v-card>
             </router-link>
