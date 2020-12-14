@@ -46,22 +46,7 @@ namespace Capstone.Models
                 transaction.Paid = false;
                 transaction.Amount_Paid = 0;
                 transaction.Rent_Price = Rent_Price;
-
-                
-
-
-                //if(From_Date.Month == 12)
-                //{
-                //    From_Date = From_Date.AddYears(1);
-
-                //    DateTime startOfNewYear = new DateTime(From_Date.Year, 1, From_Date.Day);
-
-                //    From_Date = startOfNewYear;
-                //} 
-                //else
-                //{
-                    From_Date = From_Date.AddMonths(1);
-                //}
+                From_Date = From_Date.AddMonths(1);
                 
 
 

@@ -25,10 +25,26 @@ namespace Capstone.Models
     public class BasicRenterInformation
     {
         public int User_Id { get; set; }
-        public string FullName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public int Property_Id { get; set; }
+        public int Property_Id { get; set; } //User_Id, FirstName, LastName, FullName, Address, PhoneNumber, Email, Property_Id
+    }
+
+    public class RenterInformationWithTransactionHistory
+    {
+        public BasicRenterInformation Info { get; set; } //User_Id, FirstName, LastName, FullName, Address, PhoneNumber, Email, Property_Id
+        public List<Transaction> TransactionHistory { get; set; } //Transaction_Id, Lease_Id, Property_Id, Payment_Due_Date, Late_Fees, Paid, Amount_Paid, Rent_Price
+
     }
 }

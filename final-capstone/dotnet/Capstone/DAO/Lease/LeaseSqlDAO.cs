@@ -233,7 +233,8 @@ namespace Capstone.DAO
 
                     while (reader.Read())
                     {
-                        renterInfo.FullName = (string)reader["first_name"] + " " + (string)reader["last_name"];
+                        renterInfo.FirstName = (string)reader["first_name"];
+                        renterInfo.LastName = (string)reader["last_name"];
                         renterInfo.PhoneNumber = (string)reader["phone_number"];
                         renterInfo.Email = (string)reader["email"];
                         renterInfo.User_Id = userId;
@@ -271,6 +272,50 @@ namespace Capstone.DAO
             }
 
             return rowCount;
+        }
+
+        public Models.Lease GetAcceptedLeaseWithPropertyId(int property_id)
+        {
+            Models.Lease lease = new Models.Lease();
+
+            try 
+            { 
+                using(SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT lease_id, from_date, to_date, userId, property_id " +
+                                                    "FROM lease " +
+                                                    "WHERE property_id = @property_id " +
+                                                    "AND (current_status = 'approved' OR current_status = 'Approved')", conn);
+
+                    cmd.Parameters.AddWithValue("@property_id", property_id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+
+                        lease.Lease_Id = (int)reader["lease_id"];
+                        lease.From_Date = (DateTime)reader["from_date"];
+                        lease.To_Date = (DateTime)reader["to_date"];
+                        lease.User_Id = (int)reader["userId"];
+                        lease.Property_Id = (int)reader["property_id"];
+                    } 
+                    else
+                    {
+                        lease = null;
+                    }
+                }
+            }
+            catch(SqlException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+
+            return lease;
         }
     }
 }

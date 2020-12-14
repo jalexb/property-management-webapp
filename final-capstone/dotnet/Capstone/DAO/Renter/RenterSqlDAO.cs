@@ -71,7 +71,8 @@ namespace Capstone.DAO
 
                     while(reader.Read())
                     {
-                        renterInfo.FullName = (string)reader["first_name"] + " " + (string)reader["last_name"];
+                        renterInfo.FirstName = (string)reader["first_name"];
+                        renterInfo.LastName = (string)reader["last_name"];
                         renterInfo.PhoneNumber = (string)reader["phone_number"];
                         renterInfo.Email = (string)reader["email"];
                         renterInfo.User_Id = userId;
