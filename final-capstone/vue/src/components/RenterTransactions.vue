@@ -8,43 +8,45 @@
   class="mx-auto px-2 my-4 py-1"
   hover
   >
-    <p> <span>Due Date</span> <span>{{new Date(transaction.payment_Due_Date).toDateString()}}</span> </p>
-    <hr>
-    <p> <span>Rent Price</span> <span>${{transaction.rent_Price}}</span> </p>
-    <hr>
-    <p> <span>Late Fees</span> <span>${{transaction.late_Fees}}</span> </p>
-    <hr>
-    <p> <span>Amount Paid</span> <span>${{transaction.amount_Paid}}</span> </p>
-    <hr>
-    <p> <span>Amount Due</span> <span>${{transaction.amount_Due}}</span> </p>
-    <hr v-if="!transaction.paid">
+    <v-title><p> <span>Due Date</span> <span>{{new Date(transaction.payment_Due_Date).toDateString()}}</span> </p></v-title>
+        <div v-show="!transaction.paid">
+                <hr>
+                <p> <span>Rent Price</span> <span>${{transaction.rent_Price}}</span> </p>
+                <hr>
+                <p> <span>Late Fees</span> <span>${{transaction.late_Fees}}</span> </p>
+                <hr>
+                <p> <span>Amount Paid</span> <span>${{transaction.amount_Paid}}</span> </p>
+                <hr>
+                <p> <span>Amount Due</span> <span>${{transaction.amount_Due}}</span> </p>
+                <hr v-if="!transaction.paid">
 
-    <v-row justify="center">
-    <v-btn v-if="!transaction.paid && !onPayScreen"
-    v-on:click="onPayScreen = true" 
-    outlined
-    raised 
-    rounded
-    color="#BA3F1D">
-    Pay Now
-    </v-btn>
-    </v-row>
+                <v-row justify="center">
+                <v-btn v-if="!transaction.paid && !onPayScreen"
+                v-on:click="onPayScreen = true" 
+                outlined
+                raised 
+                rounded
+                color="#BA3F1D">
+                Pay Now
+                </v-btn>
+                </v-row>
 
-  <div v-if="onPayScreen">
-  <p>
-      <span>
-        <label for="amount">Amount: $</label>
-        <input type="number" name="amount" id="amount" v-model="amount_Paid">
-      </span>
-  <v-btn v-if="!transaction.paid && onPayScreen"
-  v-on:click="payRent(transaction.transaction_Id, transaction)"
-  outlined
-  raised 
-  rounded
-  color="#BA3F1D">Pay
-  </v-btn>
-  </p>
-  </div>
+            <div v-if="onPayScreen">
+            <p>
+                <span>
+                    <label for="amount">Amount: $</label>
+                    <input type="number" name="amount" id="amount" v-model="amount_Paid">
+                </span>
+            <v-btn v-if="!transaction.paid && onPayScreen"
+            v-on:click="payRent(transaction.transaction_Id, transaction)"
+            outlined
+            raised 
+            rounded
+            color="#BA3F1D">Pay
+            </v-btn>
+            </p>
+            </div>
+        </div>
   </v-card>
 </div>
 </template>
@@ -67,12 +69,12 @@ data () {
                     payment_Due_Date: null,
                     property_Id: 0,
                     rent_Price: 0,
-                    transaction_Id: 0
+                    transaction_Id: 0,
                 }
             }
         ],
         amount_Paid: 0,
-        onPayScreen: false
+        onPayScreen: false,
     }
 },
 created () {
@@ -106,6 +108,7 @@ methods: {
             RenterService.rentPayment(transactionId, transaction).then(response => {
                 if(response.status===200) {
                     alert("Your payment has been received!");
+                    this.onPayScreen = false;
                     this.getTransactions(this.currentUserId);
                 }
             }).catch(error => {
