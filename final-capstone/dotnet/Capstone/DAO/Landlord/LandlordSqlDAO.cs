@@ -38,7 +38,11 @@ namespace Capstone.DAO.Landlord
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT property_id, address_id, photo, price FROM properties WHERE userId = @landlord_id", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT property_id, properties.address_id, property_type, photo, street, street2, price " +
+                                                    "FROM properties " +
+                                                    "INNER JOIN address_table on address_table.address_id = properties.address_id " +
+                                                    "WHERE properties.userId = @landlord_id", conn);
+
                     cmd.Parameters.AddWithValue("@landlord_id", landlord_id);
 
                     SqlDataReader reader = cmd.ExecuteReader();

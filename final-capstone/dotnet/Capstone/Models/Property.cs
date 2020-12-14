@@ -63,6 +63,17 @@ namespace Capstone.Models
         public string Photo { get; set; }
         public string Street { get; set; }
         public string Street2 { get; set; }
+        public string City { get; set; }
+        public string Region { get; set; }
+        public string Zip { get; set; } //Street Street 2 City Region Zip
+        public string Address 
+        { 
+            get 
+            {
+                string address = $", {City}, {Region}, {Zip}";
+                return Street2 == "N/A" ? Street + address  : Street + " " + Street2 + address;
+            } 
+        }
         public decimal Price { get; set; }
     }
 

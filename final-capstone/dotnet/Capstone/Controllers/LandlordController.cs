@@ -39,7 +39,7 @@ namespace Capstone.Controllers
         {
             //PropertyId, AddressId, Property_Type, Photo, Street, Street2, Price
             List<LandlordProperty> properties = landlordDAO.GetLandlordProperties(landlord_id);
-
+            
             List<LandlordPropertyAndRenter> OccupiedProperties = new List<LandlordPropertyAndRenter>();
             List<LandlordProperty> VacantProperties = new List<LandlordProperty>();
             if (properties.Count() == 0)
