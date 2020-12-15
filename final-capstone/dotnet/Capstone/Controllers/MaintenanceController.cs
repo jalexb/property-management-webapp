@@ -31,5 +31,35 @@ namespace Capstone.Controllers
             return BadRequest();
         }
 
+        [HttpGet("maintenance/assigned/{userId}")]
+        public IActionResult GetAssignedTicketsByUserId(int userId)
+        {
+            IActionResult result = BadRequest();
+            List<TicketAndAddress> tickets = new List<TicketAndAddress>();
+
+            tickets = maintenanceDAO.GetAssignedTicketsByUserId(userId);
+
+            if(tickets != null)
+            {
+                result = Ok(tickets);
+            }
+
+            return result;
+        }
+
+        [HttpPut("maintenance/tickets/{request_Id}")]
+        public IActionResult MarkTicketCompleted(int request_Id, TicketAndAddress ticket)
+        {
+            IActionResult result = BadRequest();
+            int rowsAffected = maintenanceDAO.MarkTicketCompleted(request_Id, ticket);
+
+            if(rowsAffected > 0)
+            {
+                result = Ok();
+            }
+
+            return result;
+        }
+
     }
 }

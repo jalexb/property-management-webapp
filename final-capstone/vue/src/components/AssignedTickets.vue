@@ -64,8 +64,7 @@ created() {
 },
 methods: {
     getAssignedTickets(userId) {
-        this.tickets = maintenanceService.getAssignedTickets(userId);
-        /*maintenanceService.getAssignedTickets(userId).then(response => {
+        maintenanceService.getAssignedTickets(userId).then(response => {
             if(response.status===200) {
                 this.tickets = response.data;
             }
@@ -81,7 +80,7 @@ methods: {
                 } else {
                     alert("Error retrieving tickets. Request could not be created.");
                 }
-        });*/
+        });
     },
     markTicketComplete(request_Id, ticket) {
         maintenanceService.markTicketComplete(request_Id, ticket).then(response => {
