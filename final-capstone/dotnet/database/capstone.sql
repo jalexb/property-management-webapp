@@ -50,9 +50,6 @@ CREATE TABLE properties (
 	CONSTRAINT		FK_prop_user	FOREIGN KEY (userId)		REFERENCES users (userId)
 );
 
-
-
-
 CREATE TABLE lease (
 	lease_id		INT IDENTITY(1,1)	NOT NULL,
 	from_date		DATE,
@@ -77,15 +74,22 @@ CREATE TABLE renter_information (
 
 	CONSTRAINT		PK_renter_id		PRIMARY KEY (renter_id),
 	CONSTRAINT		FKuser_id			FOREIGN KEY (userId)		REFERENCES users (userId),
-
 	);
 
 CREATE TABLE maintenance_request (
 	request_id			INT IDENTITY(1, 1)	NOT NULL,
 	renter_id			INT					NOT NULL,
-	userId				INT	,
+	worker_id			INT,
 	request_info		VARCHAR(500)		NOT NULL,
-	property_id			INT					NOT NULL
+	property_id			INT					NOT NULL,
+	is_assigned			BIT,
+	is_fixed			BIT,
+	post_fix_report		VARCHAR(500),
+
+	CONSTRAINT		PK_request_id	PRIMARY KEY(request_id),
+	CONSTRAINT		FK_renter		FOREIGN KEY(renter_id) REFERENCES users (userId),
+	CONSTRAINT		FK_worker		FOREIGN KEY(worker_id) REFERENCES users (userId),
+	CONSTRAINT		FK_property		FOREIGN KEY(property_id) REFERENCES properties (property_id)
 );
 
 CREATE TABLE transactions (
