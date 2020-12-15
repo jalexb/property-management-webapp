@@ -15,7 +15,7 @@
               hover>
                 <v-img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg"> </v-img>
                 <v-card-title> 
-                  Add Available Properties
+                  View and Add Properties
                 </v-card-title>
               </v-card>
             </router-link>
