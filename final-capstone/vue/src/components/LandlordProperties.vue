@@ -38,15 +38,6 @@
             <v-card-title @click="VacantShowing = !VacantShowing">Vacant Properties</v-card-title>
             <v-slide-group
             v-show="VacantShowing">
-                    <v-btn
-                    outlined
-                    raised 
-                    rounded
-                    color="#BA3F1D"
-                    v-on:click="addingNewProperty=true"
-                    >
-                    Add New Property
-                    </v-btn>
                     <v-card
                     v-for="vacantProperty in properties.vacantProperties"
                     :key="vacantProperty.addressId"
@@ -63,50 +54,58 @@
                     </v-card>
             </v-slide-group>
             </v-card>
-
-            <v-form v-show="addingNewProperty">
-                <label for="property-type">Property Type: </label>
-                <input type="text" name="property-type" id="property-type" v-model="newProperty.property_Type" style="display: block" />
-                <label for="street">Street: </label>
-                <input type="text" name="street" id="street" v-model="newProperty.street" style="display: block" />
-                <label for="street2">Street2: </label>
-                <input type="text" name="street2" id="street2" v-model="newProperty.street2" style="display: block" />
-                <label for="city">City: </label>
-                <input type="text" name="city" id="city" v-model="newProperty.city" style="display: block" />
-                <label for="region">Region: </label>
-                <input type="text" name="region" id="region" v-model="newProperty.region" style="display: block" />
-                <label for="zip">Zip: </label>
-                <input type="number" name="zip" id="zip" v-model="newProperty.zip" style="display: block" />
-                <label for="bedrooms">Bedrooms: </label>
-                <input type="number" name="bedrooms" id="bedrooms" v-model="newProperty.bedrooms" style="display: block" />
-                <label for="bathrooms">Bathrooms: </label>
-                <input type="number" name="bathrooms" id="bathrooms" v-model="newProperty.bathrooms" style="display: block" />
-                <label for="photo">Link to Photo: </label>
-                <input type="text" name="photo" id="photo" v-model="newProperty.photo" style="display: block" />
-                <label for="description">Description: </label>
-                <input type="text" name="description" id="description" v-model="newProperty.description" style="display: block" />
-                <label for="price">Price: </label>
-                <input type="number" name="price" id="price" v-model="newProperty.price" style="display: block" />
-
-                <v-btn
-                outlined
-                raised 
-                rounded
-                color="success"
-                v-on:click="addNewProperty(newProperty)"
+            <v-card>
+            <v-card-title @click="addingNewProperty = !addingNewProperty">Add New Property</v-card-title>
+                <v-card
+                v-show="addingNewProperty"
                 >
-                Submit
-                </v-btn>
-                <v-btn
-                outlined
-                raised 
-                rounded
-                color="warning"
-                v-on:click="addingNewProperty=false"
-                >
-                Cancel
-                </v-btn>
-            </v-form>
+                    <v-form v-show="addingNewProperty">
+                    <label for="property-type">Property Type: </label>
+                    <input type="text" name="property-type" id="property-type" v-model="newProperty.property_Type" style="display: block" />
+                    <label for="street">Street: </label>
+                    <input type="text" name="street" id="street" v-model="newProperty.street" style="display: block" />
+                    <label for="street2">Street2: </label>
+                    <input type="text" name="street2" id="street2" v-model="newProperty.street2" style="display: block" />
+                    <label for="city">City: </label>
+                    <input type="text" name="city" id="city" v-model="newProperty.city" style="display: block" />
+                    <label for="region">Region: </label>
+                    <input type="text" name="region" id="region" v-model="newProperty.region" style="display: block" />
+                    <label for="zip">Zip: </label>
+                    <input type="number" name="zip" id="zip" v-model="newProperty.zip" style="display: block" />
+                    <label for="bedrooms">Bedrooms: </label>
+                    <input type="number" name="bedrooms" id="bedrooms" v-model="newProperty.bedrooms" style="display: block" />
+                    <label for="bathrooms">Bathrooms: </label>
+                    <input type="number" name="bathrooms" id="bathrooms" v-model="newProperty.bathrooms" style="display: block" />
+                    <label for="photo">Link to Photo: </label>
+                    <input type="text" name="photo" id="photo" v-model="newProperty.photo" style="display: block" />
+                    <label for="description">Description: </label>
+                    <input type="text" name="description" id="description" v-model="newProperty.description" style="display: block" />
+                    <label for="price">Price: </label>
+                    <input type="number" name="price" id="price" v-model="newProperty.price" style="display: block" />
+
+                    <v-btn
+                    outlined
+                    raised 
+                    rounded
+                    color="success"
+                    v-on:click="addNewProperty(newProperty)"
+                    class="mx-2 my-2"
+                    >
+                    Submit
+                    </v-btn>
+                    <v-btn
+                    outlined
+                    raised 
+                    rounded
+                    color="warning"
+                    v-on:click="addingNewProperty=false"
+                    class="mx-2 my-2"
+                    >
+                    Cancel
+                    </v-btn>
+                </v-form>
+                </v-card>
+        </v-card>
         </v-card>
   </div>
 </template>
@@ -201,5 +200,13 @@ p {
     margin: 5px 0 5px 0;
     display: flex;
     justify-content: space-between;
+}
+
+input {
+    margin: 5px 0 10px 20px;
+}
+
+label {
+    margin: 5px 0 0 20px;
 }
 </style>
