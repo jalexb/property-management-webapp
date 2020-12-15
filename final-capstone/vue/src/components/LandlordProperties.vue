@@ -1,7 +1,10 @@
 <template>
   <div>
-      <p>Hello</p>
-      <v-card>
+      <h1>Manage Properties</h1>
+      <v-card
+      max-width="1170"
+      class="ma-auto"
+      >
         <v-card-title>Revenue Statistics</v-card-title>
         <v-card>
             <v-card-title @click="CurrentIncomeShowing = !CurrentIncomeShowing">Current Income</v-card-title>
@@ -209,4 +212,5 @@ input {
 label {
     margin: 5px 0 0 20px;
 }
+
 </style>
