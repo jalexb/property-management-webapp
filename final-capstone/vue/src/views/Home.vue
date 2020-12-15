@@ -12,13 +12,18 @@
       <h1>Landlord Services</h1>
       <landlord-home />
     </div>
+    <div v-if="userRole == 'maintenance'">
+      <h1>Assigned Tickets</h1>
+      <assigned-tickets />
+    </div>
   </div>
 </template>
 
 <script>
 import LandlordHome from '../components/LandlordHome.vue';
 import RenterHome from "../components/RenterHome.vue";
-import PropertyList from "../components/PropertyList.vue"
+import PropertyList from "../components/PropertyList.vue";
+import AssignedTickets from '../components/AssignedTickets.vue';
 
 export default {
   data() {
@@ -30,7 +35,8 @@ export default {
   components: {
     PropertyList,
     RenterHome,
-    LandlordHome
+    LandlordHome,
+    AssignedTickets
   },
 };
 </script>
