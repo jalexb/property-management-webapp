@@ -1,4 +1,4 @@
-<template>
+      <template>
 <div style="width: 80%; margin-left: 10%; text-align: center;">
   <h1>Pending Leases</h1>
   <v-flex>
@@ -90,7 +90,7 @@ export default {
     },
     //approve lease
     approveLease(data) {
-      LandlordService.approveLease(data.lease.lease_Id).then(response => {
+      LandlordService.approveLease(data.lease.lease_Id, data.renterInfo.user_Id).then(response => {
         if(response.status === 204) {
           alert('Accepted');
           

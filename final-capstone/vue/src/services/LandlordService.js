@@ -6,11 +6,11 @@ const http = axios.create({
 
 export default {
     //get pending leases
-    getPendingLeases(landlordId) {
+    getLeases(landlordId) {
       return http.get('/leases/' + landlordId)
     },
-    approveLease(leaseId) {
-      return http.post('lease/approve/' + leaseId);
+    approveLease(leaseId, user_id) {
+      return http.post('lease/approve/' + leaseId + '/' + user_id);
     },
     rejectLease(leaseId) {
       return http.post('lease/reject/' + leaseId);

@@ -100,8 +100,8 @@ namespace Capstone.Controllers
 
         }
 
-        [HttpPost("/lease/approve/{lease_id}")]
-        public IActionResult ApproveLease(int lease_id, [FromBody]int user_id)
+        [HttpPost("/lease/approve/{lease_id}/{user_id}")]
+        public IActionResult ApproveLease(int lease_id, int user_id)
         {
             IActionResult result = BadRequest();
             int rowsAffected = _leaseDAO.ApprovePendingLease(lease_id);

@@ -140,7 +140,7 @@ namespace Capstone.DAO
                         lease.From_Date = (DateTime)reader["from_date"];
                         lease.To_Date = (DateTime)reader["to_date"];
                         lease.User_Id = (int)reader["lease_id"];
-                        lease.Property_Id = (int)reader["lease_id"];
+                        lease.Property_Id = (int)reader["property_id"];
                         lease.Lease_Id = (int)reader["lease_id"];
                         lease.Lease_Type = (string)reader["current_status"];
                     } 
@@ -268,7 +268,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("UPDATE lease SET current_status = 'rejected' WHERE (property_id = @property_id XOR user_id = '@user_id');", conn);
+                    SqlCommand cmd = new SqlCommand("UPDATE lease SET current_status = 'rejected' WHERE ((property_id = @property_id AND NOT userId = @user_id) AND current_status != 'approved');", conn);
                     cmd.Parameters.AddWithValue("@property_id", property_id);
                     cmd.Parameters.AddWithValue("@user_id", user_id);
 
