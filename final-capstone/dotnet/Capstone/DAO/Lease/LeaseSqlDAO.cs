@@ -63,7 +63,11 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@userId", userId);
                     cmd.Parameters.AddWithValue("@property_id", property_id);
 
+<<<<<<< HEAD
                     int? id = (int?)cmd.ExecuteScalar();
+=======
+                    result = (int?)cmd.ExecuteScalar() == userId ? true : false;
+>>>>>>> ad810dfaa718ea606fa78fe17318aec1539d57d9
 
                     if(id != null)
                     {
