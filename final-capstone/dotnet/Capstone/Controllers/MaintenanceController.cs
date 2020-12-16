@@ -21,11 +21,24 @@ namespace Capstone.Controllers
 
         //add maintenance ticker to maintenance_request table (Renter_Id, UserId, Request_Info, Property_Id)
         [HttpPost("submit/ticket")]
-        public IActionResult AddMaintenanceTicket([FromBody] MaintenanceTicket ticket)
+        public IActionResult AddMaintenanceTicket([FromBody] MaintenanceTicketRequest ticket)
         {
-            int rowsAffected = maintenanceDAO.AddMaintenanceTicket(ticket);
+            bool result = maintenanceService.AddMaintenanceTicket(ticket);
 
-            if(rowsAffected == 1)
+            if(result)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPut("maintenance/assign")]
+        public IActionResult AssignMaintenanceTicket([FromBody] MaintenanceTicketRequest ticket)
+        {
+            bool result = maintenanceService.AssignMaintenanceTicket(ticket);
+
+            if (result)
             {
                 return Ok();
             }

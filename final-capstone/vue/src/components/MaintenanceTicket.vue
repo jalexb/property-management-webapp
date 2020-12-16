@@ -70,6 +70,7 @@ git
 
 <script>
 import RenterService from "@/services/RenterService";
+import MaintenanceService from "@/services/MaintenanceService.js"
 
 export default {
   name: "maintenance-ticket",
@@ -81,15 +82,35 @@ export default {
       propertyId: 0,
 
       ticket: {
-        Request_Info: "",
-        UserId: null,
+        "requestId": 0,
+        "renterId": 0,
+        "workerId": null,
+        "requestInfo": null,
+        "propertyId": 0,
+        "isAssigned": null,
+        "isFixed": null,
+        "postFixReport": null
       },
       submitted: true,
     };
   },
   methods: {
     myFilter: function(){
+      this.ticket.renterId=this.$store.state.user.userId;
+      this.ticket.propertyId=this.User.property_Id;
+      MaintenanceService.submitTicket(this.ticket).then(response=>{
+        if (response.status === 200){
       this.submitted = !this.submitted;
+        }
+        else {
+          alert('Error submitting maintenance ticket');
+        }
+      })
+      .catch(error =>{
+        console.log(error);
+        alert('Error submitting ticket');
+      })
+      
     },
 
     populateTicket() {
