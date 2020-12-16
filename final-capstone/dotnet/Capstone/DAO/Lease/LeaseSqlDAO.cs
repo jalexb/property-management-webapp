@@ -59,11 +59,11 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT userId FROM lease WHERE userId = @userId AND property_id = @property_id");
+                    SqlCommand cmd = new SqlCommand("SELECT userId FROM lease WHERE userId = @userId AND property_id = @property_id", conn);
                     cmd.Parameters.AddWithValue("@userId", userId);
                     cmd.Parameters.AddWithValue("@property_id", property_id);
 
-                    result = (int)cmd.ExecuteScalar() == userId ? true : false;
+                    result = (int?)cmd.ExecuteScalar() == userId ? true : false;
 
                 }
             }
