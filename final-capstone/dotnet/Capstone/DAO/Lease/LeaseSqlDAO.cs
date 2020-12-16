@@ -63,16 +63,7 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@userId", userId);
                     cmd.Parameters.AddWithValue("@property_id", property_id);
 
-<<<<<<< HEAD
-                    int? id = (int?)cmd.ExecuteScalar();
-=======
                     result = (int?)cmd.ExecuteScalar() == userId ? true : false;
->>>>>>> ad810dfaa718ea606fa78fe17318aec1539d57d9
-
-                    if(id != null)
-                    {
-                        result = true;
-                    }
                 }
             }
             catch (SqlException e)
@@ -92,7 +83,7 @@ namespace Capstone.DAO
 
             try
             {
-                using(SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
@@ -105,7 +96,7 @@ namespace Capstone.DAO
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    while(reader.Read())
+                    while (reader.Read())
                     {
                         Models.Lease lease = new Models.Lease();
                         lease.Lease_Id = (int)reader["lease_id"];
@@ -120,7 +111,7 @@ namespace Capstone.DAO
                 }
             }
 
-            catch(SqlException e)
+            catch (SqlException e)
             {
                 Console.WriteLine(e);
             }
@@ -255,6 +246,31 @@ namespace Capstone.DAO
 
                     SqlCommand cmd = new SqlCommand("UPDATE lease SET current_status = 'rejected' WHERE property_id = @property_id AND current_status = 'pending';", conn);
                     cmd.Parameters.AddWithValue("@property_id", property_id);
+
+
+                    rowCount = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return rowCount;
+        }
+
+        public int RejectPendingLeasesWithPropertyId(int property_id, int user_id)
+        {
+            int rowCount = 0;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("UPDATE lease SET current_status = 'rejected' WHERE (property_id = @property_id XOR user_id = '@user_id');", conn);
+                    cmd.Parameters.AddWithValue("@property_id", property_id);
+                    cmd.Parameters.AddWithValue("@user_id", user_id);
 
 
                     rowCount = cmd.ExecuteNonQuery();

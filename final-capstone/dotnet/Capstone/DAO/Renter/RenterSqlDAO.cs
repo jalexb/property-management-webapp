@@ -57,7 +57,7 @@ namespace Capstone.DAO
 
             try
             {
-                using(SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
@@ -66,7 +66,7 @@ namespace Capstone.DAO
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    while(reader.Read())
+                    while (reader.Read())
                     {
                         renterInfo.FirstName = (string)reader["first_name"];
                         renterInfo.LastName = (string)reader["last_name"];
@@ -95,7 +95,7 @@ namespace Capstone.DAO
             int zip;
             try
             {
-                using(SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
@@ -104,7 +104,7 @@ namespace Capstone.DAO
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    while(reader.Read())
+                    while (reader.Read())
                     {
                         street = (string)reader["street"];
                         street2 = (string)reader["street2"] == "N/A" ? "" : (string)reader["street2"];
@@ -129,7 +129,7 @@ namespace Capstone.DAO
             int propertyId = 0;
             try
             {
-                using(SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
@@ -140,7 +140,7 @@ namespace Capstone.DAO
                 }
 
             }
-            catch(SqlException e)
+            catch (SqlException e)
             {
                 Console.WriteLine(e);
             }
@@ -153,7 +153,7 @@ namespace Capstone.DAO
 
             try
             {
-                using(SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 

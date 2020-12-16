@@ -14,18 +14,17 @@ namespace Capstone.Models
 
     public class AllLandlordProperties
     {
-        public List<LandlordPropertyAndRenter> OccupiedProperties { get; set; }
+        public List<LandlordAndPropertyInfoWithTransactionHistory> OccupiedProperties { get; set; }
         public List<LandlordProperty> VacantProperties { get; set; }
         public decimal OccupiedRentSum
         {
             get
             {
                 decimal rentSum = 0;
-                foreach(LandlordPropertyAndRenter property in OccupiedProperties)
+                foreach (LandlordAndPropertyInfoWithTransactionHistory property in OccupiedProperties)
                 {
                     rentSum += property.Property.Price;
                 }
-
 
                 return rentSum;
             }

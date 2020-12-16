@@ -9,7 +9,7 @@
     <div class="description">
     <p>{{ property.description }}</p>
     </div>
-    <div v-if="userRole==='user'" class="button">
+    <div v-if="userRole==='user' && !userHasLease" class="button">
     <router-link :to="{path: '/lease-form/' + this.property.propertyId}">
     <v-btn
             outlined
@@ -57,7 +57,9 @@ export default {
         street: "",
         street2: "",
         zip: ""
-      }
+      },
+
+      userHasLease: true,
     }
   },
 
@@ -85,10 +87,11 @@ export default {
   },
   methods: {
     checkIfUserAppliedForThisProperty() {
-      propertyService.checkIfUserAppliedForProperty(this.property.addressId, this.$store.state.user.userId)
+      propertyService.checkIfUserAppliedForProperty(this.$route.params.id, this.$store.state.user.userId)
       .then(response => {
-        console.log(response.data);
-
+        if(response.status === 200) {
+          this.userHasLease = response.data;
+        }
       })
     }
   }

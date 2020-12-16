@@ -12,7 +12,7 @@ namespace Capstone.DAO
         int ApprovePendingLease(int lease_id);
         Models.Lease GetLease(int lease_id);
         int RejectPendingLease(int lease_id);
-        int RejectPendingLeasesWithPropertyId(int property_id);
+        int RejectPendingLeasesWithPropertyId(int property_id, int user_id);
         List<Models.Lease> GetLandlordLeases(int landlord_id);
         bool CheckIfUserAppliedForThisProperty(int userId, int property_id);
         Models.Lease GetAcceptedLeaseWithPropertyId(int property_id);
