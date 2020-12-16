@@ -70,7 +70,7 @@ namespace Capstone.Models
         { 
             get 
             {
-                string address = $", {City}, {Region}, {Zip}";
+                string address = $", {City} {Region}, {Zip}";
                 return Street2 == "N/A" ? Street + address  : Street + " " + Street2 + address;
             } 
         }

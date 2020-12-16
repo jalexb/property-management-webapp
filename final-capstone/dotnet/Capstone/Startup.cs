@@ -79,7 +79,7 @@ namespace Capstone
             services.AddTransient<IMaintenanceDAO>(m => new MaintenanceSqlDAO(connectionString));
             services.AddScoped<ILeaseService, LeaseService>();
             services.AddScoped<IRenterService, RenterService>();
-
+            services.AddScoped<IMaintenanceService, MaintenanceService>();
             services.AddAutoMapper(typeof(Startup));
         }
 

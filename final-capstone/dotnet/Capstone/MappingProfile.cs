@@ -17,6 +17,7 @@ namespace Capstone
             CreateMap<LeaseRequest, Entities.Lease>();
             CreateMap<Entities.Lease, LeaseResponse>();
             CreateMap<Entities.Properties, PropertiesResponse>();
+            CreateMap<Entities.MaintenanceRequest, MaintenanceResponse>();
         }
     }
 }

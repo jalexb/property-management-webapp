@@ -12,9 +12,11 @@ namespace Capstone.Controllers
     {
 
         private readonly IMaintenanceDAO maintenanceDAO;
-        public MaintenanceController(IMaintenanceDAO _maintenanceDAO)
+        private readonly IMaintenanceService maintenanceService;
+        public MaintenanceController(IMaintenanceDAO _maintenanceDAO, IMaintenanceService _maintenanceService)
         {
             maintenanceDAO = _maintenanceDAO;
+            maintenanceService = _maintenanceService;
         }
 
         //add maintenance ticker to maintenance_request table (Renter_Id, UserId, Request_Info, Property_Id)
@@ -40,6 +42,20 @@ namespace Capstone.Controllers
             tickets = maintenanceDAO.GetAssignedTicketsByUserId(userId);
 
             if(tickets != null)
+            {
+                result = Ok(tickets);
+            }
+
+            return result;
+        }
+
+        [HttpGet("maintenance/unassigned")]
+        public IActionResult GetUnassignedTickets()
+        {
+            IActionResult result = BadRequest();
+            var tickets = maintenanceService.GetUnassignedMaintenanceTickets();
+
+            if (tickets != null)
             {
                 result = Ok(tickets);
             }

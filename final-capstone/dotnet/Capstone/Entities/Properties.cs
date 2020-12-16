@@ -8,6 +8,7 @@ namespace Capstone.Entities
         public Properties()
         {
             Lease = new HashSet<Lease>();
+            MaintenanceRequest = new HashSet<MaintenanceRequest>();
             Transactions = new HashSet<Transactions>();
         }
 
@@ -23,6 +24,7 @@ namespace Capstone.Entities
         public virtual AddressTable Address { get; set; }
         public virtual Users User { get; set; }
         public virtual ICollection<Lease> Lease { get; set; }
+        public virtual ICollection<MaintenanceRequest> MaintenanceRequest { get; set; }
         public virtual ICollection<Transactions> Transactions { get; set; }
     }
 }

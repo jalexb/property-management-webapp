@@ -17,12 +17,11 @@ namespace Capstone.Entities
 
         public virtual DbSet<AddressTable> AddressTable { get; set; }
         public virtual DbSet<Lease> Lease { get; set; }
+        public virtual DbSet<MaintenanceRequest> MaintenanceRequest { get; set; }
         public virtual DbSet<Properties> Properties { get; set; }
         public virtual DbSet<RenterInformation> RenterInformation { get; set; }
         public virtual DbSet<Transactions> Transactions { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-
-        // Unable to generate entity type for table 'dbo.maintenance_request'. Please see the warning messages.
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -122,6 +121,54 @@ namespace Capstone.Entities
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_userId_user");
+            });
+
+            modelBuilder.Entity<MaintenanceRequest>(entity =>
+            {
+                entity.HasKey(e => e.RequestId)
+                    .HasName("PK_request_id");
+
+                entity.ToTable("maintenance_request");
+
+                entity.Property(e => e.RequestId).HasColumnName("request_id");
+
+                entity.Property(e => e.IsAssigned).HasColumnName("is_assigned");
+
+                entity.Property(e => e.IsFixed).HasColumnName("is_fixed");
+
+                entity.Property(e => e.PostFixReport)
+                    .HasColumnName("post_fix_report")
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PropertyId).HasColumnName("property_id");
+
+                entity.Property(e => e.RenterId).HasColumnName("renter_id");
+
+                entity.Property(e => e.RequestInfo)
+                    .IsRequired()
+                    .HasColumnName("request_info")
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.WorkerId).HasColumnName("worker_id");
+
+                entity.HasOne(d => d.Property)
+                    .WithMany(p => p.MaintenanceRequest)
+                    .HasForeignKey(d => d.PropertyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_propertyId");
+
+                entity.HasOne(d => d.Renter)
+                    .WithMany(p => p.MaintenanceRequestRenter)
+                    .HasForeignKey(d => d.RenterId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_renter");
+
+                entity.HasOne(d => d.Worker)
+                    .WithMany(p => p.MaintenanceRequestWorker)
+                    .HasForeignKey(d => d.WorkerId)
+                    .HasConstraintName("FK_worker");
             });
 
             modelBuilder.Entity<Properties>(entity =>
