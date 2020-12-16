@@ -60,7 +60,12 @@ namespace Capstone.Controllers
         [HttpPut("{transactionId}")]
         public IActionResult PayRent(int transactionId, Transaction transaction)
         {
-            IActionResult result = BadRequest();
+            IActionResult result = NotFound();
+            if(transaction.Amount_Due < 0)
+            {
+                return BadRequest();
+            }
+
             int rowsAffected;
             
             if(transaction.Amount_Paid > 0)

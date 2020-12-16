@@ -103,7 +103,7 @@ methods: {
     payRent(transactionId, transaction) {
         if(this.amount_Paid > 0) {
             let payment_Due_Date = new Date(transaction.payment_Due_Date).toISOString();
-            transaction.amount_Paid = parseInt(this.amount_Paid);
+            transaction.amount_Paid += parseInt(this.amount_Paid);
             transaction.payment_Due_Date = payment_Due_Date.substring(0, 10);
             RenterService.rentPayment(transactionId, transaction).then(response => {
                 if(response.status===200) {
@@ -112,12 +112,18 @@ methods: {
                     this.getTransactions(this.currentUserId);
                 }
             }).catch(error => {
+                transaction.amount_Paid -= this.amount_Paid;
                 if (error.response) {
+                    if (error.response.status===400) {
+                    alert("The attempted payment is more than what is owed.");
+                    }
+                    else {
                     alert(
                     "Error making payment. Response from server was " +
                      error.response.statusText +
                      "."
             );
+                    }
                 } else if (error.request) {
                 alert("Error making payment. Could not connect to server.");
                 } else {
