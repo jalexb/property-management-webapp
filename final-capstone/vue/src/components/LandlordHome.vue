@@ -24,11 +24,13 @@
               max-width="400"
               hover>
               <!--<router-link :to="{ name: 'property-details', params: {id: property.propertyId} }">-->
+              <router-link :to="{ name: 'landlord-assign-tickets' }">
               <v-img src="https://static6.depositphotos.com/1155356/651/i/600/depositphotos_6516733-stock-photo-air-conditioning-repair.jpg"> </v-img>
               <v-card-title> 
                 Assign Maintenance Tickets
               </v-card-title>
-              <!--</router-link>-->
+              <!--</router-link>-->	
+              </router-link>
             </v-card>
             <v-card
               class="ma-6"

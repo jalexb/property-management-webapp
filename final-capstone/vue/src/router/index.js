@@ -13,6 +13,7 @@ import PendingLeases from '../components/PendingLeases.vue'
 import RenterSettings from '../views/RenterSettings.vue'
 import CompletedApplications from '../views/CompletedApplications.vue'
 import LandlordProperties from '@/views/LandlordProperties'
+import UnassignedTickets from '@/views/UnassignedTickets.vue'
 
 Vue.use(Router)
 
@@ -109,7 +110,13 @@ const router = new Router({
       path: "/landlord/properties",
       name: "landlord-properties",
       component: LandlordProperties
-    }
+    },	  
+    // added in path for assigning tickets to workers
+        {
+          path: "/landlord/assign-tickets",
+          name: "landlord-assign-tickets",
+          component: UnassignedTickets
+        }
   ]
 })
 
