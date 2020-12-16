@@ -121,7 +121,7 @@ namespace Capstone.DAO.Maintenance
 
                 ticket.Request_Id = (int)reader["request_id"];
                 ticket.Renter_Id = (int)reader["renter_id"];
-                ticket.UserId = (int)reader["worker_id"];
+                ticket.Worker_Id = (int)reader["worker_id"];
                 ticket.Request_Info = (string)reader["request_info"];
                 ticket.Property_Id = (int)reader["property_id"];
                 ticket.Is_Assigned = (bool)reader["is_assigned"];
