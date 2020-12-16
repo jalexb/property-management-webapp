@@ -55,7 +55,7 @@ git
         </v-text-field>
 
         <v-textarea
-          v-model="ticket.Request_Info"
+          v-model="ticket.requestInfo"
           label="Maintenance Description"
         >
         </v-textarea>
