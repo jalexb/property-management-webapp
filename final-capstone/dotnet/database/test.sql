@@ -10,14 +10,14 @@ SELECT * FROM properties WHERE userId = 5
 
 SELECT * FROM lease
 
+UPDATE lease SET current_status = 'pending' WHERE userId = 6
+
+
 SELECT lease_id, from_date, to_date, userId, property_id FROM lease WHERE property_id = 2 AND (current_status = 'approved' OR current_status = 'Approved') 
 
 BEGIN TRANSACTION
 
-INSERT INTO properties
-(userId, address_id, bedrooms, bathrooms, photo, prop_desc, price)
-VALUES
-(5, 1, 0, 3, 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg', 'Lovely home just a few minutes away from the shore. With three bedrooms and two bathrooms it is sure to have plenty of space and amenities.', 2200);
+UPDATE lease SET current_status = 'rejected' WHERE ((property_id = 3 AND NOT userId = 6 AND current_status != ('approved')) OR (userId = 6 AND NOT property_id = 3 AND current_status != ('approved')));
 ROLLBACK TRANSACTION
 
 SELECT transaction_id,transactions.lease_id, transactions.property_id, payment_due_date, late_fees, paid, amount_paid, lease.userId, properties.price 

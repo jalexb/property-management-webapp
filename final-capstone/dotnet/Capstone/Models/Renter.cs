@@ -38,7 +38,7 @@ namespace Capstone.Models
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public int Property_Id { get; set; } //User_Id, FirstName, LastName, FullName, Address, PhoneNumber, Email, Property_Id
+        public int? Property_Id { get; set; } //User_Id, FirstName, LastName, FullName, Address, PhoneNumber, Email, Property_Id
     }
 
     public class RenterInformationWithTransactionHistory

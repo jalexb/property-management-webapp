@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="valid">
+  <v-form v-model="valid" v-on:submit.prevent="saveApplication()">
     <div class="field">
       <h1>Lease Application</h1>
     </div>
@@ -118,7 +118,10 @@ export default {
         leaseType: null,
         salary: 0.0,
       },
+      gotRenterInformation: false,
     };
+
+    
   },
   created() {
     this.pendingLease.propertyId = parseInt(this.$route.params.id);
@@ -152,19 +155,19 @@ export default {
       return RenterService.getUsersRenterInformation(
         this.$store.state.user.userId
       ).then((response) => {
-        this.renter = response.data;
-        let firstAndLast = response.data.fullName.split(" ");
-        this.renter.firstName = firstAndLast[0];
-        this.renter.lastName = firstAndLast[1];
+        if(response.status == 200) {
+          this.renter = response.data;
+          this.gotRenterInformation = true;
+        }
       });
     },
     saveRenter() {
-      this.renter.user_Id = this.$store.state.user.userId;
-      RenterService.saveRenter(this.renter)
+      if(!this.gotRenterInformation) {
+        this.renter.user_Id = this.$store.state.user.userId;
+        RenterService.saveRenter(this.renter)
         .then((response) => {
           if (response.status == 200) {
             alert("Renter information has been saved");
-            this.$router.push("/");
           } else {
             alert("There was problem saving the Renter information, not saved");
           }
@@ -173,6 +176,7 @@ export default {
           console.log(error);
           alert("There was a problem with the renter info, not saved!");
         });
+      }
     },
     saveApplication() {
       this.pendingLease.userId = this.$store.state.user.userId;
@@ -181,6 +185,7 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             this.saveRenter();
+            this.$router.push("/");
             alert("Application has been saved");
           } else {
             alert("There was a problem with the application, not saved!");

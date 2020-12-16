@@ -12,6 +12,9 @@
       </div>
 
       <v-spacer></v-spacer>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <div v-if="this.$store.state.user.role === 'admin'">
         <router-link v-bind:to="{name: 'completed-applications'}">
           <v-btn
@@ -26,6 +29,13 @@
       </div>
 
       <v-spacer></v-spacer>
+      <h4 v-if="this.$store.state.token != ''">
+        Hello, {{this.$store.state.user.username}}! &nbsp; Your Role: {{this.$store.state.user.role}}
+      </h4>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+
       <div v-if="this.$store.state.token === ''">
         <router-link v-bind:to="{name: 'login'}">
           <v-btn
@@ -49,7 +59,6 @@
           </v-btn>
         </router-link>
       </div>
-
     </v-app-bar>
 </template>
 
@@ -64,6 +73,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

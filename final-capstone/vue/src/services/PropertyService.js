@@ -18,6 +18,6 @@ export default {
     },
 
     checkIfUserAppliedForProperty(property_id, user_Id) {
-        return http.post('/lease/' + user_Id, property_id);
+        return http.post(`lease/${user_Id}/${property_id}`);
     }
 }

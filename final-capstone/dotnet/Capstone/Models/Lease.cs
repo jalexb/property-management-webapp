@@ -21,10 +21,10 @@ namespace Capstone.Models
     }
 
 
-    public class PendingLeaseAndRenterInformation
+    public class LeaseAndRenterInformation
     {
-        public Lease Pending_Lease { get; set; }
-        public BasicRenterInformation Renter_Info { get; set; }
+        public Lease Lease { get; set; }
+        public BasicRenterInformation RenterInfo { get; set; }
     }
 
     public class Lease

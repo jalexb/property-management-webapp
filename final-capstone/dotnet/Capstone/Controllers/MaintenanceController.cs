@@ -76,11 +76,11 @@ namespace Capstone.Controllers
             return result;
         }
 
-        [HttpPut("maintenance/tickets/{request_Id}")]
-        public IActionResult MarkTicketCompleted(int request_Id, TicketAndAddress ticket)
+        [HttpPut("maintenance/tickets/{id}")]
+        public IActionResult MarkTicketCompleted(int id, [FromBody] TicketAndAddress ticket)
         {
             IActionResult result = BadRequest();
-            int rowsAffected = maintenanceDAO.MarkTicketCompleted(request_Id, ticket);
+            int rowsAffected = maintenanceDAO.MarkTicketCompleted(id, ticket);
 
             if(rowsAffected > 0)
             {

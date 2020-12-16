@@ -83,6 +83,7 @@ methods: {
         });
     },
     markTicketComplete(request_Id, ticket) {
+        console.log(ticket);
         maintenanceService.markTicketComplete(request_Id, ticket).then(response => {
             if(response.status===200) {
                 ticket.is_Fixed = true;

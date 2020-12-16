@@ -19,7 +19,7 @@ namespace Capstone.Controllers
         private readonly ILeaseDAO _leaseDAO;
         private readonly ILeaseService _leaseService;
         private readonly IRenterDAO _renterDAO;
-        public LeaseController(ILeaseDAO leaseDAO, ILeaseService leaseService, IRenterDAO renterDAO, IPropertyDAO propertyDAO)
+        public LeaseController(ILeaseDAO leaseDAO, ILeaseService leaseService, IRenterDAO renterDAO)
         {
             _leaseDAO = leaseDAO;
             _leaseService = leaseService;
@@ -51,20 +51,11 @@ namespace Capstone.Controllers
 
             return Ok(leaseResponses);
         }
-        [HttpPost("{property_id}/{user_id}")]
+        [HttpPost("{user_id}/{property_id}")]
         public IActionResult HasUserAppliedForLease(int user_id, int property_id)
         {
             bool result = _leaseDAO.CheckIfUserAppliedForThisProperty(user_id, property_id);
-
-            if(result == true)
-            {
-                return Ok(true);
-            }
-
-            return Ok(false);
-
-
-
+            return Ok(result);
         }
 
         [HttpGet]
@@ -81,21 +72,20 @@ namespace Capstone.Controllers
         {
             List<Lease> leases = _leaseDAO.GetLandlordLeases(landlord_id);
             IActionResult result = BadRequest();
-
-            if(leases != null)
+            if (leases != null)
             {
                 List<LeaseAndRenterInformation> leaseAndRenterInfoList = new List<LeaseAndRenterInformation>();
-                foreach(Lease lease in leases)
+                foreach (Lease lease in leases)
                 {
                     BasicRenterInformation RenterInfo = _renterDAO.GetRenterInformation(lease.User_Id);
-                    if (RenterInfo == null) 
+                    if (RenterInfo == null)
                         return BadRequest();
-                    
+
                     RenterInfo.Address = _renterDAO.GetRenterAddress(lease.Property_Id);
-                   
-                    if (RenterInfo.Address == null) 
+
+                    if (RenterInfo.Address == null)
                         return BadRequest();
-                    
+
                     LeaseAndRenterInformation leaseAndRenterInfo = new LeaseAndRenterInformation();
 
                     leaseAndRenterInfo.Lease = lease;
@@ -107,20 +97,20 @@ namespace Capstone.Controllers
             }
 
             return result;
-            
+
         }
 
-        [HttpPost("/lease/approve/{lease_id}")]
-        public IActionResult ApproveLease(int lease_id)
+        [HttpPost("/lease/approve/{lease_id}/{user_id}")]
+        public IActionResult ApproveLease(int lease_id, int user_id)
         {
             IActionResult result = BadRequest();
             int rowsAffected = _leaseDAO.ApprovePendingLease(lease_id);
-            if(rowsAffected == 1)
+            if (rowsAffected == 1)
             {
                 int? property_id = GetPropertyIdFromLeaseId(lease_id);
-                if(property_id != null)
+                if (property_id != null)
                 {
-                    RejectPendingLeasesWithPropertyId((int)property_id); //reject other leases with the same user Id when a lease is approved
+                    RejectPendingLeasesWithPropertyId((int)property_id, user_id); //reject other leases with the same user Id when a lease is approved
                 }
                 result = NoContent();
             }
@@ -132,10 +122,9 @@ namespace Capstone.Controllers
         {
             return _leaseDAO.GetLease(lease_id)?.Property_Id; //if return value is null, return null, else return returnValue.property_id
         }
-
-        private bool RejectPendingLeasesWithPropertyId(int property_id)
+        private bool RejectPendingLeasesWithPropertyId(int property_id, int user_id)
         {
-            return _leaseDAO.RejectPendingLeasesWithPropertyId(property_id) > 0 ? true : false;
+            return _leaseDAO.RejectPendingLeasesWithPropertyId(property_id, user_id) > 0 ? true : false;
         }
 
         [HttpPost("/lease/reject/{lease_id}")]
