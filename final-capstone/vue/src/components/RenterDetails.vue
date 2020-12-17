@@ -15,7 +15,7 @@
             <td>{{transaction.amount_Paid}}</td>
             <td>{{transaction.late_Fees}}</td>
             <td>{{new Date(transaction.payment_Due_Date).toISOString().substring(0,10)}}</td>
-            <td>{{paid === true ? "Yes" : "No"}}</td>
+            <td>{{transaction.paid === true ? "Yes" : "No"}}</td>
         </tr>
     </table>
 </v-card>

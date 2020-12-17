@@ -6,8 +6,8 @@
       class="ma-auto"
       >
         <v-card-title>Revenue Statistics</v-card-title>
-        <v-card class="currentIncome">
-            <v-card-title  @click="CurrentIncomeShowing = !CurrentIncomeShowing" justify="space-between"><v-col>Current Income</v-col><v-spacer></v-spacer><v-col v-show="!CurrentIncomeShowing">Occupied Properties: {{properties.occupiedProperties.length}} </v-col></v-card-title>
+        <v-card class="currentIncome" hover>
+            <v-card-title hover @click="CurrentIncomeShowing = !CurrentIncomeShowing"><v-col>Current Income</v-col><v-spacer></v-spacer><v-spacer></v-spacer><v-spacer></v-spacer><v-col v-show="!CurrentIncomeShowing" style="font-size: 14px">Occupied Properties: {{properties.occupiedProperties.length}} <img v-show="CurrentIncomeShowing" src="@/assets/arrow.png" alt=""></v-col></v-card-title>
             <div v-show="CurrentIncomeShowing">
                 <p><span>Occupied Properties</span><span>{{properties.occupiedProperties.length}}</span></p>
                 <p><span>Current Monthly Rent Amount</span><span>${{properties.occupiedRentSum}}</span></p>
@@ -15,16 +15,18 @@
 
             </div>
         </v-card>
-        <v-card class="potentialIncome">
-            <v-card-title @click="PotentialIncomeShowing = !PotentialIncomeShowing">Potential Income</v-card-title>
+        <v-card class="potentialIncome" hover>
+            <v-card-title hover @click="PotentialIncomeShowing = !PotentialIncomeShowing"><v-col>Potential Income</v-col><v-spacer></v-spacer><v-spacer></v-spacer><v-spacer></v-spacer><v-col v-show="!PotentialIncomeShowing" style="font-size: 14px">Vacant Properties: {{properties.vacantProperties.length}} </v-col></v-card-title>
             <div v-show="PotentialIncomeShowing">
                 <p><span>Vacant Properties</span><span>{{properties.vacantProperties.length}}</span></p>
                 <p><span>Potential Additional Monthly Rent Amount</span><span>${{properties.vacantRentSum}}</span></p>
             </div>
         </v-card>
-        <v-card class="occupiedPRoperties">
-            <v-card-title @click="OccupiedShowing = !OccupiedShowing">Occupied Properties</v-card-title>
+        <v-card class="occupiedPRoperties" hover>
+            <v-card-title hover @click="OccupiedShowing = !OccupiedShowing">Occupied Properties</v-card-title>
             <v-slide-group
+            class="v-slide-group--is-overflowing"
+
             show-arrows="always"
             v-show="OccupiedShowing">
             <v-card
@@ -44,11 +46,10 @@
             </v-slide-group>
 
         </v-card>
-        <v-card class="vacantProperties">
-            <v-card-title @click="VacantShowing = !VacantShowing">Vacant Properties</v-card-title>
+        <v-card class="vacantProperties" hover>
+            <v-card-title hover @click="VacantShowing = !VacantShowing">Vacant Properties</v-card-title>
             <v-slide-group
                        show-arrows="always"
-                       center-active="true"
                        v-show="VacantShowing">
                     <v-card
                     v-for="vacantProperty in properties.vacantProperties"
@@ -65,8 +66,8 @@
                     </v-card>
             </v-slide-group>
             </v-card>
-            <v-card class="addNewProperty">
-            <v-card-title @click="addingNewProperty = !addingNewProperty">Add New Property</v-card-title>
+            <v-card class="addNewProperty" hover>
+            <v-card-title hover @click="addingNewProperty = !addingNewProperty">Add New Property</v-card-title>
                 <v-card
                 v-show="addingNewProperty"
                 >
@@ -130,7 +131,30 @@ export default {
     components: { RenterDetails },
     data() {
         return {
-            properties: [],
+            properties: [{
+                occupiedProperties: [{
+                    idefinedthis: 0,
+                },
+                {
+                  idefinedthis: 0,  
+                },
+                {
+                  idefinedthis: 0,  
+                },{
+                  idefinedthis: 0,  
+                },{
+                  idefinedthis: 0,  
+                },],
+                vacantProperties: [{
+                  idefinedthis: 0,  
+                },{
+                  idefinedthis: 0,  
+                },{
+                  idefinedthis: 0,  
+                },{
+                  idefinedthis: 0,  
+                },],
+            }],
             VacantShowing: false,
             OccupiedShowing: false,
             CurrentIncomeShowing: false,
@@ -209,22 +233,14 @@ export default {
 </script>
 
 <style scoped>
+
 p {
     margin: 5px 0 5px 0;
     display: flex;
     justify-content: space-between;
 }
 
-input {
-    margin: 5px 0 10px 20px;
-}
-
-label {
-    margin: 5px 0 0 20px;
-}
-
 div {
     padding: 10px;
 }
-
 </style>
