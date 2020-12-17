@@ -20,7 +20,7 @@ namespace Capstone.DAO.Maintenance
         //get maintenance requests with a list of properties
 
         //add maintenance ticket to maintenance_request table, return rowsAffected
-        public int AddMaintenanceTicket(MaintenanceTicket ticket)
+        public int AddMaintenanceTicket(MaintenanceTicketRequest ticket)
         {
 
             int rowsAffected = 0;
@@ -34,9 +34,9 @@ namespace Capstone.DAO.Maintenance
                                                         "(renter_id, request_info, property_id) " +
                                                     "VALUES" +
                                                         "(@Renter_Id, @Request_Info, @Property_Id)", conn);
-                    cmd.Parameters.AddWithValue("@Renter_Id", ticket.Renter_Id);
-                    cmd.Parameters.AddWithValue("@Request_Info", ticket.Request_Info);
-                    cmd.Parameters.AddWithValue("@Property_Id", ticket.Property_Id);
+                    cmd.Parameters.AddWithValue("@Renter_Id", ticket.RenterId);
+                    cmd.Parameters.AddWithValue("@Request_Info", ticket.RequestId);
+                    cmd.Parameters.AddWithValue("@Property_Id", ticket.PropertyId);
 
                     rowsAffected = cmd.ExecuteNonQuery();
 

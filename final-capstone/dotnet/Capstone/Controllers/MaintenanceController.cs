@@ -23,9 +23,9 @@ namespace Capstone.Controllers
         [HttpPost("submit/ticket")]
         public IActionResult AddMaintenanceTicket([FromBody] MaintenanceTicketRequest ticket)
         {
-            bool result = maintenanceService.AddMaintenanceTicket(ticket);
+            int rowsAffected = maintenanceDAO.AddMaintenanceTicket(ticket);
 
-            if(result)
+            if(rowsAffected > 0)
             {
                 return Ok();
             }
