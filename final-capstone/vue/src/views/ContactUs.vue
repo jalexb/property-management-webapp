@@ -1,5 +1,9 @@
 <template>
+    
     <div class="contact">
+        <div>
+            <h1>Contact Us</h1>
+        </div>
         <form @submit.prevent="sendEmail">
           <label>Name</label>
           <input 

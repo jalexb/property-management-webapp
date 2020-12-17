@@ -1,5 +1,8 @@
 <template>
   <v-container fluid>
+      <div>
+          <h1>About Us</h1>
+      </div>
     <v-flex xs12 flex-direction: row justify-space-around>
       <v-card class="pa-6 ma-4" max-width="350">
         <h1>Amy Scott</h1>
