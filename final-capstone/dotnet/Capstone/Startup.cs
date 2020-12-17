@@ -17,6 +17,7 @@ using Capstone.DAO.Renter;
 using Capstone.DAO.Maintenance;
 using Capstone.DAO.Transaction;
 using Capstone.DAO.Landlord;
+using Capstone.Controllers;
 
 namespace Capstone
 {
@@ -80,6 +81,7 @@ namespace Capstone
             services.AddScoped<ILeaseService, LeaseService>();
             services.AddScoped<IRenterService, RenterService>();
             services.AddScoped<IMaintenanceService, MaintenanceService>();
+            services.AddScoped<IWorkerService, WorkerService>();
             services.AddAutoMapper(typeof(Startup));
         }
 
