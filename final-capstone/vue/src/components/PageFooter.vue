@@ -3,13 +3,14 @@
     <v-row justify="center" no-gutters>
       <v-col class="primary lighten-3 py-4 text-center white--text" cols="12">
         {{ new Date().getFullYear() }} —
-        <strong
-          >Vuetify |
-          <router-link class="routerlink" :to="{ name: 'home' }">
-            Help
+        <strong>
+          <router-link
+            class="routerlink white--text"
+            :to="{ name: 'about-us' }"
+          >
+            About Us |
           </router-link>
-          |
-          <router-link class="routerlink" :to="{ name: 'home' }">
+          <router-link class="routerlink white--text" :to="{ name: 'home' }">
             Contact
           </router-link>
         </strong>

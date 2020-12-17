@@ -14,6 +14,7 @@ import RenterSettings from '../views/RenterSettings.vue'
 import CompletedApplications from '../views/CompletedApplications.vue'
 import LandlordProperties from '@/views/LandlordProperties'
 import UnassignedTickets from '@/views/UnassignedTickets.vue'
+import AboutUs from '../views/AboutUs'
 
 Vue.use(Router)
 
@@ -116,7 +117,14 @@ const router = new Router({
           path: "/landlord/assign-tickets",
           name: "landlord-assign-tickets",
           component: UnassignedTickets
+        },
+        {
+          path: "/about-us",
+          name: "about-us",
+          component: AboutUs
+
         }
+
   ]
 })
 
