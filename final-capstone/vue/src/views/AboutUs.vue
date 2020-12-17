@@ -35,7 +35,7 @@
           contain
           max-height="300"
           max-width="300"
-          src="https://files.slack.com/files-pri/T0GNFLF6D-F01H57X351Q/img_0151.jpg"
+          src="https://media-exp1.licdn.com/dms/image/C5603AQGvVCIpbp86xw/profile-displayphoto-shrink_400_400/0/1601046325229?e=1613606400&v=beta&t=JfjnlL--nc7cEhXIEvWId66W_GjNGPJb-YilmZXqpDo"
         >
         </v-img>
         <!-- v-card-text with description and contact info -->
@@ -59,7 +59,7 @@
           contain
           max-height="300"
           max-width="300"
-          src="https://files.slack.com/files-pri/T0GNFLF6D-F01HV5Q6Y5N/linkedin_picture.jpg"
+          src="https://media-exp1.licdn.com/dms/image/C4D03AQEKVXhte8hrOg/profile-displayphoto-shrink_400_400/0/1600127102942?e=1613606400&v=beta&t=9DdRRpTLXR21klTCskCnvpJ4wgd2FSSxC8KbqLZ4D_s"
         >
         </v-img>
         <!-- v-card-text with description and contact info -->
