@@ -83,11 +83,11 @@ methods: {
         });
     },
     markTicketComplete(request_Id, ticket) {
-        console.log(ticket);
         maintenanceService.markTicketComplete(request_Id, ticket).then(response => {
             if(response.status===200) {
                 ticket.is_Fixed = true;
                 alert("Ticket has successfully been marked completed!");
+                this.tickets.push(this.tickets.splice(this.tickets.indexOf(ticket), 1)[0]);
             }
         }).catch(error => {
             if (error.response) {
