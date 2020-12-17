@@ -45,7 +45,7 @@
           <strong> Email: </strong> developer.jacob.barnett@gmail.com
         </v-card-text>
         <v-card-text class=" primary--text">
-          <strong> About: </strong> 
+          <strong> About: </strong> Jacob first discovered the front end when he was taking some web design classes in highschool as well as participating on the competitive robotics team. Ever since then he has always wanted to be a developer!
         </v-card-text>
       </v-card>
 
