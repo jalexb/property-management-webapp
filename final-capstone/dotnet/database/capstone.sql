@@ -308,13 +308,13 @@ VALUES (1, 2, '03-01-2021', 0, 0, 0);
 
 --populate default maintenance ticket data
 INSERT INTO maintenance_request (renter_id, worker_id, request_info, property_id, is_assigned, is_fixed, post_fix_report)
-VALUES(3, null, 'The shower only gets cold water.', 8, 1, 0, '');
+VALUES(3, null, 'The shower only gets cold water.', 8, 0, 0, '');
 
 INSERT INTO maintenance_request (renter_id, worker_id, request_info, property_id, is_assigned, is_fixed, post_fix_report)
-VALUES(3, null, 'The garbage disposal for the kitchen sink doesn''t work.', 9, 1, 0, '');
+VALUES(3, null, 'The garbage disposal for the kitchen sink doesn''t work.', 9, 0, 0, '');
 
 INSERT INTO maintenance_request (renter_id, worker_id, request_info, property_id, is_assigned, is_fixed, post_fix_report)
-VALUES(3, null, 'My basement flooded', 9, 1, 0, '');
+VALUES(3, null, 'My basement flooded', 9, 0, 0, '');
 
 INSERT INTO worker_information (userId, first_name, last_name, phone_number, email)
 VALUES(5, 'Bob', 'theBuilder', '513-555-1212', 'BobtheBuilder@wefixthings.com');
