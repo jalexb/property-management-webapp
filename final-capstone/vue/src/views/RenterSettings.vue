@@ -18,7 +18,7 @@
       >
       </v-text-field>
 
-      <v-btn type="submit" outlined rounded color="primary"
+      <v-btn type="submit" outlined rounded color="primary" v-on:click="updateRenterInfo()"
         >Update Settings</v-btn
       >
     </v-form>
@@ -37,9 +37,9 @@ export default {
         firstName: null,
         lastName: null,
         phoneNumber: null,
-        email: null,
-        leaseType: null,
-        salary: 0.0,
+        email: null
+        //leaseType: null,
+        //salary: 0.0,
       },
     };
   },

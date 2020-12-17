@@ -1,9 +1,10 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 div#app{
     /* background-color: yellow; */
     
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    /*font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;*/
+    font-family: 'Montserrat', sans-serif;
 }
 
 h1 {
