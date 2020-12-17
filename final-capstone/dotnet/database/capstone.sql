@@ -317,7 +317,7 @@ INSERT INTO maintenance_request (renter_id, worker_id, request_info, property_id
 VALUES(3, null, 'My basement flooded', 9, 0, 0, '');
 
 INSERT INTO worker_information (userId, first_name, last_name, phone_number, email)
-VALUES(5, 'Bob', 'theBuilder', '513-555-1212', 'BobtheBuilder@wefixthings.com');
+VALUES(6, 'Bob', 'theBuilder', '513-555-1212', 'BobtheBuilder@wefixthings.com');
 
 GO
 
