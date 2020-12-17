@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-flex xs12 flex-direction: row justify-space-around>
-      <v-card class="pa-6 mx-auto" max-width="350">
+      <v-card class="pa-6 ma-4" max-width="350">
         <h1>Amy Scott</h1>
         <!-- v-img with user photo -->
         <v-img
@@ -21,11 +21,11 @@
           <strong> Email: </strong> amy.ack.scott@gmail.com
         </v-card-text>
         <v-card-text class=" primary--text">
-          <strong> About: </strong>
+          <strong> About: </strong> Amy has a bachelors degree in Computer Science and has worked many years in the insurance business.  She has experience in with xml, SQL, Oracle and mainframe data.  As a consultant, she help many customers migrate from one admin system to xPression suite of software. She is looking to forward her career using her .NET skills and current skill.
         </v-card-text>
       </v-card>
 
-      <v-card class="pa-6 mx-auto" max-width="350">
+      <v-card class="pa-6 ma-4" max-width="350"  >
         <h1>Jacob Barnett</h1>
         <!-- v-img with user photo -->
         <v-img
@@ -49,7 +49,7 @@
         </v-card-text>
       </v-card>
 
-      <v-card class="pa-6 mx-auto" max-width="350">
+      <v-card class="pa-6 ma-4" max-width="350">
         <h1>Evan Gemmer</h1>
         <!-- v-img with user photo -->
         <v-img
@@ -74,7 +74,7 @@
         </v-card-text>
       </v-card>
 
-      <v-card class="pa-6 mx-auto" max-width="350">
+      <v-card class="pa-6 ma-4" max-width="350">
         <h1>Braydon Griffith</h1>
         <!-- v-img with user photo -->
         <v-img
