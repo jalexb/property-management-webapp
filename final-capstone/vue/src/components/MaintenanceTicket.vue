@@ -26,7 +26,7 @@ git
 
       <v-card></v-card>
 
-      <v-form @submit.prevent="submit">
+      <v-form @submit.prevent="submit" ref="form">
         <v-text-field
           v-model="User.fullName"
           label="Name"
@@ -63,6 +63,16 @@ git
         <v-btn type="submit" outlined rounded v-on:click="myFilter" target="">
           Submit
         </v-btn>
+
+        <v-btn outlined rounded v-on:click="reset">
+          Reset Form
+        </v-btn>
+
+
+        <v-btn outlined rounded v-on:click="cancel">
+          Cancel
+        </v-btn>
+
       </v-form>
     </div>
   </div>
@@ -70,7 +80,7 @@ git
 
 <script>
 import RenterService from "@/services/RenterService";
-import MaintenanceService from "@/services/MaintenanceService.js"
+import MaintenanceService from "@/services/MaintenanceService.js";
 
 export default {
   name: "maintenance-ticket",
@@ -82,35 +92,43 @@ export default {
       propertyId: 0,
 
       ticket: {
-        "requestId": 0,
-        "renterId": 0,
-        "workerId": null,
-        "requestInfo": null,
-        "propertyId": 0,
-        "isAssigned": null,
-        "isFixed": null,
-        "postFixReport": null
+        requestId: 0,
+        renterId: 0,
+        workerId: null,
+        requestInfo: null,
+        propertyId: 0,
+        isAssigned: null,
+        isFixed: null,
+        postFixReport: null,
       },
       submitted: true,
     };
   },
   methods: {
-    myFilter: function(){
-      this.ticket.renterId=this.$store.state.user.userId;
-      this.ticket.propertyId=this.User.property_Id;
-      MaintenanceService.submitTicket(this.ticket).then(response=>{
-        if (response.status === 200){
-      this.submitted = !this.submitted;
-        }
-        else {
-          alert('Error submitting maintenance ticket');
-        }
-      })
-      .catch(error =>{
-        console.log(error);
-        alert('Error submitting ticket');
-      })
-      
+    reset() {
+      this.$refs.form.reset();
+    },
+
+    cancel() {
+      this.$refs.form.reset();
+      this.$router.push("/");
+    },
+
+    myFilter: function() {
+      this.ticket.renterId = this.$store.state.user.userId;
+      this.ticket.propertyId = this.User.property_Id;
+      MaintenanceService.submitTicket(this.ticket)
+        .then((response) => {
+          if (response.status === 200) {
+            this.submitted = !this.submitted;
+          } else {
+            alert("Error submitting maintenance ticket");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("Error submitting ticket");
+        });
     },
 
     populateTicket() {
