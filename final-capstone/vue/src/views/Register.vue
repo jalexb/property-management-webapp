@@ -80,10 +80,7 @@ export default {
           .register(this.user)
           .then((response) => {
             if (response.status == 201) {
-              this.$router.push({
-                path: "/",
-                query: { registration: "success" },
-              });
+              this.login();
             }
           })
           .catch((error) => {
@@ -94,6 +91,24 @@ export default {
             }
           });
       }
+    },
+    login() {
+      authService
+        .login(this.user)
+        .then((response) => {
+          if (response.status == 200) {
+            this.$store.commit("SET_AUTH_TOKEN", response.data.token);
+            this.$store.commit("SET_USER", response.data.user);
+            this.$router.push('/');
+          }
+        })
+        .catch((error) => {
+          const response = error.response;
+
+          if (response.status === 401) {
+            this.invalidCredentials = true;
+          }
+        });
     },
     clearErrors() {
       this.registrationErrors = false;

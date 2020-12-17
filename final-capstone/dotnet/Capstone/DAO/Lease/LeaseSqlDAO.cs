@@ -268,7 +268,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("UPDATE lease SET current_status = 'rejected' WHERE ((property_id = @property_id AND NOT userId = @user_id) AND current_status != 'approved');", conn);
+                    SqlCommand cmd = new SqlCommand("UPDATE lease SET current_status = 'rejected' WHERE ((userId = @user_id AND NOT property_id = @property_id ) OR (property_id = @property_id AND NOT userId = @user_id) AND current_status != 'approved');", conn);
                     cmd.Parameters.AddWithValue("@property_id", property_id);
                     cmd.Parameters.AddWithValue("@user_id", user_id);
 

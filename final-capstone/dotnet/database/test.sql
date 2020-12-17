@@ -10,6 +10,8 @@ SELECT * FROM properties WHERE userId = 5
 
 SELECT * FROM lease
 
+UPDATE lease SET current_status = 'rejected' WHERE ((userId = 6 AND NOT property_id = 3 ) OR (property_id = 3 AND NOT userId = 6) AND current_status != 'approved')
+
 UPDATE lease SET current_status = 'pending' WHERE userId = 6
 
 

@@ -7,7 +7,7 @@
       >
         <v-card-title>Revenue Statistics</v-card-title>
         <v-card class="currentIncome">
-            <v-card-title  @click="CurrentIncomeShowing = !CurrentIncomeShowing" justify="space-between"><v-col>Current Income</v-col><v-col>Current Monthly Rent Amount: ${{properties.occupiedRentSum}}</v-col></v-card-title>
+            <v-card-title  @click="CurrentIncomeShowing = !CurrentIncomeShowing" justify="space-between"><v-col>Current Income</v-col><v-spacer></v-spacer><v-col v-show="!CurrentIncomeShowing">Occupied Properties: {{properties.occupiedProperties.length}} </v-col></v-card-title>
             <div v-show="CurrentIncomeShowing">
                 <p><span>Occupied Properties</span><span>{{properties.occupiedProperties.length}}</span></p>
                 <p><span>Current Monthly Rent Amount</span><span>${{properties.occupiedRentSum}}</span></p>
@@ -48,13 +48,12 @@
             <v-card-title @click="VacantShowing = !VacantShowing">Vacant Properties</v-card-title>
             <v-slide-group
                        show-arrows="always"
-                       v-show="VacantShowing"
-                       center-active="true">
+                       center-active="true"
+                       v-show="VacantShowing">
                     <v-card
                     v-for="vacantProperty in properties.vacantProperties"
                     :key="vacantProperty.addressId"
                     max-width="250"
-                    v-show="VacantShowing"
                     >
                         <v-card-title>
                             {{ vacantProperty.address }}
@@ -131,7 +130,57 @@ export default {
     components: { RenterDetails },
     data() {
         return {
-            properties: [],
+            properties: [{
+                occupiedProperties: [ {
+
+                }],
+                vacantProperties: [{
+                    address: null,
+                    photo: null,
+                    price: null,
+                },
+                {
+                    address: null,
+                    photo: null,
+                    price: null,
+                },
+                {
+                    address: null,
+                    photo: null,
+                    price: null,
+                },
+                {
+                    address: null,
+                    photo: null,
+                    price: null,
+                },
+                {
+                    address: null,
+                    photo: null,
+                    price: null,
+                },
+                {
+                    address: null,
+                    photo: null,
+                    price: null,
+                },
+                {
+                    address: null,
+                    photo: null,
+                    price: null,
+                },
+                {
+                    address: null,
+                    photo: null,
+                    price: null,
+                },
+                {
+                    address: null,
+                    photo: null,
+                    price: null,
+                },
+                ]
+            }],
             VacantShowing: false,
             OccupiedShowing: false,
             CurrentIncomeShowing: false,
