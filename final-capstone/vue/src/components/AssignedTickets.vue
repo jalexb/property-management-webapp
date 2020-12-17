@@ -1,6 +1,73 @@
 <template>
-  <div>
-      <v-card
+  <div style="max-width: 90%" class="mx-auto">
+  <v-flex>
+    <v-card hover>
+    <v-card-title @click="incompleteShowing = !incompleteShowing">Incomplete</v-card-title>
+    <div v-show="incompleteShowing">
+    <v-card-text>
+      <table style="width: 100%">
+        <tr>
+          <th>Address</th>
+          <th>Unit</th>
+          <th>Request Information</th>
+          <th>Post-Fix Report</th>
+          <th>Status</th>
+        </tr>
+        <tr
+        v-for="ticket in tickets" 
+        :key="ticket.request_Id"
+        hover>
+          <td v-show="!ticket.is_Fixed">{{ticket.street}}</td>
+          <td v-show="!ticket.is_Fixed">{{ticket.street2}}</td>
+          <td v-show="!ticket.is_Fixed">{{ticket.request_Info}}</td>
+          <td v-show="!ticket.is_Fixed"><textarea id="report" name="report" rows="3" cols="50" v-model="ticket.post_Fix_Report" /></td>
+          <td v-show="!ticket.is_Fixed">
+            <v-btn
+            outlined
+            raised 
+            rounded
+            color="#BA3F1D"
+            v-on:click="markTicketComplete(ticket.request_Id, ticket)"
+            class="ma-2"
+            >
+                Mark Completed
+            </v-btn>  
+          </td>     
+        </tr>
+      </table>
+    </v-card-text>
+    </div>
+  </v-card>
+
+  <v-card hover>
+    <v-card-title @click="completeShowing = !completeShowing">Complete</v-card-title>
+    <div v-show="completeShowing">
+    <v-card-text>
+      <table style="width: 100%">
+        <tr>
+          <th>Address</th>
+          <th>Unit</th>
+          <th>Request Information</th>
+          <th>Post-Fix Report</th>
+          <th>Status</th>
+        </tr>
+        <tr
+        v-for="ticket in tickets" 
+        :key="ticket.request_Id"
+        hover>
+          <td v-show="ticket.is_Fixed">{{ticket.street}}</td>
+          <td v-show="ticket.is_Fixed">{{ticket.street2}}</td>
+          <td v-show="ticket.is_Fixed">{{ticket.request_Info}}</td>
+          <td v-show="ticket.is_Fixed">{{ticket.post_Fix_Report}}</td>
+          <td v-show="ticket.is_Fixed">Complete</td>     
+        </tr>
+      </table>
+    </v-card-text>
+    </div>
+  </v-card>
+  </v-flex>
+
+      <!--<v-card
       v-for="ticket in tickets"
       :key="ticket.request_Id"
       max-width="600"
@@ -31,7 +98,7 @@
         </v-btn>
         </v-row>
       </div>
-      </v-card>
+      </v-card>-->
   </div>
 </template>
 
@@ -56,7 +123,9 @@ data() {
                     street2: "N/A",
                 }
             }
-        ]
+        ],
+        completeShowing: false,
+        incompleteShowing: false
     }
 },
 created() {
