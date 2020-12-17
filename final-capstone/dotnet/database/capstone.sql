@@ -67,7 +67,7 @@ CREATE TABLE renter_information (
 	userId				INT					NOT NULL,
 	first_name			VARCHAR(64)			NOT NULL,
 	last_name			VARCHAR(64)			NOT NULL,
-	phone_number		VARCHAR(10)			NOT NULL,
+	phone_number		VARCHAR(20)			NOT NULL,
 	email				VARCHAR(300)		NOT NULL,
 	lease_type			VARCHAR(64)			NOT NULL,
 	salary				DECIMAL				NOT NULL,
@@ -91,6 +91,18 @@ CREATE TABLE maintenance_request (
 	CONSTRAINT		FK_worker		FOREIGN KEY(worker_id) REFERENCES users (userId),
 	CONSTRAINT		FK_property		FOREIGN KEY(property_id) REFERENCES properties (property_id)
 );
+
+CREATE TABLE worker_information ( 
+	userId				INT					NOT NULL,
+	first_name			VARCHAR(64)			NOT NULL,
+	last_name			VARCHAR(64)			NOT NULL,
+	phone_number		VARCHAR(20)			NOT NULL,
+	email				VARCHAR(300)		NOT NULL,
+
+	CONSTRAINT		PK_worker_id		PRIMARY KEY (userId),
+	CONSTRAINT		FK_worker_user_id	FOREIGN KEY (userId)		REFERENCES users (userId),
+	);
+
 
 CREATE TABLE transactions (
 	transaction_id		INT IDENTITY(1, 1)  NOT NULL,
@@ -133,6 +145,12 @@ VALUES
 INSERT INTO users (username, password_hash, salt, user_role)
 VALUES
 	('l','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'landlord');
+
+INSERT INTO users (username, password_hash, salt, user_role)
+VALUES
+	('Bob','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'maintenance');
+
+
 
 
 --populate default address data
@@ -295,4 +313,9 @@ VALUES(3, 4, 'The shower only gets cold water.', 8, 1, 0, '');
 INSERT INTO maintenance_request (renter_id, worker_id, request_info, property_id, is_assigned, is_fixed, post_fix_report)
 VALUES(3, 4, 'The garbage disposal for the kitchen sink doesn''t work.', 9, 1, 0, '');
 
+INSERT INTO worker_information (userId, first_name, last_name, phone_number, email)
+VALUES(5, 'Bob', 'theBuilder', '513-555-1212', 'BobtheBuilder@wefixthings.com');
+
 GO
+
+

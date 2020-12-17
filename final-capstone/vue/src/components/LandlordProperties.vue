@@ -6,27 +6,32 @@
       class="ma-auto"
       >
         <v-card-title>Revenue Statistics</v-card-title>
-        <v-card>
-            <v-card-title @click="CurrentIncomeShowing = !CurrentIncomeShowing">Current Income</v-card-title>
+        <v-card class="currentIncome">
+            <v-card-title  @click="CurrentIncomeShowing = !CurrentIncomeShowing" justify="space-between"><v-col>Current Income</v-col><v-col>Current Monthly Rent Amount: ${{properties.occupiedRentSum}}</v-col></v-card-title>
             <div v-show="CurrentIncomeShowing">
                 <p><span>Occupied Properties</span><span>{{properties.occupiedProperties.length}}</span></p>
                 <p><span>Current Monthly Rent Amount</span><span>${{properties.occupiedRentSum}}</span></p>
+                <renter-details :property="property" v-for="property in properties.occupiedProperties" :key="property.renter.info.user_Id"></renter-details>
+
             </div>
         </v-card>
-        <v-card>
+        <v-card class="potentialIncome">
             <v-card-title @click="PotentialIncomeShowing = !PotentialIncomeShowing">Potential Income</v-card-title>
             <div v-show="PotentialIncomeShowing">
                 <p><span>Vacant Properties</span><span>{{properties.vacantProperties.length}}</span></p>
                 <p><span>Potential Additional Monthly Rent Amount</span><span>${{properties.vacantRentSum}}</span></p>
             </div>
         </v-card>
-        <v-card>
+        <v-card class="occupiedPRoperties">
             <v-card-title @click="OccupiedShowing = !OccupiedShowing">Occupied Properties</v-card-title>
+            <v-slide-group
+            show-arrows="always"
+            v-show="OccupiedShowing">
             <v-card
-            v-show="OccupiedShowing"
             v-for="occupiedProperty in properties.occupiedProperties"
             :key="occupiedProperty.property.addressId"
             >
+            
                 <v-card-title>
                     {{ occupiedProperty.renter.info.fullName }} <br/>
                     {{ occupiedProperty.property.street}}
@@ -36,11 +41,15 @@
                     <p>${{ occupiedProperty.property.price}}</p>
                 </v-card-text>
             </v-card>
+            </v-slide-group>
+
         </v-card>
-        <v-card>
+        <v-card class="vacantProperties">
             <v-card-title @click="VacantShowing = !VacantShowing">Vacant Properties</v-card-title>
             <v-slide-group
-            v-show="VacantShowing">
+                       show-arrows="always"
+                       v-show="VacantShowing"
+                       center-active="true">
                     <v-card
                     v-for="vacantProperty in properties.vacantProperties"
                     :key="vacantProperty.addressId"
@@ -57,7 +66,7 @@
                     </v-card>
             </v-slide-group>
             </v-card>
-            <v-card>
+            <v-card class="addNewProperty">
             <v-card-title @click="addingNewProperty = !addingNewProperty">Add New Property</v-card-title>
                 <v-card
                 v-show="addingNewProperty"
@@ -115,9 +124,11 @@
 
 <script>
 import LandlordService from '@/services/LandlordService'
-
+import RenterDetails from './RenterDetails.vue'
+  
 export default {
     name: 'landlord-properties',
+    components: { RenterDetails },
     data() {
         return {
             properties: [],
@@ -211,6 +222,10 @@ input {
 
 label {
     margin: 5px 0 0 20px;
+}
+
+div {
+    padding: 10px;
 }
 
 </style>
