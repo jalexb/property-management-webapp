@@ -136,15 +136,15 @@ VALUES
 	('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
 INSERT INTO users (username, password_hash, salt, user_role)
 VALUES
-	('r','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'renter');
+	('renter','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'renter');
 
 INSERT INTO users (username, password_hash, salt, user_role)
 VALUES
-	('m','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'maintenance'); -- password is a
+	('worker','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'maintenance'); -- password is a
 
 INSERT INTO users (username, password_hash, salt, user_role)
 VALUES
-	('l','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'landlord');
+	('landlord','nIXPgkurH3MTLSqSnUuiyIRVdIo=', '6BR2lRBjrdo=', 'landlord');
 
 INSERT INTO users (username, password_hash, salt, user_role)
 VALUES
