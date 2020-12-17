@@ -130,57 +130,7 @@ export default {
     components: { RenterDetails },
     data() {
         return {
-            properties: [{
-                occupiedProperties: [ {
-
-                }],
-                vacantProperties: [{
-                    address: null,
-                    photo: null,
-                    price: null,
-                },
-                {
-                    address: null,
-                    photo: null,
-                    price: null,
-                },
-                {
-                    address: null,
-                    photo: null,
-                    price: null,
-                },
-                {
-                    address: null,
-                    photo: null,
-                    price: null,
-                },
-                {
-                    address: null,
-                    photo: null,
-                    price: null,
-                },
-                {
-                    address: null,
-                    photo: null,
-                    price: null,
-                },
-                {
-                    address: null,
-                    photo: null,
-                    price: null,
-                },
-                {
-                    address: null,
-                    photo: null,
-                    price: null,
-                },
-                {
-                    address: null,
-                    photo: null,
-                    price: null,
-                },
-                ]
-            }],
+            properties: [],
             VacantShowing: false,
             OccupiedShowing: false,
             CurrentIncomeShowing: false,
