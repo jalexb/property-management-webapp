@@ -15,6 +15,7 @@ import CompletedApplications from '../views/CompletedApplications.vue'
 import LandlordProperties from '@/views/LandlordProperties'
 import UnassignedTickets from '@/views/UnassignedTickets.vue'
 import AboutUs from '../views/AboutUs'
+import ContactUs from '../views/ContactUs'
 
 Vue.use(Router)
 
@@ -122,6 +123,12 @@ const router = new Router({
           path: "/about-us",
           name: "about-us",
           component: AboutUs
+
+        },
+        {
+          path: "/contact-us",
+          name: "contact-us",
+          component: ContactUs
 
         }
 

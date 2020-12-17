@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^2.6.5",
+    "emailjs-com": "^2.6.4",
     "vue": "^2.6.10",
     "vue-phone-number-input": "^1.1.10",
     "vue-router": "^3.0.3",

@@ -10,7 +10,7 @@
           >
             About Us |
           </router-link>
-          <router-link class="routerlink white--text" :to="{ name: 'home' }">
+          <router-link class="routerlink white--text" :to="{ name: 'contact-us' }">
             Contact
           </router-link>
         </strong>
