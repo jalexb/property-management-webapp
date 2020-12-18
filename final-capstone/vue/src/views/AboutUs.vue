@@ -35,7 +35,7 @@
           contain
           max-height="300"
           max-width="300"
-          src="https://media-exp1.licdn.com/dms/image/C5603AQGvVCIpbp86xw/profile-displayphoto-shrink_400_400/0/1601046325229?e=1613606400&v=beta&t=JfjnlL--nc7cEhXIEvWId66W_GjNGPJb-YilmZXqpDogit "
+          src="https://media-exp1.licdn.com/dms/image/C5603AQGvVCIpbp86xw/profile-displayphoto-shrink_400_400/0/1601046325229?e=1613606400&v=beta&t=JfjnlL--nc7cEhXIEvWId66W_GjNGPJb-YilmZXqpDo"
         >
         </v-img>
         <!-- v-card-text with description and contact info -->
