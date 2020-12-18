@@ -9,6 +9,16 @@ SELECT * FROM properties INNER JOIN address_table on address_table.address_id = 
 SELECT * FROM properties WHERE userId = 5
 
 SELECT * FROM lease
+SELECT * FROM maintenance_request
+
+UPDATE maintenance_request SET post_fix_report = '' WHERE  request_id = 4
+
+SELECT request_id, renter_id, worker_id, request_info, maintenance_request.property_id, 
+                                                    is_assigned, is_fixed, post_fix_report, address_table.street, address_table.street2 
+                                                    FROM maintenance_request
+                                                    INNER JOIN properties ON properties.property_id = maintenance_request.property_id 
+                                                    INNER JOIN address_table ON address_table.address_id = properties.address_id
+                                                    WHERE worker_id = 6 AND is_assigned = 1
 
 UPDATE lease SET current_status = 'rejected' WHERE ((userId = 6 AND NOT property_id = 3 ) OR (property_id = 3 AND NOT userId = 6) AND current_status != 'approved')
 

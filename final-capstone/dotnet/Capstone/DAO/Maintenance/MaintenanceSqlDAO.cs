@@ -31,12 +31,15 @@ namespace Capstone.DAO.Maintenance
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand("INSERT INTO maintenance_request" +
-                                                        "(renter_id, request_info, property_id) " +
+                                                        "(renter_id, request_info, property_id, is_fixed, post_fix_report) " +
                                                     "VALUES" +
-                                                        "(@Renter_Id, @Request_Info, @Property_Id)", conn);
+                                                        "(@Renter_Id, @Request_Info, @Property_Id, @is_fixed, @post_fix_report)", conn);
                     cmd.Parameters.AddWithValue("@Renter_Id", ticket.RenterId);
-                    cmd.Parameters.AddWithValue("@Request_Info", ticket.RequestId);
+                    cmd.Parameters.AddWithValue("@Request_Info", ticket.RequestInfo);
                     cmd.Parameters.AddWithValue("@Property_Id", ticket.PropertyId);
+                    cmd.Parameters.AddWithValue("@is_fixed", 0);
+                    cmd.Parameters.AddWithValue("@post_fix_report", "");
+
 
                     rowsAffected = cmd.ExecuteNonQuery();
 
@@ -125,7 +128,7 @@ namespace Capstone.DAO.Maintenance
                 ticket.Request_Info = (string)reader["request_info"];
                 ticket.Property_Id = (int)reader["property_id"];
                 ticket.Is_Assigned = (bool)reader["is_assigned"];
-                ticket.Is_Fixed = (bool)reader["is_fixed"];
+                ticket.Is_Fixed = (bool?)reader["is_fixed"];
                 ticket.Post_Fix_Report = (string)reader["post_fix_report"];
                 ticket.Street = (string)reader["street"];
                 ticket.Street2 = (string)reader["street2"];

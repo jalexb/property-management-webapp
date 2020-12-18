@@ -24,7 +24,7 @@ namespace Capstone.Models
         public string Request_Info { get; set; }
         public int Property_Id { get; set; }
         public bool Is_Assigned { get; set; }
-        public bool Is_Fixed { get; set; }
+        public bool? Is_Fixed { get; set; }
         public string Post_Fix_Report { get; set; }
         public string Street { get; set; }
         public string Street2 { get; set; }
